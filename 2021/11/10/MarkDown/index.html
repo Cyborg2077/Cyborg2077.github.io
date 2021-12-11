@@ -216,7 +216,7 @@
                 console.log('已挂载history_calendar')
                 // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
                 parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
-            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='/'|| '/' ==='all')){
 
             history_calendar_injector_config()
         } </script><script data-pjax  src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script><script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-card-history/baiduhistory/js/main.js"></script><script data-pjax>
@@ -228,7 +228,7 @@
     }
   var elist = 'null'.split(',');
   var cpage = location.pathname;
-  var epage = 'all';
+  var epage = '/';
   var flag = 0;
 
   for (var i=0;i<elist.length;i++){
