@@ -1,0 +1,481 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第十一届蓝桥杯省赛 Java--B组 | Kyle's Blog</title><meta name="keywords" content="蓝桥杯"><meta name="author" content="Kyle Violet"><meta name="copyright" content="Kyle Violet"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="自己写的一些题解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十一届蓝桥杯省赛 Java--B组">
+<meta property="og:url" content="https://cyborg2077.github.io/2022/03/18/LanqiaoCup02/index.html">
+<meta property="og:site_name" content="Kyle&#39;s Blog">
+<meta property="og:description" content="自己写的一些题解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img0.baidu.com/it/u=518815500,4294667560&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800">
+<meta property="article:published_time" content="2022-03-18T12:46:32.000Z">
+<meta property="article:modified_time" content="2022-03-21T13:36:09.831Z">
+<meta property="article:author" content="Kyle Violet">
+<meta property="article:tag" content="蓝桥杯">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img0.baidu.com/it/u=518815500,4294667560&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://cyborg2077.github.io/2022/03/18/LanqiaoCup02/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第十一届蓝桥杯省赛 Java--B组',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-21 21:36:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/font_3049706_63ju4ev0yqm.css"><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-card-history/baiduhistory/css/main.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-clock/lib/clock.min.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/%E6%AE%8B%E9%98%B3.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Kyle's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第十一届蓝桥杯省赛 Java--B组</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-18T12:46:32.000Z" title="发表于 2022-03-18 20:46:32">2022-03-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-21T13:36:09.831Z" title="更新于 2022-03-21 21:36:09">2022-03-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第十一届蓝桥杯省赛 Java--B组"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="试题-A-门牌制作-5分"><a href="#试题-A-门牌制作-5分" class="headerlink" title="试题 A: 门牌制作(5分)"></a>试题 A: 门牌制作(5分)</h1><p>小蓝要为一条街的住户制作门牌号。<br>这条街一共有 2020 位住户，门牌号从 1 到 2020 编号。<br>小蓝制作门牌的方法是先制作 0 到 9 这几个数字字符，最后根据需要将字<br>符粘贴到门牌上，例如门牌 1017 需要依次粘贴字符 1、 0、 1、 7，即需要 1 个<br>字符 0， 2 个字符 1， 1 个字符 7。<br>请问要制作所有的 1 到 2020 号门牌，总共需要多少个字符 2？</p>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>把每个数字转化成字符数组形式 依次遍历每个字符数组 遇到’2’则计数+1</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">2020</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">char</span>[] ch = (i+<span class="string">&quot;&quot;</span>).toCharArray();</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">char</span> c: ch) &#123;</span><br><span class="line">				<span class="keyword">if</span>(c == <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">					count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(count);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果：624</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="试题-B-寻找-2020-5分"><a href="#试题-B-寻找-2020-5分" class="headerlink" title="试题 B: 寻找 2020(5分)"></a>试题 B: 寻找 2020(5分)</h1><p>小蓝有一个数字矩阵，里面只包含数字 0 和 2。小蓝很喜欢 2020，他想找<br>到这个数字矩阵中有多少个 2020 。<br>小蓝只关注三种构成 2020 的方式：<br>• 同一行里面连续四个字符从左到右构成 2020。<br>• 同一列里面连续四个字符从上到下构成 2020。<br>• 在一条从左上到右下的斜线上连续四个字符，从左上到右下构成 2020。<br>例如，对于下面的矩阵：<br>220000<br>000000<br>002202<br>000000<br>000022<br>002020<br>一共有 5 个 2020。其中 1 个是在同一行里的， 1 个是在同一列里的， 3 个<br>是斜线上的。<br>小蓝的矩阵比上面的矩阵要大，由于太大了，他只好将这个矩阵放在了一<br>个文件里面，在试题目录下有一个文件 2020.txt，里面给出了小蓝的矩阵。<br>请帮助小蓝确定在他的矩阵中有多少个 2020。</p>
+<h2 id="思路分析-1"><a href="#思路分析-1" class="headerlink" title="思路分析"></a>思路分析</h2><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span>[][] arr = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">6</span>][<span class="number">6</span>];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="comment">//这里是一个小技巧</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">			arr[i] = scan.nextLine().toCharArray();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//横向判断 注意j不要越界</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j + <span class="number">3</span> &lt; <span class="number">6</span>; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (arr[i][j] == <span class="string">&#x27;2&#x27;</span> &amp;&amp; arr[i][j + <span class="number">1</span>] == <span class="string">&#x27;0&#x27;</span> &amp;&amp; arr[i][j + <span class="number">2</span>] == <span class="string">&#x27;2&#x27;</span> &amp;&amp; arr[i][j + <span class="number">3</span>] == <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">					count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//纵向判断 注意i不要越界</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i + <span class="number">3</span> &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">6</span>; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (arr[i][j] == <span class="string">&#x27;2&#x27;</span> &amp;&amp; arr[i + <span class="number">1</span>][j] == <span class="string">&#x27;0&#x27;</span> &amp;&amp; arr[i + <span class="number">2</span>][j] == <span class="string">&#x27;2&#x27;</span> &amp;&amp; arr[i + <span class="number">3</span>][j] == <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">					count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//斜向判断 注意i和j不要越界</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i + <span class="number">3</span> &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j + <span class="number">3</span> &lt; <span class="number">6</span>; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (arr[i][j] == <span class="string">&#x27;2&#x27;</span> &amp;&amp; arr[i + <span class="number">1</span>][j + <span class="number">1</span>] == <span class="string">&#x27;0&#x27;</span> &amp;&amp; arr[i + <span class="number">2</span>][j + <span class="number">2</span>] == <span class="string">&#x27;2&#x27;</span> &amp;&amp; arr[i + <span class="number">3</span>][j + <span class="number">3</span>] == <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">					count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(count);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 由于没有数据 只能拿案例数据测试 </span></span><br></pre></td></tr></table></figure>
+
+<h1 id="试题-C-蛇形填数-10分"><a href="#试题-C-蛇形填数-10分" class="headerlink" title="试题 C: 蛇形填数(10分)"></a>试题 C: 蛇形填数(10分)</h1><p>如下图所示，小明用从 1 开始的正整数“蛇形”填充无限大的矩阵。<br><img src="https://img-blog.csdnimg.cn/20210117152841412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTY0MDI2MA==,size_16,color_FFFFFF,t_70"><br>容易看出矩阵第二行第二列中的数是 5。请你计算矩阵中第 20 行第 20 列 的数是多少？</p>
+<h2 id="思路分析-2"><a href="#思路分析-2" class="headerlink" title="思路分析"></a>思路分析</h2><p>第n行第n列前面有 2 * (n - 1) 行<br>第20行第20列前面有 38 行<br>38行对应的元素个数为 (1+38)*38/2 = 741个<br>在加上当前斜行的20个<br>答案为 761</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println((<span class="number">1</span> + <span class="number">38</span>) * <span class="number">38</span> / <span class="number">2</span> + <span class="number">20</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="试题-D-七段码-10分"><a href="#试题-D-七段码-10分" class="headerlink" title="试题 D: 七段码(10分)"></a>试题 D: 七段码(10分)</h1><p>小蓝要用七段码数码管来表示一种特殊的文字。<br><img src="https://img-blog.csdnimg.cn/20210117153800488.png"><br>上图给出了七段码数码管的一个图示，数码管中一共有 7 段可以发光的二极管，分别标记为 a, b, c, d, e, f, g。<br>小蓝要选择一部分二极管（至少要有一个）发光来表达字符。在设计字符的表达时，要求所有发光的二极管是连成一片的。</p>
+<p>例如： b 发光，其他二极管不发光可以用来表达一种字符。<br>例如： c 发光，其他二极管不发光可以用来表达一种字符。这种 方案与上 一行的方案可以用来表示不同的字符，尽管看上去比较相似。<br>例如： a, b, c, d, e 发光， f, g 不发光可以用来表达一种字符。<br>例如： b, f 发光，其他二极管不发光则不能用来表达一种字符，因为发光 的二极管没有连成一片。<br>请问，小蓝可以用七段码数码管表达多少种不同的字符？</p>
+<h2 id="思路分析-3"><a href="#思路分析-3" class="headerlink" title="思路分析"></a>思路分析</h2><h2 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h2><h1 id="试题-E-排序-15分"><a href="#试题-E-排序-15分" class="headerlink" title="试题 E: 排序(15分)"></a>试题 E: 排序(15分)</h1><p>小蓝最近学习了一些排序算法，其中冒泡排序让他印象深刻。在冒泡排序中，每次只能交换相邻的两个元素。<br>小蓝发现，如果对一个字符串中的字符排序，只允许交换相邻的两个字符，则在所有可能的排序方案中，冒泡排序的总交换次数是最少的。<br>例如，对于字符串 lan 排序，只需要 1 次交换。对于字符串 qiao 排序，总共需要 4 次交换。<br>小蓝找到了很多字符串试图排序，他恰巧碰到一个字符串，需要 100 次交换，可是他忘了吧这个字符串记下来，现在找不到了。<br>请帮助小蓝找一个只包含小写英文字母且没有字母重复出现的字符串，对该串的字符排序，正好需要 100 次交换。如果可能找到多个，请告诉小蓝最短的那个。如果最短的仍然有多个，请告诉小蓝字典序最小的那个。请注意字符串中不可以包含相同的字符。</p>
+<h2 id="思路分析-4"><a href="#思路分析-4" class="headerlink" title="思路分析"></a>思路分析</h2><p>cba这个例子 a需要交换两次 b需要交换1次 总共为2 + 1 = 3次<br>gfedcba这个例子 则需要6 + 5 + 4 + 3 + 2 + 1 = 21次<br>易知：14 + 13 + ··· + 1 = 105次<br>onmlkjihgfedcba这个序列需要15次 需要少交换五次 那我们将倒数第六位的字母放到第一位 就可以少交换5次<br>所以序列应该为 jonmlkihgfedcba</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="试题-F-成绩分析-15分"><a href="#试题-F-成绩分析-15分" class="headerlink" title="试题 F: 成绩分析(15分)"></a>试题 F: 成绩分析(15分)</h1><p>小蓝给学生们组织了一场考试，卷面总分为 100 分，每个学生的得分都是 一个 0 到 100 的整数。<br>请计算这次考试的最高分、最低分和平均分。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入的第一行包含一个整数 n，表示考试人数。 接下来 n 行，每行包含一个 0 至 100 的整数，表示一个学生的得分。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出三行。<br>第一行包含一个整数，表示最高分。<br>第二行包含一个整数，表示最低分。<br>第三行包含一个实数，四舍五入保留正好两位小数，表示平均分。</p>
+<h2 id="思路分析-5"><a href="#思路分析-5" class="headerlink" title="思路分析"></a>思路分析</h2><p>送分题</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">int</span> n=scan.nextInt();</span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">		<span class="keyword">int</span> max=Integer.MIN_VALUE;</span><br><span class="line">		<span class="keyword">int</span> min=Integer.MAX_VALUE;</span><br><span class="line">		<span class="keyword">double</span> sum=<span class="number">0.0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">			arr[i]=scan.nextInt();</span><br><span class="line">			<span class="keyword">if</span>(arr[i]&gt;max) max=arr[i];</span><br><span class="line">			<span class="keyword">if</span>(arr[i]&lt;min) min=arr[i];</span><br><span class="line">			sum+=arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">double</span> avg=sum/n;</span><br><span class="line">		System.out.println(max);</span><br><span class="line">		System.out.println(min);</span><br><span class="line">		System.out.printf(<span class="string">&quot;%.2f&quot;</span>,avg);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="试题-G-单词分析-20分"><a href="#试题-G-单词分析-20分" class="headerlink" title="试题 G: 单词分析(20分)"></a>试题 G: 单词分析(20分)</h1><p>小蓝正在学习一门神奇的语言，这门语言中的单词都是由小写英文字母组 成，有些单词很长，远远超过正常英文单词的长度。小蓝学了很长时间也记不 住一些单词，他准备不再完全记忆这些单词，而是根据单词中哪个字母出现得 最多来分辨单词。<br>现在，请你帮助小蓝，给了一个单词后，帮助他找到出现最多的字母和这 个字母出现的次数。</p>
+<h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一行包含一个单词，单词只由小写英文字母组成。</p>
+<h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出两行，第一行包含一个英文字母，表示单词中出现得最多的字母是哪 个。如果有多个字母出现的次数相等，输出字典序最小的那个。<br>第二行包含一个整数，表示出现得最多的那个字母在单词中出现的次数。</p>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><p>lanqiao</p>
+<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><p>a<br>2</p>
+<h2 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入"></a>样例输入</h2><p>longlonglongistoolong</p>
+<h2 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出"></a>样例输出</h2><p>o<br>6</p>
+<h2 id="评测用例规模与约定"><a href="#评测用例规模与约定" class="headerlink" title="评测用例规模与约定"></a>评测用例规模与约定</h2><p>对于所有的评测用例，输入的单词长度不超过 1000。</p>
+<h2 id="思路分析-6"><a href="#思路分析-6" class="headerlink" title="思路分析"></a>思路分析</h2><p>哈希<br>创建一个长度为26的数组下标0<del>25依次对应’a’</del>‘z’<br>找到下标最大的 用下标 + ‘a’ 转化成字符 即为频次最多的字母<br>##</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">		Arrays.fill(arr,<span class="number">0</span>);</span><br><span class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">char</span>[] word=scan.next().toCharArray();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">char</span> c : word) &#123;</span><br><span class="line">			arr[c-<span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> index=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> max= Integer.MIN_VALUE;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[i]&gt;max) &#123;</span><br><span class="line">				max=arr[i];</span><br><span class="line">				index=i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println((<span class="keyword">char</span>)(index+<span class="string">&#x27;a&#x27;</span>));</span><br><span class="line">		System.out.println(max);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="试题-H-数字三角形-20分"><a href="#试题-H-数字三角形-20分" class="headerlink" title="试题 H: 数字三角形(20分)"></a>试题 H: 数字三角形(20分)</h1><p><img src="https://img-blog.csdnimg.cn/2021011715523376.png"><br>上图给出了一个数字三角形。从三角形的顶部到底部有很多条不同的路径。 对于每条路径，把路径上面的数加起来可以得到一个和，你的任务就是找到最大的和。<br>路径上的每一步只能从一个数走到下一层和它最近的左边的那个数或者右 边的那个数。此外，向左下走的次数与向右下走的次数相差不能超过 1。</p>
+<h2 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入的第一行包含一个整数 N (1 &lt; N ≤ 100)，表示三角形的行数。下面的 N 行给出数字三角形。数字三角形上的数都是 0 至 100 之间的整数。</p>
+<h2 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示答案。</p>
+<h2 id="样例输入-2"><a href="#样例输入-2" class="headerlink" title="样例输入"></a>样例输入</h2><p>5<br>7<br>3 8<br>8 1 0<br>2 7 4 4<br>4 5 2 6 5</p>
+<h2 id="样例输出-2"><a href="#样例输出-2" class="headerlink" title="样例输出"></a>样例输出</h2><p>27</p>
+<h2 id="思路分析-7"><a href="#思路分析-7" class="headerlink" title="思路分析"></a>思路分析</h2><p>简单dp<br>往左下走和往右下走的次数相差不能超过1<br>那也就是走到最下面一层 只可能出现在中间<br>如果是奇数 则就是中间位置的值<br>如果是偶数 则是两个中间值中的最大值</p>
+<h2 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">int</span> n = scan.nextInt();</span><br><span class="line">		<span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>][n + <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">				dp[i][j] = scan.nextInt();</span><br><span class="line">				dp[i][j] += Math.max(dp[i - <span class="number">1</span>][j - <span class="number">1</span>], dp[i - <span class="number">1</span>][j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(n % <span class="number">2</span> == <span class="number">1</span> ? dp[n][n / <span class="number">2</span> + <span class="number">1</span>] : Math.max(dp[n][n / <span class="number">2</span>], dp[n][n / <span class="number">2</span> + <span class="number">1</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="试题-I-子串分值和-25分"><a href="#试题-I-子串分值和-25分" class="headerlink" title="试题 I: 子串分值和(25分)"></a>试题 I: 子串分值和(25分)</h1><p>对于一个字符串 S，我们定义 S 的分值 f(S) 为 S 中出现的不同的字符个 数。例如 f(”aba”) = 2，f(”abc”) = 3, f(”aaa”) = 1。 现在给定一个字符串 S[0…n−1]（长度为 n），请你计算对于所有 S 的非空 子串 S[i…j](0≤i≤ j &lt; n)，f(S[i…j]) 的和是多少。</p>
+<h2 id="输入格式-3"><a href="#输入格式-3" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入一行包含一个由小写字母组成的字符串 S。</p>
+<h2 id="输出格式-3"><a href="#输出格式-3" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数表示答案。</p>
+<h2 id="样例输入-3"><a href="#样例输入-3" class="headerlink" title="样例输入"></a>样例输入</h2><p>ababc</p>
+<h2 id="样例输出-3"><a href="#样例输出-3" class="headerlink" title="样例输出"></a>样例输出</h2><p>28</p>
+<h2 id="样例说明"><a href="#样例说明" class="headerlink" title="样例说明"></a>样例说明</h2><p>子串 f值<br>a 1<br>ab 2<br>aba 2<br>abab 2<br>ababc 3<br>b 1<br>ba 2<br>bab 2<br>babc 3<br>a 1<br>ab 2<br>abc 3<br>b 1<br>bc 2<br>c 1</p>
+<h2 id="评测用例规模与约定-1"><a href="#评测用例规模与约定-1" class="headerlink" title="评测用例规模与约定"></a>评测用例规模与约定</h2><p>对于 20% 的评测用例，1≤n≤10；<br>对于 40% 的评测用例，1≤n≤100；<br>对于 50% 的评测用例，1≤n≤1000；<br>对于 60% 的评测用例，1≤n≤10000；<br>对于所有评测用例，1≤n≤100000。</p>
+<h1 id="试题-J-装饰珠-25分"><a href="#试题-J-装饰珠-25分" class="headerlink" title="试题 J: 装饰珠(25分)"></a>试题 J: 装饰珠(25分)</h1><p>在怪物猎人这一款游戏中，玩家可以通过给装备镶嵌不同的装饰珠来获取相应的技能，以提升自己的战斗能力。<br>已知猎人身上一共有 6 66 件装备，每件装备可能有若干个装饰孔，每个装饰孔有各自的等级，可以镶嵌一颗小于等于自身等级的装饰珠 (也可以选择不镶嵌)。<br>装饰珠有M种，编号1至M，分别对应M 种技能，第i种装饰珠的等级为Li，只能镶嵌在等级大于等于Li的装饰孔中。<br>对第i种技能来说，当装备相应技能的装饰珠数量达到Ki个时，会产生Wi(Ki) 的价值。镶嵌同类技能的数量越多，产生的价值越大，即Wi(Ki − 1) &lt; Wi(Ki) 。但每个技能都有上限Pi(1 ≤ P i ≤ 7) ，当装备的珠子数量超过Pi时，只会产生Wi(Pi) 的价值。<br>对于给定的装备和装饰珠数据，求解如何镶嵌装饰珠，使得 6 件装备能得到的总价值达到最大。</p>
+<h2 id="输入格式-4"><a href="#输入格式-4" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入的第1至6行，包含6件装备的描述。其中第i的第一个整数Ni表示<br>第i件装备的装饰孔数量。后面紧接着Ni个整数，分别表示该装备上每个装饰孔的等级L(1 ≤ L ≤ 4) 。<br>第7行包含一个正整数M，表示装饰珠 (技能) 种类数量。<br>第8至 M + 7行，每行描述一种装饰珠 (技能) 的情况。每行的前两个整数Lj(1 ≤ Lj ≤ 4)和Pj(1 ≤ Pi ≤ 7)分别表示第j种装饰珠的等级和上限。接下来Pj个整数，其中第k个数表示装备该中装饰珠数量为k时的价值 Wj(k)。</p>
+<h2 id="输出格式-4"><a href="#输出格式-4" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行包含一个整数，表示能够得到的最大价值。</p>
+<h2 id="样例输入-4"><a href="#样例输入-4" class="headerlink" title="样例输入"></a>样例输入</h2><p>1 1<br>2 1 2<br>1 1<br>2 2 2<br>1 1<br>1 3<br>3<br>1 5 1 2 3 5 8<br>2 4 2 4 8 15<br>3 2 5 10</p>
+<h2 id="样例输出-4"><a href="#样例输出-4" class="headerlink" title="样例输出"></a>样例输出</h2><p>20</p>
+<h2 id="样例说明-1"><a href="#样例说明-1" class="headerlink" title="样例说明"></a>样例说明</h2><p>按照如下方式镶嵌珠子得到最大价值 18，括号内表示镶嵌的装饰珠的种类编号：<br>1: (1)<br>2: (1) (2)<br>3: (1)<br>4: (2) (2)<br>5: (1)<br>6: (2)<br>4 颗技能 1 装饰珠，4 颗技能 2 装饰珠 W1(4) + W2(4) = 5 + 15 = 20。</p>
+<h2 id="评测用例规模与约定-2"><a href="#评测用例规模与约定-2" class="headerlink" title="评测用例规模与约定"></a>评测用例规模与约定</h2><p>对于 30% 的评测用例，1 ≤ Ni ≤ 10, 1 ≤ M ≤ 20, 1 ≤ Wj(k) ≤ 500；<br>对于所有评测用例，1 ≤ Ni ≤ 50, 1 ≤ M ≤ 10000, 1 ≤ Wj(k) ≤ 10000。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Kyle Violet</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://cyborg2077.github.io/2022/03/18/LanqiaoCup02/">https://cyborg2077.github.io/2022/03/18/LanqiaoCup02/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://cyborg2077.github.io" target="_blank">Kyle's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=518815500,4294667560&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/20/BackTracking/"><img class="prev-cover" src="https://img2.baidu.com/it/u=595920241,2439700946&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">回溯</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/21/LanqiaoCup/"><img class="next-cover" src="https://img0.baidu.com/it/u=1144121390,2782791282&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第十二届蓝桥杯省赛 Java--B组</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/02/21/LanqiaoCup/" title="第十二届蓝桥杯省赛 Java--B组"><img class="cover" src="https://img0.baidu.com/it/u=1144121390,2782791282&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-21</div><div class="title">第十二届蓝桥杯省赛 Java--B组</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Kyle Violet</div><div class="author-info__description">今天也是emo的一天</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Cyborg2077"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Cyborg2077" target="_blank" title="Github"><i class="iconfont icon-github-fill"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1586385296&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">2022不摆烂</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-A-%E9%97%A8%E7%89%8C%E5%88%B6%E4%BD%9C-5%E5%88%86"><span class="toc-number">1.</span> <span class="toc-text">试题 A: 门牌制作(5分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">1.1.</span> <span class="toc-text">思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-B-%E5%AF%BB%E6%89%BE-2020-5%E5%88%86"><span class="toc-number">2.</span> <span class="toc-text">试题 B: 寻找 2020(5分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90-1"><span class="toc-number">2.1.</span> <span class="toc-text">思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-C-%E8%9B%87%E5%BD%A2%E5%A1%AB%E6%95%B0-10%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">试题 C: 蛇形填数(10分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90-2"><span class="toc-number">3.1.</span> <span class="toc-text">思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-D-%E4%B8%83%E6%AE%B5%E7%A0%81-10%E5%88%86"><span class="toc-number">4.</span> <span class="toc-text">试题 D: 七段码(10分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90-3"><span class="toc-number">4.1.</span> <span class="toc-text">思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-3"><span class="toc-number">4.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-E-%E6%8E%92%E5%BA%8F-15%E5%88%86"><span class="toc-number">5.</span> <span class="toc-text">试题 E: 排序(15分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90-4"><span class="toc-number">5.1.</span> <span class="toc-text">思路分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-F-%E6%88%90%E7%BB%A9%E5%88%86%E6%9E%90-15%E5%88%86"><span class="toc-number">6.</span> <span class="toc-text">试题 F: 成绩分析(15分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">6.1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">6.2.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90-5"><span class="toc-number">6.3.</span> <span class="toc-text">思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.4.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-G-%E5%8D%95%E8%AF%8D%E5%88%86%E6%9E%90-20%E5%88%86"><span class="toc-number">7.</span> <span class="toc-text">试题 G: 单词分析(20分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">7.1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">7.2.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5"><span class="toc-number">7.3.</span> <span class="toc-text">样例输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA"><span class="toc-number">7.4.</span> <span class="toc-text">样例输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5-1"><span class="toc-number">7.5.</span> <span class="toc-text">样例输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA-1"><span class="toc-number">7.6.</span> <span class="toc-text">样例输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E6%B5%8B%E7%94%A8%E4%BE%8B%E8%A7%84%E6%A8%A1%E4%B8%8E%E7%BA%A6%E5%AE%9A"><span class="toc-number">7.7.</span> <span class="toc-text">评测用例规模与约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90-6"><span class="toc-number">7.8.</span> <span class="toc-text">思路分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-H-%E6%95%B0%E5%AD%97%E4%B8%89%E8%A7%92%E5%BD%A2-20%E5%88%86"><span class="toc-number">8.</span> <span class="toc-text">试题 H: 数字三角形(20分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">8.1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">8.2.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5-2"><span class="toc-number">8.3.</span> <span class="toc-text">样例输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA-2"><span class="toc-number">8.4.</span> <span class="toc-text">样例输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90-7"><span class="toc-number">8.5.</span> <span class="toc-text">思路分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4"><span class="toc-number">8.6.</span> <span class="toc-text">代码提交</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-I-%E5%AD%90%E4%B8%B2%E5%88%86%E5%80%BC%E5%92%8C-25%E5%88%86"><span class="toc-number">9.</span> <span class="toc-text">试题 I: 子串分值和(25分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-3"><span class="toc-number">9.1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-3"><span class="toc-number">9.2.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5-3"><span class="toc-number">9.3.</span> <span class="toc-text">样例输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA-3"><span class="toc-number">9.4.</span> <span class="toc-text">样例输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-number">9.5.</span> <span class="toc-text">样例说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E6%B5%8B%E7%94%A8%E4%BE%8B%E8%A7%84%E6%A8%A1%E4%B8%8E%E7%BA%A6%E5%AE%9A-1"><span class="toc-number">9.6.</span> <span class="toc-text">评测用例规模与约定</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%95%E9%A2%98-J-%E8%A3%85%E9%A5%B0%E7%8F%A0-25%E5%88%86"><span class="toc-number">10.</span> <span class="toc-text">试题 J: 装饰珠(25分)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-4"><span class="toc-number">10.1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-4"><span class="toc-number">10.2.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5-4"><span class="toc-number">10.3.</span> <span class="toc-text">样例输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA-4"><span class="toc-number">10.4.</span> <span class="toc-text">样例输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%AF%B4%E6%98%8E-1"><span class="toc-number">10.5.</span> <span class="toc-text">样例说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E6%B5%8B%E7%94%A8%E4%BE%8B%E8%A7%84%E6%A8%A1%E4%B8%8E%E7%BA%A6%E5%AE%9A-2"><span class="toc-number">10.6.</span> <span class="toc-text">评测用例规模与约定</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/03/20/BackTracking/" title="回溯"><img src="https://img2.baidu.com/it/u=595920241,2439700946&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="回溯"/></a><div class="content"><a class="title" href="/2022/03/20/BackTracking/" title="回溯">回溯</a><time datetime="2022-03-20T01:42:35.000Z" title="发表于 2022-03-20 09:42:35">2022-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/18/LanqiaoCup02/" title="第十一届蓝桥杯省赛 Java--B组"><img src="https://img0.baidu.com/it/u=518815500,4294667560&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第十一届蓝桥杯省赛 Java--B组"/></a><div class="content"><a class="title" href="/2022/03/18/LanqiaoCup02/" title="第十一届蓝桥杯省赛 Java--B组">第十一届蓝桥杯省赛 Java--B组</a><time datetime="2022-03-18T12:46:32.000Z" title="发表于 2022-03-18 20:46:32">2022-03-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/21/LanqiaoCup/" title="第十二届蓝桥杯省赛 Java--B组"><img src="https://img0.baidu.com/it/u=1144121390,2782791282&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第十二届蓝桥杯省赛 Java--B组"/></a><div class="content"><a class="title" href="/2022/02/21/LanqiaoCup/" title="第十二届蓝桥杯省赛 Java--B组">第十二届蓝桥杯省赛 Java--B组</a><time datetime="2022-02-21T03:11:32.000Z" title="发表于 2022-02-21 11:11:32">2022-02-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/15/BinaryTree/" title="二叉树"><img src="https://img2.baidu.com/it/u=781630402,3569603339&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=281" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二叉树"/></a><div class="content"><a class="title" href="/2022/02/15/BinaryTree/" title="二叉树">二叉树</a><time datetime="2022-02-15T08:41:32.000Z" title="发表于 2022-02-15 16:41:32">2022-02-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/13/StackAndQueue/" title="栈与队列"><img src="https://img0.baidu.com/it/u=2087153766,2086250114&amp;fm=26&amp;fmt=auto" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="栈与队列"/></a><div class="content"><a class="title" href="/2022/02/13/StackAndQueue/" title="栈与队列">栈与队列</a><time datetime="2022-02-13T04:19:54.000Z" title="发表于 2022-02-13 12:19:54">2022-02-13</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(135deg,#ace0f9,#a1c4fd)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Kyle Violet</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://cyborg2077.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-1iozy0e3e-cyborg2077.vercel.app/',
+      region: ''
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-1iozy0e3e-cyborg2077.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo@1.4.14/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-1iozy0e3e-cyborg2077.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo@1.4.14/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="7134539309" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?Cyborg2077";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="Cyborg2077";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><script data-pjax>function history_calendar_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-history"><div class="card-content"><div class="item-headline"><i class="fas fa-clock fa-spin"></i><span>那年今日</span></div><div id="history-baidu" style="height: 100px;overflow: hidden"><div class="history_swiper-container" id="history-container" style="width: 100%;height: 100%"><div class="swiper-wrapper" id="history_container_wrapper" style="height:20px"></div></div></div></div>';
+                console.log('已挂载history_calendar')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='/'|| '/' ==='all')){
+
+            history_calendar_injector_config()
+        } </script><script data-pjax  src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script><script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-card-history/baiduhistory/js/main.js"></script><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="/img/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://cdn.jsdelivr.net/npm/hexo-butterfly-clock/lib/clock.min.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false});</script></body></html>
