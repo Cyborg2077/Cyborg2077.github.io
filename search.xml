@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>GameEvaluation</title>
+      <link href="/2022/03/30/GameEvaluation/"/>
+      <url>/2022/03/30/GameEvaluation/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 游戏评测 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 游戏评测 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第十届蓝桥杯省赛 Java--B组</title>
       <link href="/2022/03/26/LanqiaoCup03/"/>
       <url>/2022/03/26/LanqiaoCup03/</url>
@@ -38,16 +63,14 @@
       
       <categories>
           
-          <category> 回溯算法 </category>
-          
-          <category> 二叉树 </category>
+          <category> 力扣 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
             <tag> 回溯算法 </tag>
             
@@ -119,14 +142,12 @@
           
           <category> 力扣 </category>
           
-          <category> 二叉树 </category>
-          
       </categories>
       
       
         <tags>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
             <tag> 二叉树 </tag>
             
@@ -148,14 +169,12 @@
           
           <category> 力扣 </category>
           
-          <category> 栈与队列 </category>
-          
       </categories>
       
       
         <tags>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
             <tag> 栈与队列 </tag>
             
@@ -177,16 +196,14 @@
           
           <category> 学习笔记 </category>
           
-          <category> Java </category>
-          
-          <category> 集合 </category>
-          
       </categories>
       
       
         <tags>
             
             <tag> 学习笔记 </tag>
+            
+            <tag> Java </tag>
             
             <tag> 集合 </tag>
             
@@ -208,14 +225,12 @@
           
           <category> 力扣 </category>
           
-          <category> 字符串 </category>
-          
       </categories>
       
       
         <tags>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
             <tag> 字符串 </tag>
             
@@ -237,14 +252,12 @@
           
           <category> 力扣 </category>
           
-          <category> 哈希表 </category>
-          
       </categories>
       
       
         <tags>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
             <tag> 哈希表 </tag>
             
@@ -266,14 +279,12 @@
           
           <category> 力扣 </category>
           
-          <category> 链表 </category>
-          
       </categories>
       
       
         <tags>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
             <tag> 链表 </tag>
             
@@ -295,8 +306,6 @@
           
           <category> 力扣 </category>
           
-          <category> 数组 </category>
-          
       </categories>
       
       
@@ -304,7 +313,7 @@
             
             <tag> 数组 </tag>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
         </tags>
       
@@ -324,16 +333,14 @@
           
           <category> 力扣 </category>
           
-          <category> 贪心算法 </category>
-          
       </categories>
       
       
         <tags>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
-            <tag> 贪心算法 </tag>
+            <tag> 贪心 </tag>
             
         </tags>
       
@@ -353,14 +360,12 @@
           
           <category> 力扣 </category>
           
-          <category> 动态规划(DP) </category>
-          
       </categories>
       
       
         <tags>
             
-            <tag> 力扣题解 </tag>
+            <tag> 算法训练 </tag>
             
             <tag> 动态规划(DP) </tag>
             
@@ -407,16 +412,14 @@
           
           <category> 学习笔记 </category>
           
-          <category> Java </category>
-          
-          <category> 多线程 </category>
-          
       </categories>
       
       
         <tags>
             
             <tag> 学习笔记 </tag>
+            
+            <tag> Java </tag>
             
             <tag> 多线程 </tag>
             
@@ -431,21 +434,19 @@
       <link href="/2021/12/20/server/"/>
       <url>/2021/12/20/server/</url>
       
-        <content type="html"><![CDATA[<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>闲得无聊买了三年的腾讯云服务器，以后游戏挂机刷东西就可以在服务器上完成了<del>再也不用担心游戏本扰民了</del></p><p>用Python的pyautogui库可以完成许多重复性工作(可以模拟达到按键精灵的效果)</p><p>本文先简要描述一下搭建饥荒专用服务器的流程(steam版)</p><p>以下是本文所需的全部文件</p><p>提取码: 9527  <a class="btn-beautify button--animated pink large" href="https://pan.baidu.com/s/1XIaqVzuWrkGAa3wZKd1WyQ"   title="百度网盘下载链接"><i class="far fa-hand-point-right"></i><span>百度网盘下载链接</span></a></p><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>不多说，先买好云服务器(我买的腾讯云)  <a class="btn-beautify button--animated blue large" href="https://cloud.tencent.com/act/new?from=15616"   title="戳这里"><i class="far fa-hand-point-right"></i><span>戳这里</span></a></p><p>然后修改密码</p><p><img src="/img/%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81.png" alt="修改密码"></p><p>复制公网IP，并通过win10的远程桌面链接，连接到云服务器上</p><p><img src="/img/%E5%85%AC%E7%BD%91IP.png" alt="公网IP"> <img src="/img/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5.png" alt="远程连接"></p><p>然后将网盘下载好的内容复制到<strong>服务器</strong>的 文档 目录下</p><p><img src="/img/%E6%AD%A4%E7%94%B5%E8%84%91.png" alt="此电脑"></p><p>打开steamcmd文件夹，然后双击里面的.exe文件进行安装</p><p>打开脚本文件夹，以管理员身份运行里面的update文件</p><p>然后在<strong>自己电脑</strong>上新创建一个世界，到达选人物界面断开连接即可</p><p><img src="/img/%E6%96%AD%E5%BC%80.png" alt="断开连接"></p><p>将刚创建的存档<strong>复制到服务器</strong>的  C:\Users\Administrator\Documents\Klei\DoNotStarveTogether  目录下</p><p>并将存档名改为 “Cluster_1” 进入该存档 创建一个”cluster_token.txt”文本文件</p><p><img src="/img/%E4%BB%A4%E7%89%8C.png" alt="令牌"></p><p>从<strong>自己的电脑</strong>上复制mod文件  在 steam\steamapps\common\Don’t Starve Together\mods 目录下和 steam\steamapps\workshop\content\322330均是</p><p>将所有的mod名改成<strong>workshop-nums</strong>的形式(例：workshop-8516651315)  并复制所有mod</p><p><img src="/img/%E5%A4%8D%E5%88%B6%E5%B0%B1%E5%A5%BD.png" alt="steam mods"></p><p><img src="/img/%E4%BF%AE%E6%94%B9.png" alt="修改"></p><p>粘贴到云服务器的  C:\Users\Administrator\Documents\steamcmd\steamapps\common\Don’t Starve Together Dedicated Server\mods  目录下</p><p>实际上只需要复制你开服用的mod就行，但为了日后方便，还是将所有的mod都复制过来比较稳妥，这个过程可能耗时很长，请耐心等待</p><p>完成上述操作之后，将脚本文件中的start和startcave文件复制到<br>C:\Users\Administrator\Documents\steamcmd\steamapps\common\Don’t Starve Together Dedicated Server\bin 目录下并运行</p><p><img src="/img/%E5%AE%8C%E6%88%90%E5%9B%BE.png" alt="完成图"></p><p>运行完毕后，大功告成，在自己电脑上测试，看看能否搜到刚创建的服务器</p><p><img src="/img/%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90.png" alt="大功告成"></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>闲得无聊买了三年的腾讯云服务器，以后游戏挂机刷东西就可以在服务器上完成了<del>再也不用担心游戏本扰民了</del></p><p>用Python的pyautogui库可以完成许多重复性工作(可以模拟达到按键精灵的效果)</p><p>本文先简要描述一下搭建饥荒专用服务器的流程(steam版)</p><p>以下是本文所需的全部文件</p><p>提取码: 9527  <a class="btn-beautify pink large" href="https://pan.baidu.com/s/1XIaqVzuWrkGAa3wZKd1WyQ"   title="百度网盘下载链接"><i class="far fa-hand-point-right"></i><span>百度网盘下载链接</span></a></p><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>不多说，先买好云服务器(我买的腾讯云)  <a class="btn-beautify blue large" href="https://cloud.tencent.com/act/new?from=15616"   title="戳这里"><i class="far fa-hand-point-right"></i><span>戳这里</span></a></p><p>然后修改密码</p><p><img src="/img/%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81.png" alt="修改密码"></p><p>复制公网IP，并通过win10的远程桌面链接，连接到云服务器上</p><p><img src="/img/%E5%85%AC%E7%BD%91IP.png" alt="公网IP"> <img src="/img/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5.png" alt="远程连接"></p><p>然后将网盘下载好的内容复制到<strong>服务器</strong>的 文档 目录下</p><p><img src="/img/%E6%AD%A4%E7%94%B5%E8%84%91.png" alt="此电脑"></p><p>打开steamcmd文件夹，然后双击里面的.exe文件进行安装</p><p>打开脚本文件夹，以管理员身份运行里面的update文件</p><p>然后在<strong>自己电脑</strong>上新创建一个世界，到达选人物界面断开连接即可</p><p><img src="/img/%E6%96%AD%E5%BC%80.png" alt="断开连接"></p><p>将刚创建的存档<strong>复制到服务器</strong>的  C:\Users\Administrator\Documents\Klei\DoNotStarveTogether  目录下</p><p>并将存档名改为 “Cluster_1” 进入该存档 创建一个”cluster_token.txt”文本文件</p><p><img src="/img/%E4%BB%A4%E7%89%8C.png" alt="令牌"></p><p>从<strong>自己的电脑</strong>上复制mod文件  在 steam\steamapps\common\Don’t Starve Together\mods 目录下和 steam\steamapps\workshop\content\322330均是</p><p>将所有的mod名改成<strong>workshop-nums</strong>的形式(例：workshop-8516651315)  并复制所有mod</p><p><img src="/img/%E5%A4%8D%E5%88%B6%E5%B0%B1%E5%A5%BD.png" alt="steam mods"></p><p><img src="/img/%E4%BF%AE%E6%94%B9.png" alt="修改"></p><p>粘贴到云服务器的  C:\Users\Administrator\Documents\steamcmd\steamapps\common\Don’t Starve Together Dedicated Server\mods  目录下</p><p>实际上只需要复制你开服用的mod就行，但为了日后方便，还是将所有的mod都复制过来比较稳妥，这个过程可能耗时很长，请耐心等待</p><p>完成上述操作之后，将脚本文件中的start和startcave文件复制到<br>C:\Users\Administrator\Documents\steamcmd\steamapps\common\Don’t Starve Together Dedicated Server\bin 目录下并运行</p><p><img src="/img/%E5%AE%8C%E6%88%90%E5%9B%BE.png" alt="完成图"></p><p>运行完毕后，大功告成，在自己电脑上测试，看看能否搜到刚创建的服务器</p><p><img src="/img/%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90.png" alt="大功告成"></p>]]></content>
       
       
       <categories>
           
-          <category> 腾讯云 </category>
-          
-          <category> 游戏 </category>
+          <category> 杂谈 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 游戏 </tag>
+            <tag> Don&#39;t Starve Together </tag>
             
         </tags>
       
@@ -458,7 +459,7 @@
       <link href="/2021/11/16/FinalExam/"/>
       <url>/2021/11/16/FinalExam/</url>
       
-        <content type="html"><![CDATA[<h2 id="速成课"><a href="#速成课" class="headerlink" title="速成课"></a>速成课</h2><p>资料来源<a class="btn-beautify button--animated blue large" href="https://www.techfens.com/"   title="TechFen's Blog"><i class="far fa-hand-point-right"></i><span>TechFen's Blog</span></a></p><p>这里收录了常见的一些期末考试的科目，更多速成课详情<a class="btn-beautify button--animated pink large" href="https://pan.techfens.com/"   title="戳这里"><i class="far fa-hand-point-right"></i><span>戳这里</span></a><br><img src="/img/%E9%80%9F%E6%88%90%E8%AF%BE.png" alt="速成课"></p><a class="btn-beautify button--animated pink large" href="https://pan.techfens.com/A%20-%20%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"   title="数学类"><i class="far fa-hand-point-right"></i><span>数学类</span></a><p><img src="/img/%E6%95%B0%E5%AD%A6%E7%B1%BB.png" alt="数学类"></p><a class="btn-beautify button--animated red large" href="https://pan.techfens.com/D%20-%20%E6%9C%BA%E6%A2%B0%E3%80%81%E5%8A%9B%E5%AD%A6%E7%B1%BB"   title="机械力学类"><i class="far fa-hand-point-right"></i><span>机械力学类</span></a><p><img src="/img/%E6%9C%BA%E6%A2%B0%E5%8A%9B%E5%AD%A6%E7%B1%BB.png" alt="机械力学类"></p><a class="btn-beautify button--animated purple large" href="https://pan.techfens.com/C%20-%20%E7%BB%8F%E6%B5%8E%E3%80%81%E7%AE%A1%E7%90%86%E7%B1%BB"   title="经管类"><i class="far fa-hand-point-right"></i><span>经管类</span></a><p><img src="/img/%E7%BB%8F%E7%AE%A1%E7%B1%BB.png" alt="经管类"></p><a class="btn-beautify button--animated orange large" href="https://pan.techfens.com/E%20-%20%E9%80%9A%E4%BF%A1%E3%80%81%E7%94%B5%E6%B0%94%E7%B1%BB"   title="通信电气类"><i class="far fa-hand-point-right"></i><span>通信电气类</span></a><p><img src="/img/%E9%80%9A%E4%BF%A1%E7%94%B5%E6%B0%94%E7%B1%BB.png" alt="通信电气类"></p><a class="btn-beautify button--animated green large" href="https://pan.techfens.com/F%20-%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB"   title="计算机类"><i class="far fa-hand-point-right"></i><span>计算机类</span></a><p><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB.png" alt="计算机类"></p><a class="btn-beautify button--animated large" href="https://pan.techfens.com/G%20-%20%E5%8C%96%E5%B7%A5%E3%80%81%E5%8C%96%E5%AD%A6%E7%B1%BB"   title="化学类"><i class="far fa-hand-point-right"></i><span>化学类</span></a><p><img src="/img/%E5%8C%96%E5%AD%A6%E7%B1%BB.png" alt="化学类"></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="速成课"><a href="#速成课" class="headerlink" title="速成课"></a>速成课</h2><p>资料来源<a class="btn-beautify blue large" href="https://www.techfens.com/"   title="TechFen's Blog"><i class="far fa-hand-point-right"></i><span>TechFen's Blog</span></a></p><p>这里收录了常见的一些期末考试的科目，更多速成课详情<a class="btn-beautify pink large" href="https://pan.techfens.com/"   title="戳这里"><i class="far fa-hand-point-right"></i><span>戳这里</span></a><br><img src="/img/%E9%80%9F%E6%88%90%E8%AF%BE.png" alt="速成课"></p><a class="btn-beautify pink large" href="https://pan.techfens.com/A%20-%20%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"   title="数学类"><i class="far fa-hand-point-right"></i><span>数学类</span></a><p><img src="/img/%E6%95%B0%E5%AD%A6%E7%B1%BB.png" alt="数学类"></p><a class="btn-beautify red large" href="https://pan.techfens.com/D%20-%20%E6%9C%BA%E6%A2%B0%E3%80%81%E5%8A%9B%E5%AD%A6%E7%B1%BB"   title="机械力学类"><i class="far fa-hand-point-right"></i><span>机械力学类</span></a><p><img src="/img/%E6%9C%BA%E6%A2%B0%E5%8A%9B%E5%AD%A6%E7%B1%BB.png" alt="机械力学类"></p><a class="btn-beautify purple large" href="https://pan.techfens.com/C%20-%20%E7%BB%8F%E6%B5%8E%E3%80%81%E7%AE%A1%E7%90%86%E7%B1%BB"   title="经管类"><i class="far fa-hand-point-right"></i><span>经管类</span></a><p><img src="/img/%E7%BB%8F%E7%AE%A1%E7%B1%BB.png" alt="经管类"></p><a class="btn-beautify orange large" href="https://pan.techfens.com/E%20-%20%E9%80%9A%E4%BF%A1%E3%80%81%E7%94%B5%E6%B0%94%E7%B1%BB"   title="通信电气类"><i class="far fa-hand-point-right"></i><span>通信电气类</span></a><p><img src="/img/%E9%80%9A%E4%BF%A1%E7%94%B5%E6%B0%94%E7%B1%BB.png" alt="通信电气类"></p><a class="btn-beautify green large" href="https://pan.techfens.com/F%20-%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB"   title="计算机类"><i class="far fa-hand-point-right"></i><span>计算机类</span></a><p><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB.png" alt="计算机类"></p><a class="btn-beautify large" href="https://pan.techfens.com/G%20-%20%E5%8C%96%E5%B7%A5%E3%80%81%E5%8C%96%E5%AD%A6%E7%B1%BB"   title="化学类"><i class="far fa-hand-point-right"></i><span>化学类</span></a><p><img src="/img/%E5%8C%96%E5%AD%A6%E7%B1%BB.png" alt="化学类"></p>]]></content>
       
       
       <categories>
@@ -484,10 +485,6 @@
           
           <category> 学习笔记 </category>
           
-          <category> Java </category>
-          
-          <category> 排序算法 </category>
-          
       </categories>
       
       
@@ -496,6 +493,8 @@
             <tag> 排序算法 </tag>
             
             <tag> 学习笔记 </tag>
+            
+            <tag> Java </tag>
             
         </tags>
       
@@ -508,8 +507,14 @@
       <link href="/2021/11/10/MarkDown/"/>
       <url>/2021/11/10/MarkDown/</url>
       
-        <content type="html"><![CDATA[<h1 id="学了五分钟的MarkDown语法"><a href="#学了五分钟的MarkDown语法" class="headerlink" title="学了五分钟的MarkDown语法"></a>学了五分钟的MarkDown语法</h1><h1 id="以后可能会继续更新"><a href="#以后可能会继续更新" class="headerlink" title="以后可能会继续更新"></a>以后可能会继续更新</h1><p>[在线编译器]<a href="https://dillinger.io/">https://dillinger.io/</a></p><h2 id="1-标题语法"><a href="#1-标题语法" class="headerlink" title="1.标题语法"></a>1.标题语法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标题语法</span></span><br><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="测试环节"><a href="#测试环节" class="headerlink" title="测试环节"></a>测试环节</h3><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h2 id="2-字体"><a href="#2-字体" class="headerlink" title="2.字体"></a>2.字体</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加粗</span></span><br><span class="line">**我被加粗了**</span><br><span class="line"><span class="comment">// 代码高亮</span></span><br><span class="line">==HIGH LIGHT==</span><br><span class="line"><span class="comment">// 删除线</span></span><br><span class="line">~~我被删除啦~~</span><br><span class="line"><span class="comment">// 斜体</span></span><br><span class="line">*我是斜体字*</span><br></pre></td></tr></table></figure><h3 id="测试环节-1"><a href="#测试环节-1" class="headerlink" title="测试环节"></a>测试环节</h3><p><strong>我被加粗了</strong></p><p>==HIGH LIGHT==</p><p><del>我被删除啦</del></p><p><em>我是斜体字</em></p><h2 id="3-引用"><a href="#3-引用" class="headerlink" title="3.引用"></a>3.引用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用语法</span></span><br><span class="line">&gt;作者: Kyle_CyaN</span><br><span class="line">&gt;&gt;作者: Kyle_CyaN</span><br><span class="line">&gt;&gt;&gt;作者: Kyle_CyaN</span><br><span class="line">&gt;&gt;&gt;&gt;作者: Kyle_CyaN</span><br></pre></td></tr></table></figure><h3 id="测试环节-2"><a href="#测试环节-2" class="headerlink" title="测试环节"></a>测试环节</h3><blockquote><p>作者: Kyle_CyaN</p><blockquote><p>作者: Kyle_CyaN</p><blockquote><p>作者: Kyle_CyaN</p><blockquote><p>作者: Kyle_CyaN</p></blockquote></blockquote></blockquote></blockquote><h2 id="4-分割线"><a href="#4-分割线" class="headerlink" title="4.分割线"></a>4.分割线</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分割线1</span></span><br><span class="line">---</span><br><span class="line"><span class="comment">// 分割线2</span></span><br><span class="line">***</span><br></pre></td></tr></table></figure><h3 id="测试环节-3"><a href="#测试环节-3" class="headerlink" title="测试环节"></a>测试环节</h3><hr><hr><h2 id="5-图片插入"><a href="#5-图片插入" class="headerlink" title="5.图片插入"></a>5.图片插入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在线图片或本地图片</span></span><br><span class="line">![我的图片](photo/me.png)</span><br></pre></td></tr></table></figure><h3 id="测试环节-4"><a href="#测试环节-4" class="headerlink" title="测试环节"></a>测试环节</h3><p><img src="https://img2.baidu.com/it/u=1519358925,3330107491&fm=26&fmt=auto" alt="我的图片"></p><h2 id="6-超链接"><a href="#6-超链接" class="headerlink" title="6.超链接"></a>6.超链接</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 超链接语法</span></span><br><span class="line">[这里是BILIBILI](https:<span class="comment">//www.bilibili.com/)</span></span><br></pre></td></tr></table></figure><h3 id="测试环节-5"><a href="#测试环节-5" class="headerlink" title="测试环节"></a>测试环节</h3><p><a href="https://www.bilibili.com/">哔哩哔哩</a></p><h2 id="7-列表"><a href="#7-列表" class="headerlink" title="7.列表"></a>7.列表</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无序列表</span></span><br><span class="line">- 目录<span class="number">1</span></span><br><span class="line">- 目录<span class="number">2</span></span><br><span class="line">- 目录<span class="number">3</span></span><br><span class="line"><span class="comment">// 有序列表</span></span><br><span class="line"><span class="number">1.</span>目录<span class="number">4</span></span><br><span class="line"><span class="number">2.</span>目录<span class="number">5</span></span><br><span class="line"><span class="number">3.</span>目录<span class="number">6</span></span><br></pre></td></tr></table></figure><h3 id="测试环节-6"><a href="#测试环节-6" class="headerlink" title="测试环节"></a>测试环节</h3><ul><li>目录1</li><li>目录2</li><li>目录3</li></ul><p>1.目录4<br>2.目录5<br>3.目录6</p><h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>做表格当然是用工具啦，毕竟手敲那么累<br><a href="https://www.tablesgenerator.com/markdown_tables">Markdown Tables Generator</a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="学了五分钟的MarkDown语法"><a href="#学了五分钟的MarkDown语法" class="headerlink" title="学了五分钟的MarkDown语法"></a>学了五分钟的MarkDown语法</h1><h1 id="以后可能会继续更新"><a href="#以后可能会继续更新" class="headerlink" title="以后可能会继续更新"></a>以后可能会继续更新</h1><p>[在线编译器]<a href="https://dillinger.io/">https://dillinger.io/</a></p><h2 id="1-标题语法"><a href="#1-标题语法" class="headerlink" title="1.标题语法"></a>1.标题语法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标题语法</span></span><br><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="测试环节"><a href="#测试环节" class="headerlink" title="测试环节"></a>测试环节</h3><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h2 id="2-字体"><a href="#2-字体" class="headerlink" title="2.字体"></a>2.字体</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加粗</span></span><br><span class="line">**我被加粗了**</span><br><span class="line"><span class="comment">// 代码高亮</span></span><br><span class="line">==HIGH LIGHT==</span><br><span class="line"><span class="comment">// 删除线</span></span><br><span class="line">~~我被删除啦~~</span><br><span class="line"><span class="comment">// 斜体</span></span><br><span class="line">*我是斜体字*</span><br></pre></td></tr></table></figure><h3 id="测试环节-1"><a href="#测试环节-1" class="headerlink" title="测试环节"></a>测试环节</h3><p><strong>我被加粗了</strong></p><p>==HIGH LIGHT==</p><p><del>我被删除啦</del></p><p><em>我是斜体字</em></p><h2 id="3-引用"><a href="#3-引用" class="headerlink" title="3.引用"></a>3.引用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用语法</span></span><br><span class="line">&gt;作者: Kyle_CyaN</span><br><span class="line">&gt;&gt;作者: Kyle_CyaN</span><br><span class="line">&gt;&gt;&gt;作者: Kyle_CyaN</span><br><span class="line">&gt;&gt;&gt;&gt;作者: Kyle_CyaN</span><br></pre></td></tr></table></figure><h3 id="测试环节-2"><a href="#测试环节-2" class="headerlink" title="测试环节"></a>测试环节</h3><blockquote><p>作者: Kyle_CyaN</p><blockquote><p>作者: Kyle_CyaN</p><blockquote><p>作者: Kyle_CyaN</p><blockquote><p>作者: Kyle_CyaN</p></blockquote></blockquote></blockquote></blockquote><h2 id="4-分割线"><a href="#4-分割线" class="headerlink" title="4.分割线"></a>4.分割线</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分割线1</span></span><br><span class="line">---</span><br><span class="line"><span class="comment">// 分割线2</span></span><br><span class="line">***</span><br></pre></td></tr></table></figure><h3 id="测试环节-3"><a href="#测试环节-3" class="headerlink" title="测试环节"></a>测试环节</h3><hr><hr><h2 id="5-图片插入"><a href="#5-图片插入" class="headerlink" title="5.图片插入"></a>5.图片插入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在线图片或本地图片</span></span><br><span class="line">![我的图片](photo/me.png)</span><br></pre></td></tr></table></figure><h3 id="测试环节-4"><a href="#测试环节-4" class="headerlink" title="测试环节"></a>测试环节</h3><p><img src="https://img2.baidu.com/it/u=1519358925,3330107491&fm=26&fmt=auto" alt="我的图片"></p><h2 id="6-超链接"><a href="#6-超链接" class="headerlink" title="6.超链接"></a>6.超链接</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 超链接语法</span></span><br><span class="line">[这里是BILIBILI](https:<span class="comment">//www.bilibili.com/)</span></span><br></pre></td></tr></table></figure><h3 id="测试环节-5"><a href="#测试环节-5" class="headerlink" title="测试环节"></a>测试环节</h3><p><a href="https://www.bilibili.com/">哔哩哔哩</a></p><h2 id="7-列表"><a href="#7-列表" class="headerlink" title="7.列表"></a>7.列表</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无序列表</span></span><br><span class="line">- 目录<span class="number">1</span></span><br><span class="line">- 目录<span class="number">2</span></span><br><span class="line">- 目录<span class="number">3</span></span><br><span class="line"><span class="comment">// 有序列表</span></span><br><span class="line"><span class="number">1.</span> 目录<span class="number">4</span></span><br><span class="line"><span class="number">2.</span> 目录<span class="number">5</span></span><br><span class="line"><span class="number">3.</span> 目录<span class="number">6</span></span><br></pre></td></tr></table></figure><h3 id="测试环节-6"><a href="#测试环节-6" class="headerlink" title="测试环节"></a>测试环节</h3><ul><li>目录1</li><li>目录2</li><li>目录3</li></ul><ol><li>目录4</li><li>目录5</li><li>目录6</li></ol><h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>做表格当然是用工具啦，毕竟手敲那么累<br><a href="https://www.tablesgenerator.com/markdown_tables">Markdown Tables Generator</a></p>]]></content>
       
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
       
       
         <tags>
@@ -527,8 +532,14 @@
       <link href="/2021/11/10/hello-world/"/>
       <url>/2021/11/10/hello-world/</url>
       
-        <content type="html"><![CDATA[<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p>这是我第一次使用<a href="https://hexo.io/">Hexo</a>框架搭建博客!<br>采用的主题是<a href="https://github.com/jerryc127/hexo-theme-butterfly">ButterFly</a><br>花了我一个晚上才搭建好，可以说是把能踩的坑全都踩了一遍。<br>以后会在这个小破站不定期更新一些学到的新东西。<br>如果想联系我的话，我的邮箱是<a href="mailto:&#67;&#121;&#100;&#101;&#x72;&#x70;&#117;&#110;&#x6b;&#x32;&#48;&#x37;&#55;&#64;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#67;&#121;&#100;&#101;&#x72;&#x70;&#117;&#110;&#x6b;&#x32;&#48;&#x37;&#55;&#64;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>。</p><h1 id="这里是我的QQ号"><a href="#这里是我的QQ号" class="headerlink" title="这里是我的QQ号"></a>这里是我的QQ号</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowQQ</span><span class="params">()</span> </span>&#123;</span><br><span class="line">String Ciphertext = <span class="string">&quot;1235689&quot;</span>;</span><br><span class="line">String QQ = <span class="string">&quot;&quot;</span> +</span><br><span class="line">Ciphertext.charAt(<span class="number">0</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">3</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">5</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">4</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">2</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">5</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">3</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">1</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">6</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">4</span>);</span><br><span class="line">System.out.println(QQ);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p>这是我第一次使用<a href="https://hexo.io/">Hexo</a>框架搭建博客!<br>采用的主题是<a href="https://github.com/jerryc127/hexo-theme-butterfly">ButterFly</a><br>花了我一个晚上才搭建好，可以说是把能踩的坑全都踩了一遍。<br>以后会在这个小破站不定期更新一些学到的新东西。<br>如果想联系我的话，我的邮箱是<a href="mailto:&#x43;&#x79;&#x64;&#101;&#114;&#x70;&#117;&#110;&#107;&#50;&#48;&#x37;&#55;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#x43;&#x79;&#x64;&#101;&#114;&#x70;&#117;&#110;&#107;&#50;&#48;&#x37;&#55;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#109;</a>。</p><h1 id="这里是我的QQ号"><a href="#这里是我的QQ号" class="headerlink" title="这里是我的QQ号"></a>这里是我的QQ号</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowQQ</span><span class="params">()</span> </span>&#123;</span><br><span class="line">String Ciphertext = <span class="string">&quot;1235689&quot;</span>;</span><br><span class="line">String QQ = <span class="string">&quot;&quot;</span> +</span><br><span class="line">Ciphertext.charAt(<span class="number">0</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">3</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">5</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">4</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">2</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">5</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">3</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">1</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">6</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">4</span>);</span><br><span class="line">System.out.println(QQ);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       
+      
+      <categories>
+          
+          <category> 杂谈 </category>
+          
+      </categories>
       
       
     </entry>
