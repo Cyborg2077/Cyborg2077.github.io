@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Java---常用类</title>
+      <link href="/2022/04/15/JavaCommonClasses/"/>
+      <url>/2022/04/15/JavaCommonClasses/</url>
+      
+        <content type="html"><![CDATA[<h1 id="JDK8之前的日期时间API"><a href="#JDK8之前的日期时间API" class="headerlink" title="JDK8之前的日期时间API"></a>JDK8之前的日期时间API</h1><h1 id="JDK8中日期时间API的介绍"><a href="#JDK8中日期时间API的介绍" class="headerlink" title="JDK8中日期时间API的介绍"></a>JDK8中日期时间API的介绍</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><table><thead><tr><th align="center">方法</th><th align="center">描述</th></tr></thead><tbody><tr><td align="center">now()</td><td align="center">静态方法，根据当前时间创建对象/指定时区的对象</td></tr><tr><td align="center">of()</td><td align="center">静态方法，根据指定日期/时间创建对象</td></tr><tr><td align="center">getDayOfMonth()/getDayOfYear()</td><td align="center">获得月份天数(1-31)/获得年份天数(1-366)</td></tr><tr><td align="center">getDayOfWeek()</td><td align="center">获得星期几(返回一个DayOfWeek枚举值)</td></tr><tr><td align="center">getMonth()</td><td align="center">获得月份,返回一个Month枚举值</td></tr><tr><td align="center">getHour()/getMinute()/getSecond()</td><td align="center">获得当前对象对应的小时、分钟、秒</td></tr><tr><td align="center">withDayOfMonth()/withDayOfYear()/ withMonth()/withYear()</td><td align="center">将月份天数、年份天数、月份、年份修改为指定的值并返回新的对象</td></tr><tr><td align="center">minusMonths()/minusWeeks()/minusDays()/ minusYears()/minusHours()</td><td align="center">从当前对象减去几月、几周、几天、几年、几小时</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 常用类 </tag>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Lua学习笔记</title>
       <link href="/2022/04/12/LuaLearningNotes/"/>
       <url>/2022/04/12/LuaLearningNotes/</url>
@@ -453,7 +482,7 @@
     
     
     <entry>
-      <title>Java多线程(持续更新中)</title>
+      <title>Java---多线程</title>
       <link href="/2021/12/25/Thread/"/>
       <url>/2021/12/25/Thread/</url>
       
@@ -526,7 +555,7 @@
     
     
     <entry>
-      <title>十大排序算法(持续更新中)</title>
+      <title>十大排序算法</title>
       <link href="/2021/11/10/SortMenu/"/>
       <url>/2021/11/10/SortMenu/</url>
       
@@ -542,11 +571,9 @@
       
         <tags>
             
-            <tag> 排序算法 </tag>
-            
             <tag> 学习笔记 </tag>
             
-            <tag> Java </tag>
+            <tag> 排序算法 </tag>
             
         </tags>
       
@@ -584,7 +611,7 @@
       <link href="/2021/11/10/hello-world/"/>
       <url>/2021/11/10/hello-world/</url>
       
-        <content type="html"><![CDATA[<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p>这是我第一次使用<a href="https://hexo.io/">Hexo</a>框架搭建博客!<br>采用的主题是<a href="https://github.com/jerryc127/hexo-theme-butterfly">ButterFly</a><br>花了我一个晚上才搭建好，可以说是把能踩的坑全都踩了一遍。<br>以后会在这个小破站不定期更新一些学到的新东西。<br>如果想联系我的话，我的邮箱是<a href="mailto:&#x43;&#x79;&#100;&#x65;&#x72;&#x70;&#x75;&#110;&#107;&#x32;&#48;&#55;&#x37;&#64;&#103;&#109;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;">&#x43;&#x79;&#100;&#x65;&#x72;&#x70;&#x75;&#110;&#107;&#x32;&#48;&#55;&#x37;&#64;&#103;&#109;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a>。</p><h1 id="这里是我的QQ号"><a href="#这里是我的QQ号" class="headerlink" title="这里是我的QQ号"></a>这里是我的QQ号</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowQQ</span><span class="params">()</span> </span>&#123;</span><br><span class="line">String Ciphertext = <span class="string">&quot;1235689&quot;</span>;</span><br><span class="line">String QQ = <span class="string">&quot;&quot;</span> +</span><br><span class="line">Ciphertext.charAt(<span class="number">0</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">3</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">5</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">4</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">2</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">5</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">3</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">1</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">6</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">4</span>);</span><br><span class="line">System.out.println(QQ);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p>这是我第一次使用<a href="https://hexo.io/">Hexo</a>框架搭建博客!<br>采用的主题是<a href="https://github.com/jerryc127/hexo-theme-butterfly">ButterFly</a><br>花了我一个晚上才搭建好，可以说是把能踩的坑全都踩了一遍。<br>以后会在这个小破站不定期更新一些学到的新东西。<br>如果想联系我的话，我的邮箱是<a href="mailto:&#67;&#x79;&#x64;&#x65;&#114;&#x70;&#x75;&#x6e;&#x6b;&#x32;&#48;&#55;&#x37;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#67;&#x79;&#x64;&#x65;&#114;&#x70;&#x75;&#x6e;&#x6b;&#x32;&#48;&#55;&#x37;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;</a>。</p><h1 id="这里是我的QQ号"><a href="#这里是我的QQ号" class="headerlink" title="这里是我的QQ号"></a>这里是我的QQ号</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowQQ</span><span class="params">()</span> </span>&#123;</span><br><span class="line">String Ciphertext = <span class="string">&quot;1235689&quot;</span>;</span><br><span class="line">String QQ = <span class="string">&quot;&quot;</span> +</span><br><span class="line">Ciphertext.charAt(<span class="number">0</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">3</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">5</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">4</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">2</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">5</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">3</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">1</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">6</span>) +</span><br><span class="line">Ciphertext.charAt(<span class="number">4</span>);</span><br><span class="line">System.out.println(QQ);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
