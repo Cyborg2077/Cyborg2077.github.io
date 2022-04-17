@@ -113,6 +113,8 @@ background: rgba(255, 255, 255, 0.9);
     background: transparent!important;
     }
 
+
+
 [data-theme="dark"]
   #aside-content .card-widget{
       background: rgba(0, 0, 0, 0.5)!important;
@@ -122,8 +124,6 @@ background: rgba(255, 255, 255, 0.9);
     background: rgba(0, 0, 0, 0.5)!important;
     }
 
-
-
 .read-mode #aside-content .card-widget{
       background: rgba(158, 204, 171, 0.5)!important;
     }
@@ -131,9 +131,7 @@ background: rgba(255, 255, 255, 0.9);
     background: rgba(158, 204, 171, 0.5)!important;
     }
 
-
-
-[data-theme="dark"]
+  [data-theme="dark"]
   .read-mode #aside-content .card-widget{
         background: rgba(0, 0, 0, 0.5)!important;
         color: #ffffff;
