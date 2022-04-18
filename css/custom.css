@@ -137,3 +137,65 @@ background: rgba(255, 255, 255, 0.9);
   div#category{
     background: rgba(0, 0, 0, 0.5)!important;
     }
+
+
+
+.read-mode #aside-content .card-widget{
+      background: rgba(158, 204, 171, 0.5)!important;
+    }
+.read-mode div#post{
+    background: rgba(158, 204, 171, 0.5)!important;
+    }
+.read-mode div#category{
+    background: rgba(158, 204, 171, 0.5)!important;
+    }
+.read-mode div#tags{
+    background: rgba(158, 204, 171, 0.5)!important;
+    }
+.read-mode div#archive{
+    background: rgba(158, 204, 171, 0.5)!important;
+    }
+.read-mode div#page{
+    background: rgba(158, 204, 171, 0.5)!important;
+    }
+.read-mode #recent-posts > .recent-post-item{
+    background: rgba(158, 204, 171, 0.5)!important;
+    }
+
+
+
+[data-theme="dark"]
+  .read-mode #aside-content .card-widget{
+        background: rgba(0, 0, 0, 0.5)!important;
+        color: #ffffff;
+      }
+[data-theme="dark"]  
+  .read-mode div#post{
+      background: rgba(0, 0, 0, 0.5)!important;
+      color: #ffffff;
+      }
+[data-theme="dark"]  
+  .read-mode #recent-posts > .recent-post-item{
+      background: rgba(0, 0, 0, 0.5)!important;
+      color: #ffffff;
+      }
+[data-theme="dark"]  
+  .read-mode div#page{
+      background: rgba(0, 0, 0, 0.5)!important;
+      color: #ffffff;
+      }
+[data-theme="dark"]  
+  .read-mode div#tags{
+      background: rgba(0, 0, 0, 0.5)!important;
+      color: #ffffff;
+      }
+[data-theme="dark"]  
+  .read-mode div#archive{
+      background: rgba(0, 0, 0, 0.5)!important;
+      color: #ffffff;
+      }
+[data-theme="dark"]  
+  .read-mode div#category{
+      background: rgba(0, 0, 0, 0.5)!important;
+      color: #ffffff;
+      }
