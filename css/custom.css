@@ -1,12 +1,3 @@
-@font-face{
-  font-family:'Candyhome' ;  /* 字体名自定义即可 */
-  src:url('/Candy.ttf'); /* 字体文件路径 */
-  font-display : swap;
-}
-p {
-  font-family: 'Candyhome', sans-serif;
-}
-
 
 .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
   left: -66px !important;
@@ -57,6 +48,36 @@ i:hover{
 }
 
 
+
+/* 页脚透明 */
+#footer{
+  background: transparent!important;
+}
+/* 页脚黑色透明玻璃效果移除 */
+#footer::before{
+    background: transparent!important;
+  }
+/* 头图透明 */
+#page-header{
+  background: transparent!important;
+}
+/*top-img黑色透明玻璃效果移除，不建议加，除非你执着于完全一图流或者背景图对比色明显 */
+#page-header.post-bg:before {
+  background-color: transparent!important;
+}
+/*夜间模式伪类遮罩层透明*/
+[data-theme="dark"]
+  #footer::before{
+      background: transparent!important;
+    }
+[data-theme="dark"]
+  #page-header::before{
+    background: transparent!important;
+    }
+
+
+
+
 /* 首页文章卡片 */
 #recent-posts > .recent-post-item{
   background:rgba(255, 255, 255, 0.9);
@@ -87,33 +108,6 @@ background: rgba(255, 255, 255, 0.9);
 }
 
 
-/* 页脚透明 */
-#footer{
-  background: transparent!important;
-}
-/* 页脚黑色透明玻璃效果移除 */
-#footer::before{
-    background: transparent!important;
-  }
-/* 头图透明 */
-#page-header{
-  background: transparent!important;
-}
-/*top-img黑色透明玻璃效果移除，不建议加，除非你执着于完全一图流或者背景图对比色明显 */
-#page-header.post-bg:before {
-  background-color: transparent!important;
-}
-/*夜间模式伪类遮罩层透明*/
-[data-theme="dark"]
-  #footer::before{
-      background: transparent!important;
-    }
-[data-theme="dark"]
-  #page-header::before{
-    background: transparent!important;
-    }
-
-
 
 [data-theme="dark"]
   #aside-content .card-widget{
@@ -123,21 +117,23 @@ background: rgba(255, 255, 255, 0.9);
   div#post{
     background: rgba(0, 0, 0, 0.5)!important;
     }
-
-.read-mode #aside-content .card-widget{
-      background: rgba(158, 204, 171, 0.5)!important;
+[data-theme="dark"]
+  #recent-posts > .recent-post-item{
+    background: rgba(0, 0, 0, 0.5)!important;
     }
-.read-mode div#post{
-    background: rgba(158, 204, 171, 0.5)!important;
+[data-theme="dark"]
+  div#page{
+    background: rgba(0, 0, 0, 0.5)!important;
     }
-
-  [data-theme="dark"]
-  .read-mode #aside-content .card-widget{
-        background: rgba(0, 0, 0, 0.5)!important;
-        color: #ffffff;
-      }
-[data-theme="dark"]  
-  .read-mode div#post{
-      background: rgba(0, 0, 0, 0.5)!important;
-      color: #ffffff;
-      }
+[data-theme="dark"]
+  div#archive{
+    background: rgba(0, 0, 0, 0.5)!important;
+    }
+[data-theme="dark"]
+  div#tags{
+    background: rgba(0, 0, 0, 0.5)!important;
+    }
+[data-theme="dark"]
+  div#category{
+    background: rgba(0, 0, 0, 0.5)!important;
+    }
