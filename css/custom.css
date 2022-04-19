@@ -200,11 +200,16 @@ background: rgba(255, 255, 255, 0.9);
       color: #ffffff;
       }
 
-@font-face{
-  font-family: 'FZFW' ;  /* 自定义字体名称 */
-  src: url('/fonts/FZFW.TTF'); /* 引入字体文件的路径 */
+@font-face {
+    font-family: 'tzy';
+    /* 字体名自定义即可 */
+    src: url('https://cdn.jsdelivr.net/gh/tzy13755126023/BLOG_SOURCE/font/ZhuZiAWan.woff2');
+    /* 字体文件路径 */
+    font-display: swap;
 }
-/*应用在body体里，放在第一个，font-family会按顺序使用字体族。如果第一个没找到就会找第二个，以此类推。*/
-body {
-font-family: FZFW,-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Lato, Roboto, "PingFang SC", "STZhongsong", "Lantinghei SC", sans-serif
+
+body,
+.gitcalendar {
+    font-family: tzy !important;
 }
+
