@@ -2699,9 +2699,6 @@ figure.highlight pre .javascript .function {
   .recent-post-item .recent-post-info .recent-post-meta > .article-meta-wrap .article-meta-link {
     margin: 0 4px;
   }
-  .recent-post-item .recent-post-info .recent-post-meta > .article-meta-wrap time {
-    display: none;
-  }
   .recent-post-item .recent-post-info .recent-post-meta > .article-meta-wrap a {
     color: #858585;
   }
