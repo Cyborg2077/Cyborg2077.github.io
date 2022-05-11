@@ -129,8 +129,9 @@ background: rgba(255, 255, 255, 0.9);
   div#archive{
     background: rgba(0, 0, 0, 0.5)!important;
     }
+
 [data-theme="dark"]
-  div#tags{
+  div#tag{
     background: rgba(0, 0, 0, 0.5)!important;
     }
 [data-theme="dark"]
@@ -150,6 +151,9 @@ background: rgba(255, 255, 255, 0.9);
     background: rgba(158, 204, 171, 0.5)!important;
     }
 .read-mode div#tags{
+    background: rgba(158, 204, 171, 0.5)!important;
+    }
+.read-mode div#tag{
     background: rgba(158, 204, 171, 0.5)!important;
     }
 .read-mode div#archive{
@@ -186,6 +190,11 @@ background: rgba(255, 255, 255, 0.9);
       }
 [data-theme="dark"]  
   .read-mode div#tags{
+      background: rgba(0, 0, 0, 0.5)!important;
+      color: #ffffff;
+      }
+[data-theme="dark"]  
+  .read-mode div#tag{
       background: rgba(0, 0, 0, 0.5)!important;
       color: #ffffff;
       }
