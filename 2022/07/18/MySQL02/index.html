@@ -1,0 +1,763 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>MySQL---基本的SELECT语句 | Kyle's Blog</title><meta name="keywords" content="MySQL"><meta name="author" content="Kyle Violet"><meta name="copyright" content="Kyle Violet"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MySQL学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL---基本的SELECT语句">
+<meta property="og:url" content="https://cyborg2077.github.io/2022/07/18/MySQL02/index.html">
+<meta property="og:site_name" content="Kyle&#39;s Blog">
+<meta property="og:description" content="MySQL学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.wallpaperscraft.com/image/single/silhouette_night_starry_sky_137292_300x168.jpg">
+<meta property="article:published_time" content="2022-07-18T04:14:54.000Z">
+<meta property="article:modified_time" content="2022-07-18T13:05:08.169Z">
+<meta property="article:author" content="Kyle Violet">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.wallpaperscraft.com/image/single/silhouette_night_starry_sky_137292_300x168.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://cyborg2077.github.io/2022/07/18/MySQL02/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f8440b73b5064587c92bcc0ec23ce01c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-RQZSMGWCQS"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQZSMGWCQS');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MySQL---基本的SELECT语句',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-18 21:05:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="//at.alicdn.com/t/font_3049706_ndj6cftvaf9.css"><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-artitalk-pro/lib/card.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-clock/lib/clock.min.css"><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@1.0.15/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/04/18/fj4XvrdM5o62hbA.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-liuyan"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shenghuo"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-bilibili"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://images.wallpaperscraft.com/image/single/silhouette_night_starry_sky_137292_300x168.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Kyle's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-liuyan"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shenghuo"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-bilibili"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MySQL---基本的SELECT语句</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-18T04:14:54.000Z" title="发表于 2022-07-18 12:14:54">2022-07-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-18T13:05:08.169Z" title="更新于 2022-07-18 21:05:08">2022-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL---基本的SELECT语句"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>我只想卷死各位，或者被各位卷死，在此特别感谢康师傅的MySQL教程</p>
+</blockquote>
+<div class="bvideo">
+    <a href="//www.bilibili.com/video/BV1iq4y1u7vj" target="_blank">
+        <div class="bvideo-box">
+            <div class="bvideo-cover">
+                <div class="cover-default"></div>
+                <div class="bvideo-cover-layer" style="background-image:url(https://images.weserv.nl/?url=http://i0.hdslb.com/bfs/archive/c871c6e8fefad41d180586b5b17f463902d66dcd.jpg)">
+                    <i class="icon-video"></i>
+                </div>
+                <span class="duration">85:43:12</span>
+            </div>
+            <div class="bvideo-info">
+                <p class="title">MySQL数据库教程天花板，mysql安装到mysql高级，强！硬！</p>
+                <p class="card-status">
+                    <span class="play-num">
+                        <i class="fa fa-youtube-play"></i>
+                        <span>214.7万</span></span>
+                    <span>
+                        <i class="fa fa-list-alt"></i>
+                        <span>8.3万</span></span></p>
+                <div class="partition">
+                    <label class="card-label">视频</label>
+                    <label class="up-label"></label>
+                    <label class="up-name">尚硅谷</label>
+                </div>
+                <div class="actions hide"></div>
+            </div>
+        </div>
+    </a>
+</div>
+<h1 id="SQL-分类"><a href="#SQL-分类" class="headerlink" title="SQL 分类"></a>SQL 分类</h1><ol>
+<li><p><span class='p red'>DDL(Data Definition Languages、数据定义语言)</span>，这些语句定义了不同的数据库、表、视图、索引等数据库对象，还可以用来创建、删除、修改数据库和数据表的结构。</p>
+<ul>
+<li>主要的语句关键字包括<span class='p red'>CREATE</span>、<span class='p red'>DROP</span>、<span class='p red'>ALTER</span>、<span class='p red'>RENAME</span>等。</li>
+</ul>
+</li>
+<li><p><span class='p red'>DML(Data Manipulation Language、数据操作语言)</span>，用于添加、删除、更新和查询数据库记录，并检查数据完整性。</p>
+<ul>
+<li>主要的语句关键字包括<span class='p red'>INSERT</span>、<span class='p red'>DELETE</span>、<span class='p red'>UPDATE</span>、<span class='p red'>SELECT</span>等。</li>
+<li>SELECT是SQL语言的基础，最为重要。</li>
+</ul>
+</li>
+<li><span class='p red'>DCL(Data Control Language、数据控制语言)</span> ，用于定义数据库、表、字段、用户的访问权限和安全级别。<ul>
+<li>主要的语句关键字包括 <span class='p red'>GRANT</span> 、 <span class='p red'>REVOKE</span> 、 <span class='p red'>COMMIT</span> 、 <span class='p red'>ROLLBACK</span> 、 <span class='p red'>SAVEPOINT</span> 等。</li>
+</ul>
+</li>
+</ol>
+<h1 id="SQL语言的规则与规范"><a href="#SQL语言的规则与规范" class="headerlink" title="SQL语言的规则与规范"></a>SQL语言的规则与规范</h1><h2 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h2><ul>
+<li>SQL 可以写在一行或者多行。为了提高可读性，各子句分行写，必要时使用缩进</li>
+<li>每条命令以 ; 或 \g 或 \G 结束</li>
+<li>关键字不能被缩写也不能分行</li>
+<li>关于标点符号<ul>
+<li>必须保证所有的()、单引号、双引号是成对结束的</li>
+<li>必须使用英文状态下的半角输入方式</li>
+<li>字符串型和日期时间类型的数据可以使用单引号（’ ‘）表示</li>
+<li>列的别名，尽量使用双引号（” “），而且不建议省略AS</li>
+</ul>
+</li>
+</ul>
+<h2 id="SQL大小写规范-（建议遵守）"><a href="#SQL大小写规范-（建议遵守）" class="headerlink" title="SQL大小写规范 （建议遵守）"></a>SQL大小写规范 （建议遵守）</h2><ul>
+<li><span class='p red'>MySQL 在 Windows 环境下是大小写不敏感的</span>.</li>
+<li><span class='p red'>MySQL 在 Linux 环境下是大小写敏感的</span>.<ul>
+<li>数据库名、表名、表的别名、变量名是严格区分大小写的</li>
+<li>关键字、函数名、列名(或字段名)、列的别名(字段的别名) 是忽略大小写的。</li>
+</ul>
+</li>
+<li><span class='p red'>推荐采用统一的书写规范</span>： <ul>
+<li>数据库名、表名、表别名、字段名、字段别名等都小写</li>
+<li>SQL 关键字、函数名、绑定变量等都大写</li>
+</ul>
+</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>可以使用如下格式的注释结构</p>
+<blockquote>
+<p>单行注释：#注释文字(MySQL特有的方式)<br>单行注释：&#8722;&#8722; 注释文字(&#8722;&#8722;后面必须包含一个空格。)<br>多行注释：/&#8727; 注释文字     &#8727;/</p>
+</blockquote>
+<h2 id="命名规则（暂时了解）"><a href="#命名规则（暂时了解）" class="headerlink" title="命名规则（暂时了解）"></a>命名规则（暂时了解）</h2><ul>
+<li>数据库、表名不得超过30个字符，变量名限制为29个</li>
+<li>必须只能包含 A–Z, a–z, 0–9, _共63个字符</li>
+<li>数据库名、表名、字段名等对象名中间不要包含空格</li>
+<li>同一个MySQL软件中，数据库不能同名；同一个库中，表不能重名；同一个表中，字段不能重名</li>
+<li>必须保证你的字段没有和保留字、数据库系统或常用方法冲突。如果坚持使用，请在SQL语句中使用`（着重号）引起来</li>
+<li>保持字段名和类型的一致性，在命名字段并为其指定数据类型的时候一定要保证一致性。假如数据类型在一个表里是整数，那在另一个表里可就别变成字符型了</li>
+</ul>
+<h2 id="数据导入指令"><a href="#数据导入指令" class="headerlink" title="数据导入指令"></a>数据导入指令</h2><p>方式一：在命令行客户端登录mysql，使用source指令导入<br>格式：source 文件路径<br>举例：source d:\mysqldb.sql;</p>
+<p>方式二：利用图形化界面工具<br>在SQLyog中选择 “工具” — “执行SQL脚本” — 选中xxx.sql文件</p>
+<h1 id="基本的SELECT语句"><a href="#基本的SELECT语句" class="headerlink" title="基本的SELECT语句"></a>基本的SELECT语句</h1><h2 id="SELECT-…-FROM"><a href="#SELECT-…-FROM" class="headerlink" title="SELECT … FROM"></a>SELECT … FROM</h2><ul>
+<li><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 标识选择哪些列</span><br><span class="line"><span class="keyword">FROM</span> 标识从哪个表中选择;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择departments表中的全部列：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> departments;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>一般情况下，除非需要使用表中所有的字段数据，最好不要使用通配符‘&#8727;’。使用通配符虽然可以节省输入查询语句的时间，但是获取不需要的列数据通常会降低查询和所使用的应用程序的效率。通配符的优势是，当不知道所需要的列的名称时，可以通过它获取它们。<br>在生产环境下，不推荐直接使用 SELECT &#8727; 进行查询。</p>
+</blockquote>
+<ul>
+<li>选择特定的列<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 从employees表中选择hire_date和salary这两列</span></span><br><span class="line"><span class="keyword">SELECT</span> hire_date, salary</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>MySQL中的SQL语句是不区分大小写的，因此SELECT和select的作用是相同的，但是，许多开发人员习惯将关键字大写、数据列和表名小写，读者也应该养成一个良好的编程习惯，这样写出来的代码更容易阅读和维护。</p>
+</blockquote>
+<h2 id="列的别名"><a href="#列的别名" class="headerlink" title="列的别名"></a>列的别名</h2><ul>
+<li>重命名一个列</li>
+<li>紧跟列名，也可以在<span class='p red'>列名和别名之间加入关键字AS，别名使用双引号包裹</span>，以便在别名中包含空格或特殊的字符并区分大小写。</li>
+<li>AS 可以省略</li>
+<li>建议别名简短，见名知意</li>
+<li>举例<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 用年薪表示salary*12的别名</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name, salary <span class="operator">*</span> <span class="number">12</span> <span class="keyword">AS</span> &quot;年薪&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="去除重复行"><a href="#去除重复行" class="headerlink" title="去除重复行"></a>去除重复行</h2><p>默认情况下，查询会返回所有行，包括重复行。<br>如果我们有一个员工表，员工都属于各个不同的部门，现在我们想查询一下有多少个部门</p>
+<div class="tabs" id="去除重复行示范"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#去除重复行示范-1">错误示范</button></li><li class="tab"><button type="button" data-href="#去除重复行示范-2">正确写法</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="去除重复行示范-1"><p>这种写法会导致重复行的出现，如果有100个员工，那么查找的结果就是100行的部门，这些部门中会有重复的部门，显然不是我们想要的结果<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> department_id</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="去除重复行示范-2"><p>我们在SELECT后面加上关键字DISTINCT就可以帮我们去除重复行了<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> department_id</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure></p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<p>针对于：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> department_id,salary</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure></p>
+<p>这里有两点需要注意：</p>
+<ol>
+<li><p>DISTINCT需要放到所有列名的前面，如果写成了下面这样，会报错</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> department_is,<span class="keyword">DISTINCT</span> salary</span><br><span class="line"><span class="keyword">FROM</span> employees; </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DISTINCT其实是对后面所有列名的组合进行去重，因为最后得到的结果是salary和department_id两列，如果对departments去重，那么会导致第一列可能有20行，第二列却只有5行，显然不能组成一张表，所以我们要把DISTINCT放到所有列名的前面</p>
+</li>
+</ol>
+<h2 id="空值参与运算"><a href="#空值参与运算" class="headerlink" title="空值参与运算"></a>空值参与运算</h2><ul>
+<li>所有运算符或列值遇到null值，运算的结果都为null</li>
+</ul>
+<p>commission_pct是提成，实际年薪应该是月薪乘上提成，再乘以12，但不是所有员工都有提成，所以没有提成的员工的commission_pct是NULL，计算出的年薪也是NULL<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name,salary <span class="operator">*</span> (<span class="number">1</span> <span class="operator">+</span> commission_pct) <span class="operator">*</span> <span class="number">12</span> <span class="keyword">AS</span> &quot;年薪&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure><br>在 MySQL 里面， 空值不等于空字符串。一个空字符串的长度是 0，而一个空值的长度是NULL。而且，在 MySQL 里面，空值是占用空间的。</p>
+<h2 id="着重号"><a href="#着重号" class="headerlink" title="着重号"></a>着重号</h2><p>如果表中的字段、表名等和保留字、数据库系统或常用方法冲突，我们需要在SQL语句中使用一对``（着重号）引起来</p>
+<h2 id="查询常数"><a href="#查询常数" class="headerlink" title="查询常数"></a>查询常数</h2><p>如果我们想对employees数据表中的员工姓名进行查询，同时增设一栏company表示员工的公司信息，同时将这个字段固定值为“尚硅谷”，那我们就可以这样写<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;尚硅谷&#x27;</span> <span class="keyword">AS</span> company, last_name </span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure></p>
+<h1 id="显示表结构"><a href="#显示表结构" class="headerlink" title="显示表结构"></a>显示表结构</h1><p>使用DESCRIBE 或 DESC 命令，表示表结构。</p>
+<blockquote>
+<p>DESCRIBE employees;<br>或<br>DESC employees;</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Field</th>
+<th style="text-align:center">Type</th>
+<th style="text-align:center">Null</th>
+<th style="text-align:center">Key</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Extra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">employee_id</td>
+<td style="text-align:center">int(6)</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">PRI</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">first_name</td>
+<td style="text-align:center">varchar(20)</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">last_name</td>
+<td style="text-align:center">varchar(25)</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">email</td>
+<td style="text-align:center">varchar(25)</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">UNI</td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">phone_number</td>
+<td style="text-align:center">varchar(20)</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">hire_date</td>
+<td style="text-align:center">date</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">job_id</td>
+<td style="text-align:center">varchar(10)</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">MUL</td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">salary</td>
+<td style="text-align:center">double(8,2)</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">commission_pct</td>
+<td style="text-align:center">double(2,2)</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">manager_id</td>
+<td style="text-align:center">int(6)</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">MUL</td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">department_id</td>
+<td style="text-align:center">int(4)</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">MUL</td>
+<td style="text-align:center">NULL</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中，各个字段的含义分别解释如下：</p>
+<ul>
+<li>Field：表示字段名称。</li>
+<li>Type：表示字段类型，这里 barcode、goodsname 是文本型的，price 是整数类型的。</li>
+<li>Null：表示该列是否可以存储NULL值。</li>
+<li>Key：表示该列是否已编制索引。PRI表示该列是表主键的一部分；UNI表示该列是UNIQUE索引的一部分；MUL表示在列中某个给定值允许出现多次。</li>
+<li>Default：表示该列是否有默认值，如果有，那么值是多少。</li>
+<li>Extra：表示可以获取的与给定列有关的附加信息，例如AUTO_INCREMENT等。</li>
+</ul>
+<h1 id="过滤数据"><a href="#过滤数据" class="headerlink" title="过滤数据"></a>过滤数据</h1><ul>
+<li><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段<span class="number">1</span>,字段<span class="number">2</span></span><br><span class="line"><span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">WHERE</span> 过滤条件;</span><br></pre></td></tr></table></figure>
+<p>使用WHERE 子句，将不满足条件的行过滤掉<br>WHERE子句紧随 FROM子句</p>
+</li>
+<li><p>举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 过滤条件：部门id为90</span></span><br><span class="line"><span class="keyword">SELECT</span> employee_id, last_name, job_id, department_id</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> department_id <span class="operator">=</span> <span class="number">90</span> ;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Kyle Violet</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://cyborg2077.github.io/2022/07/18/MySQL02/">https://cyborg2077.github.io/2022/07/18/MySQL02/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://cyborg2077.github.io" target="_blank">Kyle's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://images.wallpaperscraft.com/image/single/silhouette_night_starry_sky_137292_300x168.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/07/15/MySQL01/"><img class="next-cover" src="https://pic2.zhimg.com/v2-d0a0172a71b6bc4ff18cd1f11bfa6b3b_r.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL---概述</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="cols"><div class="col"><div class="container"><div class="front avatarPanel"><div class="inner"><div class="player-title">Attributes</div><div class="player-avatar"><img src="https://s2.loli.net/2022/04/18/fj4XvrdM5o62hbA.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div></div></div><div class="back attributesPanel"><div class="inner"><div class="player-lv">LV.5</div><div class="player-name">Kyle Violet</div><div class="attributes-value"><div class="attributes-value-item"><a href="/archives/"><div class="attributes">文章</div><div class="value-bar"><div class="value-bar-fill" style="width:47.00%"><div class="value-bar-fill-in" style="background: rgba(89, 230, 54,0.6)"></div></div></div><span>47/100</span></a></div><div class="attributes-value-item"><a href="/tags/"><div class="attributes">标签</div><div class="value-bar"><div class="value-bar-fill" style="width:46.00%"><div class="value-bar-fill-in" style="background: rgba(224, 20, 20, 0.6)"></div></div></div><span>46/100</span></a></div><div class="attributes-value-item"><a href="/categories/"><div class="attributes">分类</div><div class="value-bar"><div class="value-bar-fill" style="width:5.00%"><div class="value-bar-fill-in" style="background: rgba(30, 97, 226, 0.6)"></div></div></div><span>5/100</span></a></div></div></div></div></div></div><div class="col"><div class="container"><div class="front descriptionPanel"><div class="inner"><div class="player_description">The furthest distance in the world <br>ls not between life and death <br>But when l stand in front of you <br> Yet you don't know that l love you</div><div class="play-bottom"></div></div></div><div class="back buttonPanel"><div class="inner"><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Cyborg2077"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Cyborg2077" target="_blank" title="Github"><i class="iconfont icon-github"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1586385296&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://music.163.com/#/user/home?id=608935942" target="_blank" title="网抑云"><i class="iconfont icon-wangyiyunyinleclick"></i></a><a class="social-icon" href="https://space.bilibili.com/160218990" target="_blank" title="Bilibili"><i class="iconfont icon-bilibili"></i></a></div><div class="play-bottom"></div></div></div></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL-%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">SQL 分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL%E8%AF%AD%E8%A8%80%E7%9A%84%E8%A7%84%E5%88%99%E4%B8%8E%E8%A7%84%E8%8C%83"><span class="toc-number">2.</span> <span class="toc-text">SQL语言的规则与规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99"><span class="toc-number">2.1.</span> <span class="toc-text">基本规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%A4%A7%E5%B0%8F%E5%86%99%E8%A7%84%E8%8C%83-%EF%BC%88%E5%BB%BA%E8%AE%AE%E9%81%B5%E5%AE%88%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">SQL大小写规范 （建议遵守）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">2.3.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E6%9A%82%E6%97%B6%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">命名规则（暂时了解）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E6%8C%87%E4%BB%A4"><span class="toc-number">2.5.</span> <span class="toc-text">数据导入指令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84SELECT%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.</span> <span class="toc-text">基本的SELECT语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SELECT-%E2%80%A6-FROM"><span class="toc-number">3.1.</span> <span class="toc-text">SELECT … FROM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E7%9A%84%E5%88%AB%E5%90%8D"><span class="toc-number">3.2.</span> <span class="toc-text">列的别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="toc-number">3.3.</span> <span class="toc-text">去除重复行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A9%BA%E5%80%BC%E5%8F%82%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="toc-number">3.4.</span> <span class="toc-text">空值参与运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9D%80%E9%87%8D%E5%8F%B7"><span class="toc-number">3.5.</span> <span class="toc-text">着重号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%B8%B8%E6%95%B0"><span class="toc-number">3.6.</span> <span class="toc-text">查询常数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">显示表结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">5.</span> <span class="toc-text">过滤数据</span></a></li></ol></div></div><div class="card-widget card-recommend-post"><div class="item-headline"><i class="fas fa-dharmachakra"></i><span>相关推荐</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/15/MySQL01/" title="MySQL---概述"><img src="https://pic2.zhimg.com/v2-d0a0172a71b6bc4ff18cd1f11bfa6b3b_r.jpg" alt="MySQL---概述"></a><div class="content"><a class="title" href="/2022/07/15/MySQL01/" title="MySQL---概述">MySQL---概述</a><time datetime="2022-07-18" title="发表于 2022-07-18">2022-07-18</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(135deg,#ace0f9,#a1c4fd)"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Kyle Violet</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">The worst way to miss someone is to be sitting right beside her <br> knowing you can't have her.</div></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><!--button#darkmode(type="button" title=_p('rightside.night_mode_title'))i.fas.fa-adjust--><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.vemoji)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      document.getElementById('twikoo-count').innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo@1.5.11/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo@1.5.11/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="7134539309" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script async src="/js/diytitle.js"></script><script src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script src="/js/sun_moon.js" async></script><script src="/js/chocolate.js" async></script><script id="canvas_nest" defer="defer" color="255,192,203" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,自由,平等,公正,法制,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show","#web_bg",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-RQZSMGWCQS', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function card_artitalk_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-shuo"><div class="card-content" style="height:auto;min-height:280px;"><div class="item-headline"><i class="fas fa-comments"></i><span><a href="/artitalk/" title="artitalk page link">碎碎念</a></span><a id="cardVisual" style="cursor:pointer;float:right" onclick="cardVisual()">编辑</a></div><div id="artitalk_main" style="width:100%;height:100%;padding:1px"></div></div></div>';
+    console.log('已挂载card_artitalk');
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html);
+    (()=>{
+      const init = () => {
+        new Artitalk(Object.assign({
+          appId: 'W8Vs5lhPyoXONr88rXUqnTTb-MdYXbMMI',
+          appKey: 'CVYbhIp5zeHNMxFpH5ySmrgU',
+        }, {"serverURL":"https://W8Vs5lhP.api.lncldglobal.com","lang":"zh","pageSize":1,"color1":"#49b1f5","color2":"#00c4b6","atEmoji":{"Mafumafu1":"https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN@master/Mafumafu/199749454.png","Mafumafu2":"https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN@master/Mafumafu/199749455.png"}} ))
+      }
+      if (typeof Artitalk === 'function') {
+        init()
+      } else {
+        getScript('https://npm.elemecdn.com/artitalk').then(init)
+      }
+    })()
+    }
+  var elist = '/artitalk/,/posts/'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    card_artitalk_injector_config();
+  }
+  else if (epage === cpage){
+    card_artitalk_injector_config();
+  }
+  </script><script async src="https://npm.elemecdn.com/hexo-butterfly-artitalk-pro/lib/card_visual.js"></script><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(http://p0.itc.cn/images03/20200525/332e1ea10c634cbfaf0dfc5b69d00a3c.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/力扣/&quot;);" href="javascript:void(0);">力扣</a><span class="categoryBar-list-count">10</span><span class="categoryBar-list-descr">刷题指南</span></li><li class="categoryBar-list-item" style="background:url(http://p8.itc.cn/images03/20200525/377f4f7044fe49b0bb932f43ef4f4891.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/刷题日志/&quot;);" href="javascript:void(0);">刷题日志</a><span class="categoryBar-list-count">14</span><span class="categoryBar-list-descr">Leetcode刷题日志，目标成为千题大佬</span></li><li class="categoryBar-list-item" style="background:url(http://p8.itc.cn/images03/20200525/0ed549edde2c4d5eaecc2824e753ca74.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/学习笔记/&quot;);" href="javascript:void(0);">学习笔记</a><span class="categoryBar-list-count">13</span><span class="categoryBar-list-descr">写给自己看的一些笔记</span></li><li class="categoryBar-list-item" style="background:url(http://p6.itc.cn/images03/20200525/8dedcdf6ace44a50a1deb6a9743821fe.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/蓝桥杯/&quot;);" href="javascript:void(0);">蓝桥杯</a><span class="categoryBar-list-count">8</span><span class="categoryBar-list-descr">厕所战神杯 狗都不报</span></li><li class="categoryBar-list-item" style="background:url(http://p9.itc.cn/images03/20200525/07539bdba160465d80d23b3f16db8620.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/杂谈/&quot;);" href="javascript:void(0);">杂谈</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">随便唠唠</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://cdn.jsdelivr.net/npm/hexo-butterfly-clock/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:90px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v4.1.0"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://images.wallpaperscraft.com/image/single/silhouette_night_starry_sky_137292_300x168.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2021-12-25</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt="">Java---多线程</a><div class="blog-slider__text">Java学习笔记---多线程</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img2.baidu.com/it/u=852907915,3528076091&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2021-11-17</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt="">十大排序算法</a><div class="blog-slider__text">Java学习笔记---排序算法</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=4155835667,974645702&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-06</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt="">Java---网络编程(基础)</a><div class="blog-slider__text">Java学习笔记---网络编程(基础)</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-dbe4189cad999946abdcd174fba140ea_r.jpg&amp;refer=http%3A%2F%2Fpic3.zhimg.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1651217592&amp;t=44946406f8e7b9ed15f483e0495b33c9" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-08</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt="">Java---反射机制</a><div class="blog-slider__text">Java学习笔记---反射机制</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-dbe4189cad999946abdcd174fba140ea_r.jpg&amp;refer=http%3A%2F%2Fpic3.zhimg.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1651217592&amp;t=44946406f8e7b9ed15f483e0495b33c9" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-26</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt="">Java---IO流</a><div class="blog-slider__text">Java学习笔记---IO流</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img2.baidu.com/it/u=595920241,2439700946&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt="">Java---泛型</a><div class="blog-slider__text">Java学习笔记---泛型</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7195c774995376cbaf3c2868706521746c0e9142.png&amp;refer=http%3A%2F%2Fi0.hdslb.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1645330580&amp;t=7ef089d6818c156c451e5072f53f3597" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt="">Java---集合</a><div class="blog-slider__text">Java学习笔记---集合</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img1.baidu.com/it/u=2579164449,2431217981&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-17</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt="">Java---枚举类和注解</a><div class="blog-slider__text">Java学习笔记---枚举类和注解</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=3721396657,2943407387&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=640&amp;h=453" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-15</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt="">Java---常用类</a><div class="blog-slider__text">Java学习笔记---常用类</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false});</script></body></html>
