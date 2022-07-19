@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>MySQL---多表查询</title>
+      <link href="/2022/07/19/MySQL05/"/>
+      <url>/2022/07/19/MySQL05/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>我只想卷死各位，或者被各位卷死，在此特别感谢康师傅的MySQL教程</p></blockquote><div class="bvideo">    <a href="//www.bilibili.com/video/BV1iq4y1u7vj" target="_blank">        <div class="bvideo-box">            <div class="bvideo-cover">                <div class="cover-default"></div>                <div class="bvideo-cover-layer" style="background-image:url(https://images.weserv.nl/?url=http://i0.hdslb.com/bfs/archive/c871c6e8fefad41d180586b5b17f463902d66dcd.jpg)">                    <i class="icon-video"></i>                </div>                <span class="duration">85:43:12</span>            </div>            <div class="bvideo-info">                <p class="title">MySQL数据库教程天花板，mysql安装到mysql高级，强！硬！</p>                <p class="card-status">                    <span class="play-num">                        <i class="fa fa-youtube-play"></i>                        <span>215.3万</span></span>                    <span>                        <i class="fa fa-list-alt"></i>                        <span>8.3万</span></span></p>                <div class="partition">                    <label class="card-label">视频</label>                    <label class="up-label"></label>                    <label class="up-name">尚硅谷</label>                </div>                <div class="actions hide"></div>            </div>        </div>    </a></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MySQL---排序与分页</title>
       <link href="/2022/07/19/MySQL04/"/>
       <url>/2022/07/19/MySQL04/</url>
@@ -906,9 +931,9 @@
       
         <tags>
             
-            <tag> 算法训练 </tag>
-            
             <tag> 回溯 </tag>
+            
+            <tag> 算法训练 </tag>
             
         </tags>
       
@@ -1118,9 +1143,9 @@
       
         <tags>
             
-            <tag> 数组 </tag>
-            
             <tag> 算法训练 </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
