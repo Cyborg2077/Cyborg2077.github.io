@@ -1,0 +1,1700 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>MySQL---单行函数 | Kyle's Blog</title><meta name="keywords" content="MySQL"><meta name="author" content="Kyle Violet"><meta name="copyright" content="Kyle Violet"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MySQL学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL---单行函数">
+<meta property="og:url" content="https://cyborg2077.github.io/2022/07/21/MySQL06/index.html">
+<meta property="og:site_name" content="Kyle&#39;s Blog">
+<meta property="og:description" content="MySQL学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fbf0e4aa0bee8b05d446914c97ae4a611b64f6837.png&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645340425&t=0731cf208414cf55a532ab7a232cc4ff">
+<meta property="article:published_time" content="2022-07-21T02:44:11.000Z">
+<meta property="article:modified_time" content="2022-07-21T14:00:52.570Z">
+<meta property="article:author" content="Kyle Violet">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fbf0e4aa0bee8b05d446914c97ae4a611b64f6837.png&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645340425&t=0731cf208414cf55a532ab7a232cc4ff"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://cyborg2077.github.io/2022/07/21/MySQL06/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f8440b73b5064587c92bcc0ec23ce01c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-RQZSMGWCQS"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQZSMGWCQS');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MySQL---单行函数',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-21 22:00:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="//at.alicdn.com/t/font_3049706_ndj6cftvaf9.css"><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-artitalk-pro/lib/card.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-clock/lib/clock.min.css"><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@1.0.15/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/04/18/fj4XvrdM5o62hbA.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-liuyan"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shenghuo"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-bilibili"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fbf0e4aa0bee8b05d446914c97ae4a611b64f6837.png&amp;refer=http%3A%2F%2Fi0.hdslb.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1645340425&amp;t=0731cf208414cf55a532ab7a232cc4ff')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Kyle's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-liuyan"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shenghuo"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-bilibili"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MySQL---单行函数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-21T02:44:11.000Z" title="发表于 2022-07-21 10:44:11">2022-07-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-21T14:00:52.570Z" title="更新于 2022-07-21 22:00:52">2022-07-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>23分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL---单行函数"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>我只想卷死各位，或者被各位卷死，在此特别感谢康师傅的MySQL教程</p>
+</blockquote>
+<div class="bvideo">
+    <a href="//www.bilibili.com/video/BV1iq4y1u7vj" target="_blank">
+        <div class="bvideo-box">
+            <div class="bvideo-cover">
+                <div class="cover-default"></div>
+                <div class="bvideo-cover-layer" style="background-image:url(https://images.weserv.nl/?url=http://i0.hdslb.com/bfs/archive/c871c6e8fefad41d180586b5b17f463902d66dcd.jpg)">
+                    <i class="icon-video"></i>
+                </div>
+                <span class="duration">85:43:12</span>
+            </div>
+            <div class="bvideo-info">
+                <p class="title">MySQL数据库教程天花板，mysql安装到mysql高级，强！硬！</p>
+                <p class="card-status">
+                    <span class="play-num">
+                        <i class="fa fa-youtube-play"></i>
+                        <span>217.0万</span></span>
+                    <span>
+                        <i class="fa fa-list-alt"></i>
+                        <span>8.4万</span></span></p>
+                <div class="partition">
+                    <label class="card-label">视频</label>
+                    <label class="up-label"></label>
+                    <label class="up-name">尚硅谷</label>
+                </div>
+                <div class="actions hide"></div>
+            </div>
+        </div>
+    </a>
+</div>
+<h1 id="函数的理解"><a href="#函数的理解" class="headerlink" title="函数的理解"></a>函数的理解</h1><h2 id="什么是函数"><a href="#什么是函数" class="headerlink" title="什么是函数"></a>什么是函数</h2><p>函数在计算机语言的使用中贯穿始终，函数的作用是什么呢？它可以把我们经常使用的代码封装起来，需要的时候直接调用即可。这样既 <code>提高了代码效率</code> ，又 <code>提高了可维护性</code> 。在 SQL 中我们也可以使用函数对检索出来的数据进行函数操作。使用这些函数，可以极大地 <code>提高用户对数据库的管理效率</code> </p>
+<p>从函数定义的角度出发，我们可以将函数分成 <code>内置函数</code> 和 <code>自定义函数</code> 。在 SQL 语言中，同样也包括了内置函数和自定义函数。内置函数是系统内置的通用函数，而自定义函数是我们根据自己的需要编写的，本文讲解的是SQL的内置函数。</p>
+<h2 id="不同DBMS函数的差异"><a href="#不同DBMS函数的差异" class="headerlink" title="不同DBMS函数的差异"></a>不同DBMS函数的差异</h2><p>我们在使用 SQL 语言的时候，不是直接和这门语言打交道，而是通过它使用不同的数据库软件，即DBMS。<code>DBMS 之间的差异性很大，远大于同一个语言不同版本之间的差异。</code>实际上，只有很少的函数是被 DBMS 同时支持的。比如，大多数 DBMS 使用（||）或者（+）来做拼接符，而在 MySQL 中的字符串拼接函数为concat()。大部分 DBMS 会有自己特定的函数，<code>这就意味着采用 SQL 函数的代码可移植性是很差的，</code>因此在使用函数的时候需要特别注意。</p>
+<h2 id="MySQL的内置函数及分类"><a href="#MySQL的内置函数及分类" class="headerlink" title="MySQL的内置函数及分类"></a>MySQL的内置函数及分类</h2><p>MySQL提供了丰富的内置函数，这些函数使得数据的维护与管理更加方便，能够更好地提供数据的分析与统计功能，在一定程度上提高了开发人员进行数据分析与统计的效率。MySQL提供的内置函数从 <code>实现的功能角度</code> 可以分为数值函数、字符串函数、日期和时间函数、流程控制函数、加密与解密函数、获取MySQL信息函数、聚合函数等。这里，我将这些丰富的内置函数再分为两类： <code>单行函数</code> 、 <code>聚合函数（或分组函数）</code> 。</p>
+<p>本文主讲单行函数</p>
+<p>单行函数</p>
+<ul>
+<li>操作数据对象</li>
+<li>接受参数返回一个结果</li>
+<li>只对一行进行变换</li>
+<li>每行返回一个结果</li>
+<li>可以嵌套</li>
+<li>参数可以是一列或一个值</li>
+</ul>
+<h1 id="数值函数"><a href="#数值函数" class="headerlink" title="数值函数"></a>数值函数</h1><h2 id="基本函数"><a href="#基本函数" class="headerlink" title="基本函数"></a>基本函数</h2><p>这部分应该没什么好说的，在别的编程语言中也很常见</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ABS(x)</td>
+<td style="text-align:center">返回x的绝对值</td>
+</tr>
+<tr>
+<td style="text-align:center">SIGN(X)</td>
+<td style="text-align:center">返回X的符号。正数返回1，负数返回-1，0返回0</td>
+</tr>
+<tr>
+<td style="text-align:center">PI()</td>
+<td style="text-align:center">返回圆周率的值</td>
+</tr>
+<tr>
+<td style="text-align:center">CEIL(x)，CEILING(x)</td>
+<td style="text-align:center">返回大于或等于某个值的最小整数(向上取整)</td>
+</tr>
+<tr>
+<td style="text-align:center">FLOOR(x)</td>
+<td style="text-align:center">返回小于或等于某个值的最大整数(向下取整)</td>
+</tr>
+<tr>
+<td style="text-align:center">LEAST(e1,e2,e3…)</td>
+<td style="text-align:center">返回列表中的最小值</td>
+</tr>
+<tr>
+<td style="text-align:center">GREATEST(e1,e2,e3…)</td>
+<td style="text-align:center">返回列表中的最大值</td>
+</tr>
+<tr>
+<td style="text-align:center">MOD(x,y)</td>
+<td style="text-align:center">返回X除以Y后的余数</td>
+</tr>
+<tr>
+<td style="text-align:center">RAND()</td>
+<td style="text-align:center">返回0~1的随机值</td>
+</tr>
+<tr>
+<td style="text-align:center">RAND(x)</td>
+<td style="text-align:center">返回0~1的随机值，其中x的值用作种子值，相同的X值会产生相同的随机数</td>
+</tr>
+<tr>
+<td style="text-align:center">ROUND(x)</td>
+<td style="text-align:center">返回一个对x的值进行四舍五入后，最接近于X的整数</td>
+</tr>
+<tr>
+<td style="text-align:center">ROUND(x,y)</td>
+<td style="text-align:center">返回一个对x的值进行四舍五入后最接近X的值，并保留到小数点后面Y位</td>
+</tr>
+<tr>
+<td style="text-align:center">TRUNCATE(x,y)</td>
+<td style="text-align:center">返回数字x截断为y位小数的结果</td>
+</tr>
+<tr>
+<td style="text-align:center">SQRT(x)</td>
+<td style="text-align:center">返回x的平方根。当X的值为负数时，返回NULL</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="角度与弧度互换函数"><a href="#角度与弧度互换函数" class="headerlink" title="角度与弧度互换函数"></a>角度与弧度互换函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">RADIANS(x)</td>
+<td style="text-align:center">将角度转化为弧度，其中，参数x为角度值</td>
+</tr>
+<tr>
+<td style="text-align:center">DEGREES(x)</td>
+<td style="text-align:center">将弧度转化为角度，其中，参数x为弧度值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>初中知识：1弧度大概是57.3°，2π是360°，那现在我们来验证一下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> RADIANS(<span class="number">57.3</span>),DEGREES(<span class="number">2</span> <span class="operator">*</span> PI())</span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure></p>
+<h2 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">SIN(x)</td>
+<td style="text-align:center">返回x的正弦值，其中，参数x为弧度值</td>
+</tr>
+<tr>
+<td style="text-align:center">ASIN(x)</td>
+<td style="text-align:center">返回x的反正弦值，即获取正弦为x的值。如果x的值不在-1到1之间，则返回NULL</td>
+</tr>
+<tr>
+<td style="text-align:center">COS(x)</td>
+<td style="text-align:center">返回x的余弦值，其中，参数x为弧度值</td>
+</tr>
+<tr>
+<td style="text-align:center">ACOS(x)</td>
+<td style="text-align:center">返回x的反余弦值，即获取余弦为x的值。如果x的值不在-1到1之间，则返回NULL</td>
+</tr>
+<tr>
+<td style="text-align:center">TAN(x)</td>
+<td style="text-align:center">返回x的正切值，其中，参数x为弧度值</td>
+</tr>
+<tr>
+<td style="text-align:center">ATAN(x)</td>
+<td style="text-align:center">返回x的反正切值，即返回正切值为x的值</td>
+</tr>
+<tr>
+<td style="text-align:center">ATAN2(m,n)</td>
+<td style="text-align:center">返回两个参数的反正切值</td>
+</tr>
+<tr>
+<td style="text-align:center">COT(x)</td>
+<td style="text-align:center">返回x的余切值，其中，X为弧度值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注意参数类型是弧度制，下面我们用常见的三角函数值来验证一下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SIN</span>(RADIANS(<span class="number">30</span>)),<span class="built_in">COS</span>(RADIANS(<span class="number">60</span>)),<span class="built_in">TAN</span>(RADIANS(<span class="number">45</span>)) <span class="comment">--函数可以嵌套</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure></p>
+<h2 id="指数与对数"><a href="#指数与对数" class="headerlink" title="指数与对数"></a>指数与对数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">POW(x,y),POWER(X,Y)</td>
+<td style="text-align:center">返回x的y次方</td>
+</tr>
+<tr>
+<td style="text-align:center">EXP(X)</td>
+<td style="text-align:center">返回e的x次方，其中e是一个常数，2.718281828459045</td>
+</tr>
+<tr>
+<td style="text-align:center">LN(X)，LOG(X)</td>
+<td style="text-align:center">返回以e为底的X的对数，当X&lt;=0时，返回的结果为NULL</td>
+</tr>
+<tr>
+<td style="text-align:center">LOG10(x)</td>
+<td style="text-align:center">返回以10为底的X的对数，当X&lt;=0时，返回的结果为NULL</td>
+</tr>
+<tr>
+<td style="text-align:center">LOG2(X)</td>
+<td style="text-align:center">返回以2为底的X的对数，当X&lt;=0时，返回的结果为NULL</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>举例<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> POW(<span class="number">2</span>,<span class="number">10</span>),<span class="built_in">EXP</span>(<span class="number">3</span>),<span class="built_in">LN</span>(<span class="number">2.71828</span><span class="operator">*</span><span class="number">2.71828</span>),<span class="built_in">LOG10</span>(<span class="number">1000</span>),LOG2(<span class="number">2048</span>)</span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure></p>
+<h2 id="进制间的转换"><a href="#进制间的转换" class="headerlink" title="进制间的转换"></a>进制间的转换</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">BIN(x)</td>
+<td style="text-align:center">返回x的二进制编码</td>
+</tr>
+<tr>
+<td style="text-align:center">HEX(x)</td>
+<td style="text-align:center">返回x的十六进制编码</td>
+</tr>
+<tr>
+<td style="text-align:center">OCT(x)</td>
+<td style="text-align:center">返回x的八进制编码</td>
+</tr>
+<tr>
+<td style="text-align:center">CONV(x,f1,f2)</td>
+<td style="text-align:center">返回f1进制数变成f2进制数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>举例<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> BIN(<span class="number">255</span>),HEX(<span class="number">256</span>),OCT(<span class="number">64</span>),CONV(<span class="number">15</span>,<span class="number">10</span>,<span class="number">2</span>)</span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"><span class="comment">-- 11111111, 100, 100, 1111</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数 用法</th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ASCII(S)</td>
+<td style="text-align:center">返回字符串S中的第一个字符的ASCII码值</td>
+</tr>
+<tr>
+<td style="text-align:center">CHAR_LENGTH(s)</td>
+<td style="text-align:center">返回字符串s的字符数。作用与CHARACTER_LENGTH(s)相同</td>
+</tr>
+<tr>
+<td style="text-align:center">LENGTH(s)</td>
+<td style="text-align:center">返回字符串s的字节数，和字符集有关</td>
+</tr>
+<tr>
+<td style="text-align:center">CONCAT(s1,s2,……,sn)</td>
+<td style="text-align:center">连接s1,s2,……,sn为一个字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">CONCAT_WS(x,s1,s2,…….,sn)</td>
+<td style="text-align:center">同CONCAT(s1,s2,…)函数，但是每个字符串之间要加上x</td>
+</tr>
+<tr>
+<td style="text-align:center">INSERT(str, idx, len,replacestr)</td>
+<td style="text-align:center">将字符串str从第idx位置开始，len个字符长的子串替换为字符串replacestr</td>
+</tr>
+<tr>
+<td style="text-align:center">REPLACE(str, a, b)</td>
+<td style="text-align:center">用字符串b替换字符串str中所有出现的字符串a</td>
+</tr>
+<tr>
+<td style="text-align:center">UPPER(s) 或 UCASE(s)</td>
+<td style="text-align:center">将字符串s的所有字母转成大写字母</td>
+</tr>
+<tr>
+<td style="text-align:center">LOWER(s) 或LCASE(s)</td>
+<td style="text-align:center">将字符串s的所有字母转成小写字母</td>
+</tr>
+<tr>
+<td style="text-align:center">LEFT(str,n)</td>
+<td style="text-align:center">返回字符串str最左边的n个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">RIGHT(str,n)</td>
+<td style="text-align:center">返回字符串str最右边的n个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">LPAD(str, len, pad)</td>
+<td style="text-align:center">用字符串pad对str最左边进行填充，直到str的长度为len个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">RPAD(str ,len, pad)</td>
+<td style="text-align:center">用字符串pad对str最右边进行填充，直到str的长度为len个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">LTRIM(s)</td>
+<td style="text-align:center">去掉字符串s左侧的空格</td>
+</tr>
+<tr>
+<td style="text-align:center">RTRIM(s)</td>
+<td style="text-align:center">去掉字符串s右侧的空格</td>
+</tr>
+<tr>
+<td style="text-align:center">TRIM(s)</td>
+<td style="text-align:center">去掉字符串s开始与结尾的空格</td>
+</tr>
+<tr>
+<td style="text-align:center">TRIM(s1 FROM s)</td>
+<td style="text-align:center">去掉字符串s开始与结尾的s1</td>
+</tr>
+<tr>
+<td style="text-align:center">TRIM(LEADING s1 FROM s)</td>
+<td style="text-align:center">去掉字符串s开始处的s1</td>
+</tr>
+<tr>
+<td style="text-align:center">TRIM(TRAILING s1 FROM s</td>
+<td style="text-align:center">去掉字符串s结尾处的s1</td>
+</tr>
+<tr>
+<td style="text-align:center">REPEAT(str, n)</td>
+<td style="text-align:center">返回str重复n次的结果</td>
+</tr>
+<tr>
+<td style="text-align:center">SPACE(n)</td>
+<td style="text-align:center">返回n个空格</td>
+</tr>
+<tr>
+<td style="text-align:center">STRCMP(s1,s2)</td>
+<td style="text-align:center">比较字符串s1,s2的ASCII码值的大小</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBSTR(s,index,len)</td>
+<td style="text-align:center">返回从字符串s的index位置其len个字符，作用与SUBSTRING(s,n,len)、MID(s,n,len)相同</td>
+</tr>
+<tr>
+<td style="text-align:center">LOCATE(substr,str)</td>
+<td style="text-align:center">返回字符串substr在字符串str中首次出现的位置，作用于POSITION(substrIN str)、INSTR(str,substr)相同。未找到，返回0</td>
+</tr>
+<tr>
+<td style="text-align:center">ELT(m,s1,s2,…,sn)</td>
+<td style="text-align:center">返回指定位置的字符串，如果m=1，则返回s1，如果m=2，则返回s2，如果m=n，则返回sn</td>
+</tr>
+<tr>
+<td style="text-align:center">FIELD(s,s1,s2,…,sn)</td>
+<td style="text-align:center">返回字符串s在字符串列表中第一次出现的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">FIND_IN_SET(s1,s2)</td>
+<td style="text-align:center">返回字符串s1在字符串s2中出现的位置。其中，字符串s2是一个以逗号分隔的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">REVERSE(s)</td>
+<td style="text-align:center">返回s反转后的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">NULLIF(value1,value2)</td>
+<td style="text-align:center">比较两个字符串，如果value1与value2相等，则返回NULL，否则返回value1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note warning no-icon flat"><p>注意：MySQL中，字符串的位置是从1开始的。</p>
+</div>
+<p>下面我们来测试一些方法<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">ASCII(<span class="string">&#x27;HENTAI&#x27;</span>),                <span class="comment">-- 72</span></span><br><span class="line"><span class="keyword">CHAR_LENGTH</span>(<span class="string">&#x27;HELLO WORLD&#x27;</span>),     <span class="comment">-- 11</span></span><br><span class="line"><span class="keyword">CHAR_LENGTH</span>(<span class="string">&#x27;你好&#x27;</span>),            <span class="comment">-- 2</span></span><br><span class="line">LENGTH(<span class="string">&#x27;HELLO WORLD&#x27;</span>),          <span class="comment">-- 11</span></span><br><span class="line">LENGTH(<span class="string">&#x27;你好&#x27;</span>)                  <span class="comment">-- 6   </span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- xxx worked for xxx</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(emp.last_name,<span class="string">&#x27; worked for &#x27;</span>,mng.last_name) &quot;details&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees emp</span><br><span class="line"><span class="keyword">JOIN</span> employees mng</span><br><span class="line"><span class="keyword">ON</span> emp.`manager_id` <span class="operator">=</span> mng.`employee_id`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT_WS(<span class="string">&#x27;-&#x27;</span>,<span class="string">&#x27;HELLO&#x27;</span>,<span class="string">&#x27;WORLD&#x27;</span>,<span class="string">&#x27;HELLO&#x27;</span>,<span class="string">&#x27;KYLE&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> DUAL;          <span class="comment">-- HELLO-WORLD-HELLO-KYLE</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">INSERT</span>(<span class="string">&#x27;helloworld&#x27;</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="string">&#x27; AAAAA &#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> DUAL;          <span class="comment">-- hello AAAAA world</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> REPLACE(<span class="string">&#x27;HELLO&#x27;</span>,<span class="string">&#x27;LL&#x27;</span>,<span class="string">&#x27;QQ&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> DUAL;          <span class="comment">-- HEQQO</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="built_in">UPPER</span>(<span class="string">&#x27;Hello&#x27;</span>),     <span class="comment">-- HELLO</span></span><br><span class="line"><span class="built_in">LOWER</span>(<span class="string">&#x27;HELlo&#x27;</span>)      <span class="comment">-- hello</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;            </span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="keyword">LEFT</span>(<span class="string">&#x27;who are you&#x27;</span>,<span class="number">7</span>),      <span class="comment">-- who are</span></span><br><span class="line"><span class="keyword">RIGHT</span>(<span class="string">&#x27;who are you&#x27;</span>,<span class="number">3</span>),     <span class="comment">-- you</span></span><br><span class="line"><span class="keyword">LEFT</span>(<span class="string">&#x27;who are you&#x27;</span>,<span class="number">100</span>)     <span class="comment">-- who are you</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- LPAD可以实现右对齐的效果，RPAD可以实现左对齐的效果</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,LPAD(salary,<span class="number">10</span>,<span class="string">&#x27; &#x27;</span>) &quot;salary&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- TRIM可以去除字符串中首尾部分的空格，Java中有同样的方法</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(<span class="string">&#x27;---&#x27;</span>,<span class="built_in">TRIM</span>(<span class="string">&#x27;       HELLO WORLD                       &#x27;</span>),<span class="string">&#x27;---&#x27;</span>) &quot;Test&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">SUBSTR(<span class="string">&#x27;hello&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>),        <span class="comment">-- el</span></span><br><span class="line">LOCATE(<span class="string">&#x27;ll&#x27;</span>,<span class="string">&#x27;hello&#x27;</span>)        <span class="comment">-- 3</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">ELT(<span class="number">2</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>),                 <span class="comment">-- b</span></span><br><span class="line">FIELD(<span class="string">&#x27;mm&#x27;</span>,<span class="string">&#x27;gg&#x27;</span>,<span class="string">&#x27;jj&#x27;</span>,<span class="string">&#x27;mm&#x27;</span>,<span class="string">&#x27;dd&#x27;</span>,<span class="string">&#x27;mm&#x27;</span>),   <span class="comment">-- 3</span></span><br><span class="line">FIND_IN_SET(<span class="string">&#x27;mm&#x27;</span>,<span class="string">&#x27;gg,mm,jj,dd,mm,gg&#x27;</span>)   <span class="comment">-- 2</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure></p>
+<h1 id="日期和时间函数"><a href="#日期和时间函数" class="headerlink" title="日期和时间函数"></a>日期和时间函数</h1><h2 id="获取日期、时间"><a href="#获取日期、时间" class="headerlink" title="获取日期、时间"></a>获取日期、时间</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CURDATE() ，CURRENT_DATE()</td>
+<td style="text-align:center">返回当前日期，只包含年、月、日</td>
+</tr>
+<tr>
+<td style="text-align:center">CURTIME() ， CURRENT_TIME()</td>
+<td style="text-align:center">返回当前时间，只包含时、分、秒</td>
+</tr>
+<tr>
+<td style="text-align:center">NOW() / SYSDATE() / CURRENT_TIMESTAMP() / LOCALTIME() /LOCALTIMESTAMP()</td>
+<td style="text-align:center">返回当前系统日期和时间</td>
+</tr>
+<tr>
+<td style="text-align:center">UTC_DATE()</td>
+<td style="text-align:center">返回UTC（世界标准时间）日期</td>
+</tr>
+<tr>
+<td style="text-align:center">UTC_TIME()</td>
+<td style="text-align:center">返回UTC（世界标准时间）时间</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>方法测试：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">CURDATE(),      <span class="comment">-- 2022-07-21</span></span><br><span class="line">CURTIME(),      <span class="comment">-- 15:51:50</span></span><br><span class="line">NOW(),          <span class="comment">-- 2022-07-21 15:51:50</span></span><br><span class="line">UTC_DATE(),     <span class="comment">-- 2022-07-21</span></span><br><span class="line">UTC_TIME()      <span class="comment">-- 07:51:50     跟北京时间有8小时误差，北京属于东八区</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure></p>
+<h2 id="日期与时间戳的转换"><a href="#日期与时间戳的转换" class="headerlink" title="日期与时间戳的转换"></a>日期与时间戳的转换</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">UNIX_TIMESTAMP()</td>
+<td style="text-align:center">以UNIX时间戳的形式返回当前时间。</td>
+</tr>
+<tr>
+<td style="text-align:center">UNIX_TIMESTAMP(date)</td>
+<td style="text-align:center">将时间date以UNIX时间戳的形式返回。</td>
+</tr>
+<tr>
+<td style="text-align:center">FROM_UNIXTIME(timestamp)</td>
+<td style="text-align:center">将UNIX时间戳的时间转换为普通格式的时间</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>方法测试：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">UNIX_TIMESTAMP(),                       <span class="comment">-- 1658390269</span></span><br><span class="line">UNIX_TIMESTAMP(<span class="string">&#x27;2077-12-21 17:00:57&#x27;</span>),  <span class="comment">-- 3407302857</span></span><br><span class="line">FROM_UNIXTIME(<span class="number">1234567890</span>)               <span class="comment">-- 2009-02-14 07:31:30</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure></p>
+<h2 id="获取月份、星期、星期数、天数等函数"><a href="#获取月份、星期、星期数、天数等函数" class="headerlink" title="获取月份、星期、星期数、天数等函数"></a>获取月份、星期、星期数、天数等函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">YEAR(date)/ MONTH(date)/ DAY(date)</td>
+<td style="text-align:center">返回具体的日期值</td>
+</tr>
+<tr>
+<td style="text-align:center">HOUR(time) / MINUTE(time)/ SECOND(time)</td>
+<td style="text-align:center">返回具体的时间值</td>
+</tr>
+<tr>
+<td style="text-align:center">MONTHNAME(date)</td>
+<td style="text-align:center">返回月份:January,…</td>
+</tr>
+<tr>
+<td style="text-align:center">DAYNAME(date)</td>
+<td style="text-align:center">返回星期几:MONDAY，TUESDAY……SUNDAY</td>
+</tr>
+<tr>
+<td style="text-align:center">WEEKDAY(date)</td>
+<td style="text-align:center">返回周几，注意，周1是0，周2是1,。。。周日是6</td>
+</tr>
+<tr>
+<td style="text-align:center">QUARTER(date)</td>
+<td style="text-align:center">返回日期对应的季度，范围为1～4</td>
+</tr>
+<tr>
+<td style="text-align:center">WEEK(date), WEEKOFYEAR(date)</td>
+<td style="text-align:center">返回一年中的第几周</td>
+</tr>
+<tr>
+<td style="text-align:center">DAYOFYEAR(date)</td>
+<td style="text-align:center">返回日期是一年中的第几天</td>
+</tr>
+<tr>
+<td style="text-align:center">DAYOFMONTH(date)</td>
+<td style="text-align:center">返回日期位于所在月份的第几天</td>
+</tr>
+<tr>
+<td style="text-align:center">DAYOFWEEK(date)</td>
+<td style="text-align:center">返回周几，注意:周日是1，周一是2，… 周六是7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>方法测试：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="keyword">YEAR</span>(NOW()),        <span class="comment">-- 2022</span></span><br><span class="line"><span class="keyword">MONTH</span>(NOW()),       <span class="comment">-- 7</span></span><br><span class="line"><span class="keyword">DAY</span>(NOW()),         <span class="comment">-- 21</span></span><br><span class="line">MONTHNAME(NOW()),   <span class="comment">-- July</span></span><br><span class="line">DAYNAME(NOW())      <span class="comment">-- Thursday</span></span><br><span class="line">QUARTER(NOW()),     <span class="comment">-- 3</span></span><br><span class="line">WEEK(NOW()),        <span class="comment">-- 29</span></span><br><span class="line">DAYOFYEAR(NOW()),   <span class="comment">-- 202</span></span><br><span class="line">DAYOFMONTH(NOW()),  <span class="comment">-- 21</span></span><br><span class="line">DAYOFWEEK(NOW())    <span class="comment">-- 5 今天是周四，但周日是1，以此类推，周四是5</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;    </span><br></pre></td></tr></table></figure></p>
+<h2 id="日期的操作函数"><a href="#日期的操作函数" class="headerlink" title="日期的操作函数"></a>日期的操作函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">EXTRACT(type FROM date)</td>
+<td style="text-align:center">返回指定日期中特定的部分，type指定返回的值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>XTRACT(type FROM date)函数中type的取值与含义：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">type取值</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">MICROSECOND</td>
+<td style="text-align:center">返回毫秒数</td>
+</tr>
+<tr>
+<td style="text-align:center">SECOND</td>
+<td style="text-align:center">返回秒数</td>
+</tr>
+<tr>
+<td style="text-align:center">MINUTE</td>
+<td style="text-align:center">返回分钟数</td>
+</tr>
+<tr>
+<td style="text-align:center">HOUR</td>
+<td style="text-align:center">返回小时数</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY</td>
+<td style="text-align:center">返回天数</td>
+</tr>
+<tr>
+<td style="text-align:center">WEEK</td>
+<td style="text-align:center">返回日期在一年中的第几个星期</td>
+</tr>
+<tr>
+<td style="text-align:center">MONTH</td>
+<td style="text-align:center">返回日期在一年中的第几个月</td>
+</tr>
+<tr>
+<td style="text-align:center">QUARTER</td>
+<td style="text-align:center">返回日期在一年中的第几个季度</td>
+</tr>
+<tr>
+<td style="text-align:center">YEAR</td>
+<td style="text-align:center">返回日期的年份</td>
+</tr>
+<tr>
+<td style="text-align:center">SECOND_MICROSECOND</td>
+<td style="text-align:center">返回秒和毫秒值</td>
+</tr>
+<tr>
+<td style="text-align:center">MINUTE_MICROSECOND</td>
+<td style="text-align:center">返回分钟和毫秒值</td>
+</tr>
+<tr>
+<td style="text-align:center">MINUTE_SECOND</td>
+<td style="text-align:center">返回分钟和秒值</td>
+</tr>
+<tr>
+<td style="text-align:center">HOUR_MICROSECOND</td>
+<td style="text-align:center">返回小时和毫秒值</td>
+</tr>
+<tr>
+<td style="text-align:center">HOUR_SECOND</td>
+<td style="text-align:center">返回小时和秒值</td>
+</tr>
+<tr>
+<td style="text-align:center">HOUR_MINUTE</td>
+<td style="text-align:center">返回小时和分钟值</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY_MICROSECOND</td>
+<td style="text-align:center">返回天和毫秒值</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY_SECOND</td>
+<td style="text-align:center">返回天和秒值</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY_MINUTE</td>
+<td style="text-align:center">返回天和分钟值</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY_HOUR</td>
+<td style="text-align:center">返回天和小时</td>
+</tr>
+<tr>
+<td style="text-align:center">YEAR_MONTH</td>
+<td style="text-align:center">返回年和月</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>方法测试：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 今天是2022.7.21</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="built_in">EXTRACT</span>(<span class="keyword">DAY</span> <span class="keyword">FROM</span> NOW()),        <span class="comment">-- 21</span></span><br><span class="line"><span class="built_in">EXTRACT</span>(<span class="keyword">MONTH</span> <span class="keyword">FROM</span> NOW()),      <span class="comment">-- 7</span></span><br><span class="line"><span class="built_in">EXTRACT</span>(<span class="keyword">YEAR</span> <span class="keyword">FROM</span> NOW())        <span class="comment">-- 2022</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;    </span><br></pre></td></tr></table></figure></p>
+<h2 id="时间和秒钟转换的函数"><a href="#时间和秒钟转换的函数" class="headerlink" title="时间和秒钟转换的函数"></a>时间和秒钟转换的函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TIME_TO_SEC(TIME)</td>
+<td style="text-align:center">将 TIME 转化为秒并返回结果值。转化的公式为： 小时×3600+分钟×60+秒</td>
+</tr>
+<tr>
+<td style="text-align:center">SEC_TO_TIME(seconds)</td>
+<td style="text-align:center">将 seconds 描述转化为包含小时、分钟和秒的时间</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">TIME_TO_SEC(&quot;12:00:00&quot;),    <span class="comment">-- 43200</span></span><br><span class="line">TIME_TO_SEC(CURTIME()),     <span class="comment">-- 68155</span></span><br><span class="line">SEC_TO_TIME(<span class="number">68155</span>)          <span class="comment">-- 18:55:55</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;    </span><br></pre></td></tr></table></figure>
+<h2 id="计算日期和时间的函数"><a href="#计算日期和时间的函数" class="headerlink" title="计算日期和时间的函数"></a>计算日期和时间的函数</h2><p>第一组：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">DATE_ADD(DATETIME, INTERVAL expr TYPE)，ADDDATE(DATE,INTERVAL expr TYPE)</td>
+<td style="text-align:center">返回与给定日期时间相差INTERVAL时间段的日期时间</td>
+</tr>
+<tr>
+<td style="text-align:center">DATE_SUB(DATE,INTERVAL expr TYPE)，SUBDATE(DATE,INTERVAL expr TYPE)</td>
+<td style="text-align:center">返回与date相差INTERVAL时间间隔的日期</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>上述函数中type的取值：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">间隔类型</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">HOUR</td>
+<td style="text-align:center">小时</td>
+</tr>
+<tr>
+<td style="text-align:center">MINUTE</td>
+<td style="text-align:center">分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">SECOND</td>
+<td style="text-align:center">秒</td>
+</tr>
+<tr>
+<td style="text-align:center">YEAR</td>
+<td style="text-align:center">年</td>
+</tr>
+<tr>
+<td style="text-align:center">MONTH</td>
+<td style="text-align:center">月</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY</td>
+<td style="text-align:center">日</td>
+</tr>
+<tr>
+<td style="text-align:center">YEAR_MONTH</td>
+<td style="text-align:center">年和月</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY_HOUR</td>
+<td style="text-align:center">日和小时</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY_MINUTE</td>
+<td style="text-align:center">日和分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">DAY_SECOND</td>
+<td style="text-align:center">日和秒</td>
+</tr>
+<tr>
+<td style="text-align:center">HOUR MINUTE</td>
+<td style="text-align:center">小时和分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">HOUR SECOND</td>
+<td style="text-align:center">小时和秒</td>
+</tr>
+<tr>
+<td style="text-align:center">MINUTE_SECOND</td>
+<td style="text-align:center">分钟和秒</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">DATE_ADD(&quot;2022-7-21&quot;,<span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>),    <span class="comment">-- 2023-7-21</span></span><br><span class="line">DATE_ADD(&quot;2022-7-21&quot;,<span class="type">INTERVAL</span> <span class="number">-3</span> <span class="keyword">MONTH</span>)   <span class="comment">-- 2022-4-21    </span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">DATE_SUB(&quot;2021-10-21 23:32:00&quot;,<span class="type">INTERVAL</span> &quot;1_2&quot; YEAR_MONTH),      <span class="comment">-- 2020-08-21 23:32:00</span></span><br><span class="line">DATE_SUB(&quot;2021-10-21 23:32:00&quot;,<span class="type">INTERVAL</span> &quot;10_24&quot; MINUTE_SECOND)  <span class="comment">-- 2021-10-21 23:21:36</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;    </span><br></pre></td></tr></table></figure>
+<p>第二组：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ADDTIME(time1,time2)</td>
+<td style="text-align:center">返回time1加上time2的时间。当time2为一个数字时，代表的是秒 ，可以为负数</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBTIME(time1,time2)</td>
+<td style="text-align:center">返回time1减去time2后的时间。当time2为一个数字时，代表的是 秒 ，可以为负数</td>
+</tr>
+<tr>
+<td style="text-align:center">DATEDIFF(date1,date2)</td>
+<td style="text-align:center">返回date1 - date2的日期间隔天数</td>
+</tr>
+<tr>
+<td style="text-align:center">TIMEDIFF(time1, time2)</td>
+<td style="text-align:center">返回time1 - time2的时间间隔</td>
+</tr>
+<tr>
+<td style="text-align:center">FROM_DAYS(N)</td>
+<td style="text-align:center">返回从0000年1月1日起，N天以后的日期</td>
+</tr>
+<tr>
+<td style="text-align:center">TO_DAYS(DATE)</td>
+<td style="text-align:center">返回日期date距离0000年1月1日的天数</td>
+</tr>
+<tr>
+<td style="text-align:center">LAST_DAY(DATE)</td>
+<td style="text-align:center">返回date所在月份的最后一天的日期</td>
+</tr>
+<tr>
+<td style="text-align:center">MAKEDATE(YEAR,n)</td>
+<td style="text-align:center">针对给定年份与所在年份中的天数返回一个日期</td>
+</tr>
+<tr>
+<td style="text-align:center">MAKETIME(HOUR,MINUTE,SECOND)</td>
+<td style="text-align:center">将给定的小时、分钟和秒组合成时间并返回</td>
+</tr>
+<tr>
+<td style="text-align:center">PERIOD_ADD(TIME,n)</td>
+<td style="text-align:center">返回time加上n后的时间</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">ADDTIME(<span class="string">&#x27;2022-7-21 18:00:00&#x27;</span>,<span class="number">30</span>),            <span class="comment">-- 2022-07-21 18:00:30</span></span><br><span class="line">SUBTIME(<span class="string">&#x27;2022-7-21 18:00:00&#x27;</span>,<span class="string">&#x27;03:55:05&#x27;</span>),    <span class="comment">-- 2022-07-21 14:04:55</span></span><br><span class="line">DATEDIFF(<span class="string">&#x27;2022-7-21&#x27;</span>,<span class="string">&#x27;2022-1-1&#x27;</span>),            <span class="comment">-- 201</span></span><br><span class="line">FROM_DAYS(<span class="number">1024</span>),                             <span class="comment">-- 0002-10-21</span></span><br><span class="line">TO_DAYS(<span class="string">&#x27;2022-7-21&#x27;</span>),                        <span class="comment">-- 738722</span></span><br><span class="line">LAST_DAY(<span class="string">&#x27;2022-7-21&#x27;</span>),                       <span class="comment">-- 2022-07-31</span></span><br><span class="line">MAKEDATE(<span class="number">2022</span>,<span class="number">201</span>),                          <span class="comment">-- 2022-7-20</span></span><br><span class="line">MAKETIME(<span class="number">1</span>,<span class="number">36</span>,<span class="number">59</span>),                           <span class="comment">-- 01:36:59</span></span><br><span class="line">PERIOD_ADD(<span class="number">20220101010101</span>,<span class="number">10</span>)                <span class="comment">-- 20220101010111 实际表示2022-01-01 01:01:11</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;    </span><br></pre></td></tr></table></figure>
+<h2 id="日期的格式化与解析"><a href="#日期的格式化与解析" class="headerlink" title="日期的格式化与解析"></a>日期的格式化与解析</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">DATE_FORMAT(DATE,fmt)</td>
+<td style="text-align:center">按照字符串fmt格式化日期date值</td>
+</tr>
+<tr>
+<td style="text-align:center">TIME_FORMAT(TIME,fmt)</td>
+<td style="text-align:center">按照字符串fmt格式化时间time值</td>
+</tr>
+<tr>
+<td style="text-align:center">GET_FORMAT(date_type,format_type)</td>
+<td style="text-align:center">返回日期字符串的显示格式</td>
+</tr>
+<tr>
+<td style="text-align:center">STR_TO_DATE(str, fmt)</td>
+<td style="text-align:center">按照字符串fmt对str进行解析，解析为一个日期</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>上述 非<code>GET_FORMAT</code> 函数中fmt参数常用的格式符：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">格式符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%Y</td>
+<td style="text-align:center">4位数字表示年份</td>
+</tr>
+<tr>
+<td style="text-align:center">%y</td>
+<td style="text-align:center">表示两位数字表示年份</td>
+</tr>
+<tr>
+<td style="text-align:center">%M</td>
+<td style="text-align:center">月名表示月份（January,….）</td>
+</tr>
+<tr>
+<td style="text-align:center">%m</td>
+<td style="text-align:center">两位数字表示月份（01,02,03…）</td>
+</tr>
+<tr>
+<td style="text-align:center">%b</td>
+<td style="text-align:center">缩写的月名（Jan.，Feb.，….）</td>
+</tr>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:center">数字表示月份（1,2,3,…）</td>
+</tr>
+<tr>
+<td style="text-align:center">%D</td>
+<td style="text-align:center">英文后缀表示月中的天数（1st,2nd,3rd,…）</td>
+</tr>
+<tr>
+<td style="text-align:center">%d</td>
+<td style="text-align:center">两位数字表示月中的天数(01,02…)</td>
+</tr>
+<tr>
+<td style="text-align:center">%e</td>
+<td style="text-align:center">数字形式表示月中的天数（1,2,3,4,5…..）</td>
+</tr>
+<tr>
+<td style="text-align:center">%H</td>
+<td style="text-align:center">两位数字表示小数，24小时制（01,02..）</td>
+</tr>
+<tr>
+<td style="text-align:center">%h和%I</td>
+<td style="text-align:center">两位数字表示小时，12小时制（01,02..）</td>
+</tr>
+<tr>
+<td style="text-align:center">%k</td>
+<td style="text-align:center">数字形式的小时，24小时制(1,2,3)</td>
+</tr>
+<tr>
+<td style="text-align:center">%l</td>
+<td style="text-align:center">数字形式表示小时，12小时制（1,2,3,4….）</td>
+</tr>
+<tr>
+<td style="text-align:center">%i</td>
+<td style="text-align:center">两位数字表示分钟（00,01,02）</td>
+</tr>
+<tr>
+<td style="text-align:center">%S和%s</td>
+<td style="text-align:center">两位数字表示秒(00,01,02…)</td>
+</tr>
+<tr>
+<td style="text-align:center">%W</td>
+<td style="text-align:center">一周中的星期名称（Sunday…）</td>
+</tr>
+<tr>
+<td style="text-align:center">%a</td>
+<td style="text-align:center">一周中的星期缩写（Sun.，Mon.,Tues.，..）</td>
+</tr>
+<tr>
+<td style="text-align:center">%w</td>
+<td style="text-align:center">以数字表示周中的天数(0=Sunday,1=Monday….)</td>
+</tr>
+<tr>
+<td style="text-align:center">%j</td>
+<td style="text-align:center">以3位数字表示年中的天数(001,002…)</td>
+</tr>
+<tr>
+<td style="text-align:center">%U</td>
+<td style="text-align:center">以数字表示年中的第几周，（1,2,3。。）其中Sunday为周中第一天</td>
+</tr>
+<tr>
+<td style="text-align:center">%u</td>
+<td style="text-align:center">以数字表示年中的第几周，（1,2,3。。）其中Monday为周中第一天</td>
+</tr>
+<tr>
+<td style="text-align:center">%T</td>
+<td style="text-align:center">24小时制</td>
+</tr>
+<tr>
+<td style="text-align:center">%r</td>
+<td style="text-align:center">12小时制</td>
+</tr>
+<tr>
+<td style="text-align:center">%p</td>
+<td style="text-align:center">AM或PM</td>
+</tr>
+<tr>
+<td style="text-align:center">%%</td>
+<td style="text-align:center">表示%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 格式化</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">DATE_FORMAT(CURDATE(),<span class="string">&#x27;%Y-%M-%D&#x27;</span>),      <span class="comment">-- 2022-July-21st</span></span><br><span class="line">TIME_FORMAT(CURTIME(),<span class="string">&#x27;%h:%i:%s&#x27;</span>)       <span class="comment">-- 06:00:00</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 解析</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">STR_TO_DATE(<span class="string">&#x27;2022-December-25th 12:21:30 Monday&#x27;</span>,<span class="string">&#x27;%Y-%M-%D %h:%i:%S %W&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"><span class="comment">-- 2022-12-25 12:21:30</span></span><br></pre></td></tr></table></figure>
+<p>GET_FORMAT函数中date_type和format_type参数取值如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">日期类型</th>
+<th style="text-align:center">格式化类型</th>
+<th style="text-align:center">返回的格式化字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">DATE</td>
+<td style="text-align:center">USA</td>
+<td style="text-align:center">%m.%d.%Y</td>
+</tr>
+<tr>
+<td style="text-align:center">DATE</td>
+<td style="text-align:center">JIS</td>
+<td style="text-align:center">%Y-%m-%d</td>
+</tr>
+<tr>
+<td style="text-align:center">DATE</td>
+<td style="text-align:center">ISO</td>
+<td style="text-align:center">%Y-%m-%d</td>
+</tr>
+<tr>
+<td style="text-align:center">DATE</td>
+<td style="text-align:center">EUR</td>
+<td style="text-align:center">%d.%m.%Y</td>
+</tr>
+<tr>
+<td style="text-align:center">DATE</td>
+<td style="text-align:center">INTERNAL</td>
+<td style="text-align:center">%Y%m%d</td>
+</tr>
+<tr>
+<td style="text-align:center">TIME</td>
+<td style="text-align:center">USA</td>
+<td style="text-align:center">%h:%i:%s %p</td>
+</tr>
+<tr>
+<td style="text-align:center">TIME</td>
+<td style="text-align:center">JIS</td>
+<td style="text-align:center">%H:%i:%s</td>
+</tr>
+<tr>
+<td style="text-align:center">TIME</td>
+<td style="text-align:center">ISO</td>
+<td style="text-align:center">%H:%i:%s</td>
+</tr>
+<tr>
+<td style="text-align:center">TIME</td>
+<td style="text-align:center">EUR</td>
+<td style="text-align:center">%H.%i.%s</td>
+</tr>
+<tr>
+<td style="text-align:center">TIME</td>
+<td style="text-align:center">INTERNAL</td>
+<td style="text-align:center">%H%i%s</td>
+</tr>
+<tr>
+<td style="text-align:center">DATETIME</td>
+<td style="text-align:center">USA</td>
+<td style="text-align:center">%Y-%m-%d %H.%i.%s</td>
+</tr>
+<tr>
+<td style="text-align:center">DATETIME</td>
+<td style="text-align:center">JIS</td>
+<td style="text-align:center">%Y-%m-%d %H:%i:%s</td>
+</tr>
+<tr>
+<td style="text-align:center">DATETIME</td>
+<td style="text-align:center">ISO</td>
+<td style="text-align:center">%Y-%m-%d %H:%i:%s</td>
+</tr>
+<tr>
+<td style="text-align:center">DATETIME</td>
+<td style="text-align:center">EUR</td>
+<td style="text-align:center">%Y-%m-%d %H.%i.%s</td>
+</tr>
+<tr>
+<td style="text-align:center">DATETIME</td>
+<td style="text-align:center">INTERNAL</td>
+<td style="text-align:center">%Y%m%d%H%i%s</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">DATE_FORMAT(NOW(),GET_FORMAT(<span class="type">DATE</span>,<span class="string">&#x27;USA&#x27;</span>)),  <span class="comment">-- 07.21.2022</span></span><br><span class="line">DATE_FORMAT(NOW(),GET_FORMAT(<span class="type">DATE</span>,<span class="string">&#x27;JIS&#x27;</span>)),  <span class="comment">-- 2022-07-21</span></span><br><span class="line">DATE_FORMAT(NOW(),GET_FORMAT(<span class="type">DATE</span>,<span class="string">&#x27;EUR&#x27;</span>)),  <span class="comment">-- 21.07.2022</span></span><br><span class="line">DATE_FORMAT(NOW(),GET_FORMAT(<span class="type">DATE</span>,<span class="string">&#x27;ISO&#x27;</span>))   <span class="comment">-- 2022-07-21</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure>
+<h1 id="流程控制函数"><a href="#流程控制函数" class="headerlink" title="流程控制函数"></a>流程控制函数</h1><p>流程处理函数可以根据不同的条件，执行不同的处理流程，可以在SQL语句中实现不同的条件选择。MySQL中的流程处理函数主要包括IF()、IFNULL()和CASE()函数。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IF(VALUE,value1,value2)</td>
+<td style="text-align:center">如果value的值为TRUE，返回value1,否则返回value2</td>
+</tr>
+<tr>
+<td style="text-align:center">IFNULL(value1, value2)</td>
+<td style="text-align:center">如果value1不为NULL，返回value1，否则返回value2</td>
+</tr>
+<tr>
+<td style="text-align:center">CASE WHEN 条件1 THEN 结果1 WHEN 条件2 THEN 结果2…. [ELSE resultn] END</td>
+<td style="text-align:center">相当于Java的if…else if…else…</td>
+</tr>
+<tr>
+<td style="text-align:center">CASE expr WHEN 常量值1 THEN 值1 WHEN 常量值1 THEN值1 …. [ELSE 值n] END</td>
+<td style="text-align:center">相当于Java的switch…case…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name,salary,IF(salary <span class="operator">&gt;=</span> <span class="number">10000</span>,<span class="string">&#x27;高工资&#x27;</span>,<span class="string">&#x27;低工资&#x27;</span>) &quot;details&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> last_name,salary,salary <span class="operator">*</span> (<span class="number">1</span> <span class="operator">+</span> IF(commission_pct <span class="keyword">IS</span> <span class="keyword">NULL</span>,<span class="number">0</span>,commission_pct)) <span class="operator">*</span> <span class="number">12</span> &quot;annual_sal&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">CASE WHEN ... THEN ...WHEN ... THEN ... ELSE ... END</span></span><br><span class="line"><span class="comment">类似于java的if ... else if ... else if ... else</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,salary,</span><br><span class="line"><span class="keyword">CASE</span> <span class="keyword">WHEN</span> salary <span class="operator">&gt;=</span> <span class="number">15000</span> <span class="keyword">THEN</span> &quot;老司机&quot;</span><br><span class="line">     <span class="keyword">WHEN</span> salary <span class="operator">&gt;=</span> <span class="number">10000</span> <span class="keyword">THEN</span> &quot;潜力股&quot;</span><br><span class="line">     <span class="keyword">WHEN</span> salary <span class="operator">&gt;=</span> <span class="number">6000</span> <span class="keyword">THEN</span> &quot;小屌丝&quot;</span><br><span class="line">     <span class="keyword">ELSE</span> &quot;草根&quot; <span class="keyword">END</span> &quot;detailes&quot;, department_id</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">CASE ... WHEN ... THEN ... WHEN ... THEN ... ELSE ... END</span></span><br><span class="line"><span class="comment">类似于java的swich ... case...</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">-- 部门号为10的发1.1倍工资，部门号为20发1.2倍工资，部门号为30发1.3倍工资，取余发1.4倍工资</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,department_id,salary,</span><br><span class="line"><span class="keyword">CASE</span> department_id</span><br><span class="line"><span class="keyword">WHEN</span> <span class="number">10</span> <span class="keyword">THEN</span> salary <span class="operator">*</span> <span class="number">1.1</span></span><br><span class="line"><span class="keyword">WHEN</span> <span class="number">20</span> <span class="keyword">THEN</span> salary <span class="operator">*</span> <span class="number">1.2</span></span><br><span class="line"><span class="keyword">WHEN</span> <span class="number">30</span> <span class="keyword">THEN</span> salary <span class="operator">*</span> <span class="number">1.3</span></span><br><span class="line"><span class="keyword">ELSE</span> salary <span class="operator">*</span> <span class="number">1.4</span> <span class="keyword">END</span> &quot;details&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<h1 id="加密与解密函数"><a href="#加密与解密函数" class="headerlink" title="加密与解密函数"></a>加密与解密函数</h1><p>加密与解密函数主要用于对数据库中的数据进行加密和解密处理，以防止数据被他人窃取。这些函数在保证数据库安全时非常有用。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PASSWORD(str)</td>
+<td style="text-align:center">返回字符串str的加密版本，41位长的字符串。加密结果 不可逆 ，常用于用户的密码加密</td>
+</tr>
+<tr>
+<td style="text-align:center">MD5(str)</td>
+<td style="text-align:center">返回字符串str的md5加密后的值，也是一种加密方式。若参数为NULL，则会返回NULL</td>
+</tr>
+<tr>
+<td style="text-align:center">SHA(str)</td>
+<td style="text-align:center">从原明文密码str计算并返回加密后的密码字符串，当参数为NULL时，返回NULL。 SHA加密算法比MD5更加安全 。</td>
+</tr>
+<tr>
+<td style="text-align:center">ENCODE(VALUE,password_seed)</td>
+<td style="text-align:center">返回使用password_seed作为加密密码加密value</td>
+</tr>
+<tr>
+<td style="text-align:center">DECODE(VALUE,password_seed)</td>
+<td style="text-align:center">返回使用password_seed作为加密密码解密value</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>可以看到，ENCODE(value,password_seed)函数与DECODE(value,password_seed)函数互为反函数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- PASSWORD已经在mysql8.0中弃用</span></span><br><span class="line"><span class="keyword">SELECT</span> MD5(<span class="string">&#x27;mysql&#x27;</span>),SHA(<span class="string">&#x27;mysql&#x27;</span>),MD5(MD5(<span class="string">&#x27;mysql&#x27;</span>))</span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ENCODE 和 DECODE 已经在mysql8.0中弃用</span></span><br><span class="line"><span class="keyword">SELECT</span> ENCODE(<span class="string">&#x27;ILOVEMYSQL&#x27;</span>,<span class="string">&#x27;CYBORG&#x27;</span>),           <span class="comment">-- ���X�qW�</span></span><br><span class="line">DECODE(ENCODE(<span class="string">&#x27;ILOVEMYSQL&#x27;</span>,<span class="string">&#x27;CYBORG&#x27;</span>),<span class="string">&#x27;CYBORG&#x27;</span>)  <span class="comment">-- ILOVEMYSQL</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure>
+<h1 id="MySQL信息函数"><a href="#MySQL信息函数" class="headerlink" title="MySQL信息函数"></a>MySQL信息函数</h1><p>MySQL中内置了一些可以查询MySQL信息的函数，这些函数主要用于帮助数据库开发或运维人员更好地对数据库进行维护工作。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">VERSION()</td>
+<td style="text-align:center">返回当前MySQL的版本号</td>
+</tr>
+<tr>
+<td style="text-align:center">CONNECTION_ID()</td>
+<td style="text-align:center">返回当前MySQL服务器的连接数</td>
+</tr>
+<tr>
+<td style="text-align:center">DATABASE(),SCHEMA()</td>
+<td style="text-align:center">返回MySQL命令行当前所在的数据库</td>
+</tr>
+<tr>
+<td style="text-align:center">USER(),CURRENT_USER(),SYSTEM_USER(),SESSION_USER()</td>
+<td style="text-align:center">返回当前连接MySQL的用户名，返回结果格式为“主机名@用户名”</td>
+</tr>
+<tr>
+<td style="text-align:center">CHARSET(VALUE)</td>
+<td style="text-align:center">返回字符串value自变量的字符集</td>
+</tr>
+<tr>
+<td style="text-align:center">COLLATION(VALUE)</td>
+<td style="text-align:center">返回字符串value的比较规则</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">VERSION(),          <span class="comment">-- 8.0.29</span></span><br><span class="line">CONNECTION_ID(),    <span class="comment">-- 9</span></span><br><span class="line">DATABASE(),         <span class="comment">-- atguigudb</span></span><br><span class="line">SCHEMA(),           <span class="comment">-- atguigudb</span></span><br><span class="line"><span class="keyword">USER</span>(),             <span class="comment">-- root@localhost</span></span><br><span class="line"><span class="built_in">CURRENT_USER</span>(),     <span class="comment">-- root@localhost</span></span><br><span class="line">CHARSET(<span class="string">&#x27;Test&#x27;</span>),    <span class="comment">-- utf8mb3</span></span><br><span class="line"><span class="keyword">COLLATION</span>(<span class="string">&#x27;Test&#x27;</span>)   <span class="comment">-- utf8_general_ci</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure>
+<h1 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h1><p>MySQL中有些函数无法对其进行具体的分类，但是这些函数在MySQL的开发和运维过程中也是不容忽视的。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">FORMAT(VALUE,n)</td>
+<td style="text-align:center">返回对数字value进行格式化后的结果数据。n表示 四舍五入 后保留到小数点后n位</td>
+</tr>
+<tr>
+<td style="text-align:center">CONV(VALUE,FROM,TO)</td>
+<td style="text-align:center">将value的值进行不同进制之间的转换</td>
+</tr>
+<tr>
+<td style="text-align:center">INET_ATON(ipvalue)</td>
+<td style="text-align:center">将以点分隔的IP地址转化为一个数字</td>
+</tr>
+<tr>
+<td style="text-align:center">INET_NTOA(VALUE)</td>
+<td style="text-align:center">将数字形式的IP地址转化为以点分隔的IP地址</td>
+</tr>
+<tr>
+<td style="text-align:center">BENCHMARK(n,expr)</td>
+<td style="text-align:center">将表达式expr重复执行n次。用于测试MySQL处理expr表达式所耗费的时间</td>
+</tr>
+<tr>
+<td style="text-align:center">CONVERT(VALUE USING char_code)</td>
+<td style="text-align:center">将value所使用的字符编码修改为char_code</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 如果n的值小于或者等于0，则只保留整数部分</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">FORMAT(<span class="number">123.125</span>,<span class="number">2</span>),    <span class="comment">-- 123.13</span></span><br><span class="line">FORMAT(<span class="number">123.125</span>,<span class="number">0</span>),    <span class="comment">-- 123</span></span><br><span class="line">FORMAT(<span class="number">123.125</span>,<span class="number">-2</span>)    <span class="comment">-- 123</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span>     </span><br><span class="line">CONV(<span class="number">16</span>, <span class="number">10</span>, <span class="number">2</span>),      <span class="comment">-- 10000</span></span><br><span class="line">CONV(<span class="number">8888</span>,<span class="number">10</span>,<span class="number">16</span>),     <span class="comment">-- 22B8</span></span><br><span class="line">CONV(<span class="keyword">NULL</span>, <span class="number">10</span>, <span class="number">2</span>)     <span class="comment">-- NULL</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 以“192.168.1.100”为例，计算方式为192乘以256的3次方，加上168乘以256的2次方，加上1乘以256，再加上100。也就是256进制</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">INET_ATON(<span class="string">&#x27;192.168.1.100&#x27;</span>),     <span class="comment">--3232235876</span></span><br><span class="line">INET_NTOA(<span class="number">3232235876</span>)           <span class="comment">-- 192.168.1.100</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- BENCHMARK()用于测试表达式的执行效率</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">BENCHMARK(<span class="number">100000</span>,MD5(<span class="string">&#x27;mysql&#x27;</span>))    <span class="comment">-- 花了我0.018sec</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- CONVERT():可以实现字符集的转换</span></span><br><span class="line"><span class="keyword">SELECT</span> CHARSET(<span class="string">&#x27;atguigu&#x27;</span>),CHARSET(<span class="keyword">CONVERT</span>(<span class="string">&#x27;atguigu&#x27;</span> <span class="keyword">USING</span> <span class="string">&#x27;gbk&#x27;</span>))</span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure>
+<h1 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h1><ol>
+<li>显示系统时间(注：日期+时间)<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> NOW()</span><br><span class="line"><span class="keyword">FROM</span> DUAL;</span><br></pre></td></tr></table></figure></li>
+<li>查询员工号，姓名，工资，以及工资提高百分之20%后的结果（new salary）<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employee_id,last_name,salary,salary <span class="operator">*</span> <span class="number">1.2</span> &quot;new salary&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure></li>
+<li>将员工的姓名按首字母排序，并写出姓名的长度（length）<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name,LENGTH(last_name)</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> last_name <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure></li>
+<li>查询员工id,last_name,salary，并作为一个列输出，别名为OUT_PUT<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONCAT_WS(<span class="string">&#x27;,&#x27;</span>,employee_id,last_name,salary) &quot;OUT-PUT&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure></li>
+<li>查询公司各员工工作的年数、工作的天数，并按工作年数的降序排序<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name,DATEDIFF(NOW(),hire_date)<span class="operator">/</span><span class="number">365</span> &quot;worked_years&quot;,DATEDIFF(NOW(),hire_date) &quot;worked_days&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> worked_years <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure></li>
+<li>查询员工姓名，hire_date , department_id，满足以下条件：雇用时间在1997年之后，department_id为80 或 90 或110, commission_pct不为空<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name,hire_date,department_id</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">YEAR</span>(hire_date) <span class="operator">&gt;=</span> <span class="number">1997</span></span><br><span class="line"><span class="keyword">AND</span> department_id <span class="keyword">IN</span>(<span class="number">80</span>,<span class="number">90</span>,<span class="number">110</span>)</span><br><span class="line"><span class="keyword">AND</span> commission_pct <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure></li>
+<li>查询公司中入职超过10000天的员工姓名、入职时间<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name,hire_date</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> DATEDIFF(NOW(),hire_date) <span class="operator">&gt;=</span> <span class="number">10000</span>;</span><br></pre></td></tr></table></figure></li>
+<li>做一个查询，产生下面的结果<br>King(last_name) earns 24000(salary) monthly but wants 72000(salary * 3)<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONCAT_WS(<span class="string">&#x27; &#x27;</span>,last_name,<span class="string">&#x27;earns&#x27;</span>,<span class="keyword">TRUNCATE</span>(salary,<span class="number">0</span>),&quot;monthly but wants&quot;,<span class="keyword">TRUNCATE</span>(salary <span class="operator">*</span> <span class="number">3</span>,<span class="number">0</span>)) &quot;DREAM SALARY&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure></li>
+<li>使用case-when，按照下面的条件：</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">job</th>
+<th style="text-align:center">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">AD_PRES</td>
+<td style="text-align:center">A</td>
+</tr>
+<tr>
+<td style="text-align:center">ST_MAN</td>
+<td style="text-align:center">B</td>
+</tr>
+<tr>
+<td style="text-align:center">IT_PROG</td>
+<td style="text-align:center">C</td>
+</tr>
+<tr>
+<td style="text-align:center">SA_REP</td>
+<td style="text-align:center">D</td>
+</tr>
+<tr>
+<td style="text-align:center">ST_CLERK</td>
+<td style="text-align:center">E</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>产生下面的结果:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Last_name</th>
+<th style="text-align:center">Job_id</th>
+<th style="text-align:center">Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">king</td>
+<td style="text-align:center">AD_PRES</td>
+<td style="text-align:center">A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> last_name &quot;Last_name&quot;,job_id &quot;Job_id&quot;,<span class="keyword">CASE</span> job_id </span><br><span class="line"><span class="keyword">WHEN</span> <span class="string">&#x27;AD_PRES&#x27;</span> <span class="keyword">THEN</span> <span class="string">&#x27;A&#x27;</span></span><br><span class="line"><span class="keyword">WHEN</span> <span class="string">&#x27;ST_MAN&#x27;</span> <span class="keyword">THEN</span> <span class="string">&#x27;B&#x27;</span></span><br><span class="line"><span class="keyword">WHEN</span> <span class="string">&#x27;IT_PROG&#x27;</span> <span class="keyword">THEN</span> <span class="string">&#x27;C&#x27;</span></span><br><span class="line"><span class="keyword">WHEN</span> <span class="string">&#x27;SA_REP&#x27;</span> <span class="keyword">THEN</span> <span class="string">&#x27;D&#x27;</span></span><br><span class="line"><span class="keyword">WHEN</span> <span class="string">&#x27;ST_CLERK&#x27;</span> <span class="keyword">THEN</span> <span class="string">&#x27;E&#x27;</span></span><br><span class="line"><span class="keyword">ELSE</span> <span class="string">&#x27;F&#x27;</span></span><br><span class="line"><span class="keyword">END</span> &quot;Grade&quot;</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/bilicard.css" type="text/css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Kyle Violet</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://cyborg2077.github.io/2022/07/21/MySQL06/">https://cyborg2077.github.io/2022/07/21/MySQL06/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://cyborg2077.github.io" target="_blank">Kyle's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fbf0e4aa0bee8b05d446914c97ae4a611b64f6837.png&amp;refer=http%3A%2F%2Fi0.hdslb.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1645340425&amp;t=0731cf208414cf55a532ab7a232cc4ff" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/07/19/MySQL05/"><img class="next-cover" src="https://img0.baidu.com/it/u=518815500,4294667560&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL---多表查询</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="cols"><div class="col"><div class="container"><div class="front avatarPanel"><div class="inner"><div class="player-title">Attributes</div><div class="player-avatar"><img src="https://s2.loli.net/2022/04/18/fj4XvrdM5o62hbA.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div></div></div><div class="back attributesPanel"><div class="inner"><div class="player-lv">LV.6</div><div class="player-name">Kyle Violet</div><div class="attributes-value"><div class="attributes-value-item"><a href="/archives/"><div class="attributes">文章</div><div class="value-bar"><div class="value-bar-fill" style="width:51.00%"><div class="value-bar-fill-in" style="background: rgba(89, 230, 54,0.6)"></div></div></div><span>51/100</span></a></div><div class="attributes-value-item"><a href="/tags/"><div class="attributes">标签</div><div class="value-bar"><div class="value-bar-fill" style="width:46.00%"><div class="value-bar-fill-in" style="background: rgba(224, 20, 20, 0.6)"></div></div></div><span>46/100</span></a></div><div class="attributes-value-item"><a href="/categories/"><div class="attributes">分类</div><div class="value-bar"><div class="value-bar-fill" style="width:5.00%"><div class="value-bar-fill-in" style="background: rgba(30, 97, 226, 0.6)"></div></div></div><span>5/100</span></a></div></div></div></div></div></div><div class="col"><div class="container"><div class="front descriptionPanel"><div class="inner"><div class="player_description">The furthest distance in the world <br>ls not between life and death <br>But when l stand in front of you <br> Yet you don't know that l love you</div><div class="play-bottom"></div></div></div><div class="back buttonPanel"><div class="inner"><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Cyborg2077"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Cyborg2077" target="_blank" title="Github"><i class="iconfont icon-github"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1586385296&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://music.163.com/#/user/home?id=608935942" target="_blank" title="网抑云"><i class="iconfont icon-wangyiyunyinleclick"></i></a><a class="social-icon" href="https://space.bilibili.com/160218990" target="_blank" title="Bilibili"><i class="iconfont icon-bilibili"></i></a></div><div class="play-bottom"></div></div></div></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">函数的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">什么是函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%90%8CDBMS%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">1.2.</span> <span class="toc-text">不同DBMS函数的差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E7%9A%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E5%8F%8A%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.</span> <span class="toc-text">MySQL的内置函数及分类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">数值函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">基本函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%92%E5%BA%A6%E4%B8%8E%E5%BC%A7%E5%BA%A6%E4%BA%92%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">角度与弧度互换函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.</span> <span class="toc-text">三角函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E4%B8%8E%E5%AF%B9%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">指数与对数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.5.</span> <span class="toc-text">进制间的转换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">字符串函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">日期和时间函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%97%A5%E6%9C%9F%E3%80%81%E6%97%B6%E9%97%B4"><span class="toc-number">4.1.</span> <span class="toc-text">获取日期、时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E4%B8%8E%E6%97%B6%E9%97%B4%E6%88%B3%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.2.</span> <span class="toc-text">日期与时间戳的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%9C%88%E4%BB%BD%E3%80%81%E6%98%9F%E6%9C%9F%E3%80%81%E6%98%9F%E6%9C%9F%E6%95%B0%E3%80%81%E5%A4%A9%E6%95%B0%E7%AD%89%E5%87%BD%E6%95%B0"><span class="toc-number">4.3.</span> <span class="toc-text">获取月份、星期、星期数、天数等函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E7%9A%84%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="toc-number">4.4.</span> <span class="toc-text">日期的操作函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%92%8C%E7%A7%92%E9%92%9F%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">4.5.</span> <span class="toc-text">时间和秒钟转换的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">4.6.</span> <span class="toc-text">计算日期和时间的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8E%E8%A7%A3%E6%9E%90"><span class="toc-number">4.7.</span> <span class="toc-text">日期的格式化与解析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">流程控制函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">加密与解密函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0"><span class="toc-number">7.</span> <span class="toc-text">MySQL信息函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="toc-number">8.</span> <span class="toc-text">其他函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%BE%E5%90%8E%E7%BB%83%E4%B9%A0"><span class="toc-number">9.</span> <span class="toc-text">课后练习</span></a></li></ol></div></div><div class="card-widget card-recommend-post"><div class="item-headline"><i class="fas fa-dharmachakra"></i><span>相关推荐</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/18/MySQL02/" title="MySQL---基本的SELECT语句"><img src="https://img0.baidu.com/it/u=518815500,4294667560&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800" alt="MySQL---基本的SELECT语句"></a><div class="content"><a class="title" href="/2022/07/18/MySQL02/" title="MySQL---基本的SELECT语句">MySQL---基本的SELECT语句</a><time datetime="2022-07-18" title="发表于 2022-07-18">2022-07-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/15/MySQL01/" title="MySQL---概述"><img src="https://img2.baidu.com/it/u=595920241,2439700946&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800" alt="MySQL---概述"></a><div class="content"><a class="title" href="/2022/07/15/MySQL01/" title="MySQL---概述">MySQL---概述</a><time datetime="2022-07-18" title="发表于 2022-07-18">2022-07-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/18/MySQL03/" title="MySQL---运算符"><img src="https://img0.baidu.com/it/u=4155835667,974645702&fm=253&fmt=auto&app=138&f=PNG?w=889&h=500" alt="MySQL---运算符"></a><div class="content"><a class="title" href="/2022/07/18/MySQL03/" title="MySQL---运算符">MySQL---运算符</a><time datetime="2022-07-19" title="发表于 2022-07-19">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/19/MySQL04/" title="MySQL---排序与分页"><img src="https://img2.baidu.com/it/u=595920241,2439700946&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800" alt="MySQL---排序与分页"></a><div class="content"><a class="title" href="/2022/07/19/MySQL04/" title="MySQL---排序与分页">MySQL---排序与分页</a><time datetime="2022-07-19" title="发表于 2022-07-19">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/19/MySQL05/" title="MySQL---多表查询"><img src="https://img0.baidu.com/it/u=518815500,4294667560&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800" alt="MySQL---多表查询"></a><div class="content"><a class="title" href="/2022/07/19/MySQL05/" title="MySQL---多表查询">MySQL---多表查询</a><time datetime="2022-07-20" title="发表于 2022-07-20">2022-07-20</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(135deg,#ace0f9,#a1c4fd)"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Kyle Violet</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">The worst way to miss someone is to be sitting right beside her <br> knowing you can't have her.</div></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><!--button#darkmode(type="button" title=_p('rightside.night_mode_title'))i.fas.fa-adjust--><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.vemoji)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      document.getElementById('twikoo-count').innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo@1.5.11/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo@1.5.11/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="7134539309" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script async src="/js/diytitle.js"></script><script src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script src="/js/sun_moon.js" async></script><script src="/js/chocolate.js" async></script><script id="canvas_nest" defer="defer" color="255,192,203" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,自由,平等,公正,法制,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show","#web_bg",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-RQZSMGWCQS', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function card_artitalk_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-shuo"><div class="card-content" style="height:auto;min-height:280px;"><div class="item-headline"><i class="fas fa-comments"></i><span><a href="/artitalk/" title="artitalk page link">碎碎念</a></span><a id="cardVisual" style="cursor:pointer;float:right" onclick="cardVisual()">编辑</a></div><div id="artitalk_main" style="width:100%;height:100%;padding:1px"></div></div></div>';
+    console.log('已挂载card_artitalk');
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html);
+    (()=>{
+      const init = () => {
+        new Artitalk(Object.assign({
+          appId: 'W8Vs5lhPyoXONr88rXUqnTTb-MdYXbMMI',
+          appKey: 'CVYbhIp5zeHNMxFpH5ySmrgU',
+        }, {"serverURL":"https://W8Vs5lhP.api.lncldglobal.com","lang":"zh","pageSize":1,"color1":"#49b1f5","color2":"#00c4b6","atEmoji":{"Mafumafu1":"https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN@master/Mafumafu/199749454.png","Mafumafu2":"https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN@master/Mafumafu/199749455.png"}} ))
+      }
+      if (typeof Artitalk === 'function') {
+        init()
+      } else {
+        getScript('https://npm.elemecdn.com/artitalk').then(init)
+      }
+    })()
+    }
+  var elist = '/artitalk/,/posts/'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    card_artitalk_injector_config();
+  }
+  else if (epage === cpage){
+    card_artitalk_injector_config();
+  }
+  </script><script async src="https://npm.elemecdn.com/hexo-butterfly-artitalk-pro/lib/card_visual.js"></script><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(http://p0.itc.cn/images03/20200525/332e1ea10c634cbfaf0dfc5b69d00a3c.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/力扣/&quot;);" href="javascript:void(0);">力扣</a><span class="categoryBar-list-count">10</span><span class="categoryBar-list-descr">刷题指南</span></li><li class="categoryBar-list-item" style="background:url(http://p8.itc.cn/images03/20200525/377f4f7044fe49b0bb932f43ef4f4891.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/刷题日志/&quot;);" href="javascript:void(0);">刷题日志</a><span class="categoryBar-list-count">14</span><span class="categoryBar-list-descr">Leetcode刷题日志，目标成为千题大佬</span></li><li class="categoryBar-list-item" style="background:url(http://p8.itc.cn/images03/20200525/0ed549edde2c4d5eaecc2824e753ca74.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/学习笔记/&quot;);" href="javascript:void(0);">学习笔记</a><span class="categoryBar-list-count">17</span><span class="categoryBar-list-descr">写给自己看的一些笔记</span></li><li class="categoryBar-list-item" style="background:url(http://p6.itc.cn/images03/20200525/8dedcdf6ace44a50a1deb6a9743821fe.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/蓝桥杯/&quot;);" href="javascript:void(0);">蓝桥杯</a><span class="categoryBar-list-count">8</span><span class="categoryBar-list-descr">厕所战神杯 狗都不报</span></li><li class="categoryBar-list-item" style="background:url(http://p9.itc.cn/images03/20200525/07539bdba160465d80d23b3f16db8620.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/杂谈/&quot;);" href="javascript:void(0);">杂谈</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">随便唠唠</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://cdn.jsdelivr.net/npm/hexo-butterfly-clock/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:90px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v4.1.0"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=1144121390,2782791282&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2021-12-25</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt="">Java---多线程</a><div class="blog-slider__text">Java学习笔记---多线程</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img2.baidu.com/it/u=852907915,3528076091&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2021-11-17</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt="">十大排序算法</a><div class="blog-slider__text">Java学习笔记---排序算法</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=1415156609,1199509453&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=949&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-06</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt="">Java---网络编程(基础)</a><div class="blog-slider__text">Java学习笔记---网络编程(基础)</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img2.baidu.com/it/u=781630402,3569603339&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=281" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-08</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt="">Java---反射机制</a><div class="blog-slider__text">Java学习笔记---反射机制</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img1.baidu.com/it/u=2579164449,2431217981&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-26</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt="">Java---IO流</a><div class="blog-slider__text">Java学习笔记---IO流</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-dbe4189cad999946abdcd174fba140ea_r.jpg&amp;refer=http%3A%2F%2Fpic3.zhimg.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1651217592&amp;t=44946406f8e7b9ed15f483e0495b33c9" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-17</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt="">Java---枚举类和注解</a><div class="blog-slider__text">Java学习笔记---枚举类和注解</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=1144121390,2782791282&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt="">Java---泛型</a><div class="blog-slider__text">Java学习笔记---泛型</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=4155835667,974645702&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt="">Java---集合</a><div class="blog-slider__text">Java学习笔记---集合</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=4155835667,974645702&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-15</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt="">Java---常用类</a><div class="blog-slider__text">Java学习笔记---常用类</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false});</script></body></html>
