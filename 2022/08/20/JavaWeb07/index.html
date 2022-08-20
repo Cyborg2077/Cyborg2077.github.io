@@ -1,0 +1,1069 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>JavaWeb---会话技术 | Kyle's Blog</title><meta name="keywords" content="JavaWeb,Cookie,Session"><meta name="author" content="Kyle Violet"><meta name="copyright" content="Kyle Violet"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JavaWeb学习笔记--会话技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb---会话技术">
+<meta property="og:url" content="https://cyborg2077.github.io/2022/08/20/JavaWeb07/index.html">
+<meta property="og:site_name" content="Kyle&#39;s Blog">
+<meta property="og:description" content="JavaWeb学习笔记--会话技术">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2.baidu.com/it/u=1767752488,2158562887&fm=253&fmt=auto&app=138&f=JPEG?w=932&h=500">
+<meta property="article:published_time" content="2022-08-20T03:43:57.000Z">
+<meta property="article:modified_time" content="2022-08-20T15:11:43.639Z">
+<meta property="article:author" content="Kyle Violet">
+<meta property="article:tag" content="JavaWeb">
+<meta property="article:tag" content="Cookie">
+<meta property="article:tag" content="Session">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2.baidu.com/it/u=1767752488,2158562887&fm=253&fmt=auto&app=138&f=JPEG?w=932&h=500"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://cyborg2077.github.io/2022/08/20/JavaWeb07/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f8440b73b5064587c92bcc0ec23ce01c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-RQZSMGWCQS"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQZSMGWCQS');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JavaWeb---会话技术',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-20 23:11:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="//at.alicdn.com/t/font_3049706_ndj6cftvaf9.css"><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-artitalk-pro/lib/card.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-clock/lib/clock.min.css"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@1.0.15/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/04/18/fj4XvrdM5o62hbA.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">68</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-liuyan"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shenghuo"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-bilibili"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2.baidu.com/it/u=1767752488,2158562887&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=932&amp;h=500')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Kyle's Blog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-liuyan"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shenghuo"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-bilibili"></i><span> 追番</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JavaWeb---会话技术</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-20T03:43:57.000Z" title="发表于 2022-08-20 11:43:57">2022-08-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-20T15:11:43.639Z" title="更新于 2022-08-20 23:11:43">2022-08-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">10.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>38分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JavaWeb---会话技术"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>我只想卷死各位，或者被各位卷死，在此特别感谢黑马程序员的JavaWeb教程</p>
+</blockquote>
+<div class="bvideo">
+    <a href="//www.bilibili.com/video/BV1Qf4y1T7Hx" target="_blank">
+        <div class="bvideo-box">
+            <div class="bvideo-cover">
+                <div class="cover-default"></div>
+                <div class="bvideo-cover-layer" style="background-image:url(https://images.weserv.nl/?url=http://i1.hdslb.com/bfs/archive/9e16cdbce78cdfebed929dafe237e32fda8c5a0e.png)">
+                    <i class="icon-video"></i>
+                </div>
+                <span class="duration">34:05:46</span>
+            </div>
+            <div class="bvideo-info">
+                <p class="title">黑马程序员最新版JavaWeb基础教程，Java web从入门到企业实战完整版</p>
+                <p class="card-status">
+                    <span class="play-num">
+                        <i class="fa fa-youtube-play"></i>
+                        <span>183.4万</span></span>
+                    <span>
+                        <i class="fa fa-list-alt"></i>
+                        <span>6.8万</span></span></p>
+                <div class="partition">
+                    <label class="card-label">视频</label>
+                    <label class="up-label"></label>
+                    <label class="up-name">黑马程序员</label>
+                </div>
+                <div class="actions hide"></div>
+            </div>
+        </div>
+    </a>
+</div>
+<hr>
+<p>本文摘要：</p>
+<ul>
+<li>理解什么是会话跟踪技术</li>
+<li>掌握Cookie的使用</li>
+<li>掌握Session的使用</li>
+<li>完善用户登录注册案例的功能</li>
+</ul>
+<h1 id="会话跟踪技术概述"><a href="#会话跟踪技术概述" class="headerlink" title="会话跟踪技术概述"></a>会话跟踪技术概述</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>对于<code>会话跟踪</code>这四个字，我们需要拆开来进行解释，首先要理解什么是<code>会话</code>，然后再去理解什么是<code>会话跟踪</code>：</p>
+<ul>
+<li><p>会话：用户打开浏览器，访问web服务器的资源，会话建立，直到有一方断开连接，会话结束。在一次会话中可以包含<code>多次</code>请求和响应</p>
+<ul>
+<li>从浏览器发出请求到服务端响应数据给前端之后，一次会话（在浏览器和服务器之间）就被建立了</li>
+<li>会话被建立之后，如果浏览器或服务端都没有被关闭，则会话会持续建立着</li>
+<li>浏览器和服务器就可以继续使用该会话进行请求发送和响应，上述的整个过程就被称之为<code>会话</code><br>用实际场景来理解一下会话，比如在我们访问京东的时候，当打开浏览器进入京东首页之后，浏览器和京东服务器之间就建立了一次会话，后面的搜索商品，查看商品详情，加入购物车等，都是在这一次会话中完成的。</li>
+</ul>
+</li>
+<li><p>会话跟踪：一种维护浏览器状态的方法，服务器需要识别多次请求是否来自于同一浏览器，以便在同一次会话的多次请求之间<code>共享数据</code></p>
+<ul>
+<li>服务器会收到多个请求，这多个请求可能来自多个浏览器（京东这种购物网站，肯定时时刻刻都有好多人访问）</li>
+<li>服务器需要用来识别请求是否来自同一个浏览器</li>
+<li>服务器用来识别浏览器的过程，这个过程就是<code>会话跟踪</code></li>
+<li>服务器识别浏览器后就可以在同一个会话中的多次请求之间来<code>共享数据</code></li>
+</ul>
+</li>
+</ul>
+<p>那么我们又有一个问题需要思考，一个会话中的多次请求为什么要共享数据呢？有了这个数据共享功能之后，能实现哪些功能呢？</p>
+<ul>
+<li>购物车: <code>加入购物车</code>和<code>去购物车结算</code>是两次请求，但是后面这次请求要想展示前一次请求所添加的商品，就需要用到数据共享</li>
+<li>页面展示用户登录信息:很多网站，登录后访问多个功能发送多次请求后，浏览器上都会有当前登录用户的信息[用户名]，登录百度账号，访问贴吧，网盘，都不需要再登陆一次</li>
+<li>网站登录页面的<code>记住我</code>功能:当用户登录成功后，勾选<code>记住我</code>按钮后下次再登录的时候，网站就会自动填充用户名和密码，简化用户的登录操作，多次登录就会有多次请求，他们之间也涉及到共享数据</li>
+<li>登录页面的验证码功能:生成验证码和输入验证码点击注册这也是两次请求，这两次请求的数据之间要进行对比，相同则允许注册，不同则拒绝注册，该功能的实现也需要在同一次会话中共享数据。</li>
+</ul>
+<p>那为什么现在浏览器和服务器不支持数据共享呢?</p>
+<ul>
+<li>浏览器和服务器之间使用的是HTTP请求来进行数据传输</li>
+<li>HTTP协议是无状态的，每次浏览器向服务器请求时，服务器都会将该请求视为新的请求</li>
+<li>HTTP协议设计成无状态的目的是让每次请求之间相互独立，互不影响</li>
+<li>请求与请求之间独立后，就无法实现多次请求之间的数据共享</li>
+</ul>
+<p>分析完具体的原因后，那么该如何实现会话跟踪技术呢? 具体的实现方式有:</p>
+<ol>
+<li>客户端会话跟踪技术：Cookie</li>
+<li>服务端会话跟踪技术：Session</li>
+</ol>
+<p>这两个技术都可以实现会话跟踪，它们之间最大的区别:Cookie是存储在浏览器端而Session是存储在服务器端</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>这里主要介绍了下什么是会话和会话跟踪技术，需要注意的是:</p>
+<ul>
+<li>HTTP协议是无状态的，靠HTTP协议是无法实现会话跟踪</li>
+<li>想要实现会话跟踪，就需要用到Cookie和Session</li>
+</ul>
+<h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h1><p>学习Cookie，我们主要解决下面几个问题:</p>
+<ul>
+<li>什么是Cookie?</li>
+<li>Cookie如何来使用?</li>
+<li>Cookie是如何实现的?</li>
+<li>Cookie的使用注意事项有哪些?</li>
+</ul>
+<h2 id="Cookie的基本使用"><a href="#Cookie的基本使用" class="headerlink" title="Cookie的基本使用"></a>Cookie的基本使用</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>Cookie：客户端会话技术，将数据保存到客户端，以后每次请求都携带Cookie数据进行访问。</p>
+<h3 id="Cookie的工作流程"><a href="#Cookie的工作流程" class="headerlink" title="Cookie的工作流程"></a>Cookie的工作流程</h3><ul>
+<li>服务端提供了两个Servlet，分别是AServlet和BServlet</li>
+<li>浏览器发送HTTP请求1给服务端，服务端AServlet接收请求并进行业务处理</li>
+<li>服务端AServlet在处理请求的过程中可以创建一个Cookie对象，并将<code>name=zs</code>的数据存入Cookie</li>
+<li>服务端AServlet在响应数据的时候，会把Cookie对象响应给浏览器</li>
+<li>浏览器接收到响应数据，会把Cookie对象中的数据存储在浏览器内存中，此时浏览器和服务端就<code>建立了一次会话</code></li>
+<li><code>在同一次会话</code>中，浏览器再次发送HTTP请求2给服务端BServlet，浏览器会鞋带Cookie对象中的所有数据</li>
+<li>BServlet接收到请求和数据后，就可以获取到存储在Cookie对象中的数据，这样同一个会话中的多次请求之间就实现了数据共享</li>
+</ul>
+<h3 id="Cookie的基本使用-1"><a href="#Cookie的基本使用-1" class="headerlink" title="Cookie的基本使用"></a>Cookie的基本使用</h3><p>对于Cookie的使用，我们更关注的应该是后台代码如何操作Cookie，对于Cookie的操作主要分两大类，分别是<code>发送Cookie</code>和<code>获取Cookie</code></p>
+<ul>
+<li>发送Cookie<ul>
+<li>创建Cookie对象，并设置数据<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>发送Cookie到客户端：使用<code>response</code>对象<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>介绍完发送Cookie对应的步骤后，接下面通过一个案例来完成Cookie的发送</p>
+<p>需求:在Servlet中生成Cookie对象并存入数据，然后将数据发送给浏览器</p>
+<ol>
+<li>创建Maven项目,项目名称为cookie-demo，并在pom.xml添加依赖<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet.jsp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>编写Servlet类，名称为AServlet<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/aServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在AServlet中创建Cookie对象，存入数据，发送给前端<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/aServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;username&quot;</span>,<span class="string">&quot;zs&quot;</span>);</span><br><span class="line">        response.addCookie(cookie);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>启动测试，在浏览器查看Cookie对象中的值<blockquote>
+<p>名称       username<br>内容       zs<br>域名       localhost<br>路径       /cookie_demo<br>为何发送   仅限同一网站的连接<br>脚本可访问 是<br>创建时间   2022年8月20日星期六 10:47:16<br>到期时间   浏览会话结束时</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>获取Cookie<ul>
+<li>获取客户端携带的所有Cookie，使用<code>request</code>对象<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br></pre></td></tr></table></figure></li>
+<li>遍历数组，获取每一个Cookie对象，使用Cookie对象方法获取数据<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">    String name = cookie.getName();</span><br><span class="line">    String value = cookie.getValue();</span><br><span class="line">    System.out.println(name + <span class="string">&quot;:&quot;</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>介绍完获取Cookie对应的步骤后，接下面再通过一个案例来完成Cookie的获取<br>需求:在Servlet中获取前一个案例存入在Cookie对象中的数据</p>
+<ol>
+<li>编写一个新Servlet类，名称为BServlet<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/bServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在BServlet中使用request对象获取Cookie数组，遍历数组，从数据中获取指定名称对应的值<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/bServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">            String name = cookie.getName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;username&quot;</span>.equals(name)) &#123;</span><br><span class="line">                String value = cookie.getValue();</span><br><span class="line">                System.out.println(name + <span class="string">&quot;:&quot;</span> + value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>启动测试，在控制台打印出获取的值<br>成功输出 <code>username:zs</code></li>
+</ol>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>这里主要讲解了Cookie的基本使用,包含两部分内容</p>
+<ul>
+<li>发送Cookie:<ul>
+<li>创建Cookie对象，并设置值:<code>Cookie cookie = new Cookie(&quot;key&quot;,&quot;value&quot;);</code></li>
+<li>发送Cookie到客户端使用的是Reponse对象:<code>response.addCookie(cookie);</code></li>
+</ul>
+</li>
+<li>获取Cookie:<ul>
+<li>使用Request对象获取Cookie数组:<code>Cookie[] cookies = request.getCookies();</code></li>
+<li>遍历数组</li>
+<li>获取数组中每个Cookie对象的值:<code>cookie.getName()</code>和<code>cookie.getValue()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Cookie的原理分析"><a href="#Cookie的原理分析" class="headerlink" title="Cookie的原理分析"></a>Cookie的原理分析</h2><p>对于Cookie的实现原理是基于HTTP协议的,其中设计到HTTP协议中的两个请求头信息:</p>
+<ul>
+<li>响应头:set-cookie</li>
+<li>请求头: cookie</li>
+<li>前面的案例中已经能够实现，AServlet给前端发送Cookie，BServlet从request中获取Cookie的功能</li>
+<li>对于AServlet响应数据的时候，Tomcat服务器都是基于HTTP协议来响应数据</li>
+<li>当Tomcat发现后端要返回的是一个Cookie对象之后，Tomcat就会在响应头中添加一行数据<code>Set-Cookie:username=zs</code></li>
+<li>浏览器获取到响应结果后，从响应头中就可以获取到<code>Set-Cookie</code>对应值<code>username=zs</code>,并将数据存储在浏览器的内存中</li>
+<li>浏览器再次发送请求给BServlet的时候，浏览器会自动在请求头中添加<code>Cookie: username=zs</code>发送给服务端BServlet</li>
+<li>Request对象会把请求头中cookie对应的值封装成一个个Cookie对象，最终形成一个数组</li>
+<li>BServlet通过Request对象获取到Cookie[]后，就可以从中获取自己需要的数据</li>
+</ul>
+<h2 id="Cookie的使用细节"><a href="#Cookie的使用细节" class="headerlink" title="Cookie的使用细节"></a>Cookie的使用细节</h2><h3 id="Cookie的存活时间"><a href="#Cookie的存活时间" class="headerlink" title="Cookie的存活时间"></a>Cookie的存活时间</h3><blockquote>
+<p>名称       username<br>内容       zs<br>域名       localhost<br>路径       /cookie_demo<br>为何发送   仅限同一网站的连接<br>脚本可访问 是<br>创建时间   2022年8月20日星期六 10:47:16<br>到期时间   浏览会话结束时</p>
+</blockquote>
+<p>刚刚我们在浏览器中查看Cookie对象中的值时，发现Cookie还有<code>到期时间</code>，这个到期时间是浏览会话结束时，那我们关闭浏览器之后，再打开进行访问，BServlet就不能获取到Cookie数据了。</p>
+<p>因为默认情况下，Cookie存储在浏览器内存中，当浏览器关闭，内存释放，则Cookie被销毁</p>
+<p>但是如果使用这种默认情况下的Cookie,有些需求就无法实现，比如我们登录一些网站的时候</p>
+<ul>
+<li>第一次输入用户名和密码并勾选<code>记住我</code>然后进行登录</li>
+<li>下次再登录的时候，用户名和密码就会被自动填充，不需要再重新输入登录</li>
+<li>比如<code>记住我</code>这个功能需要记住用户名和密码一个星期，那么使用默认情况下的Cookie就会出现问题</li>
+<li>因为默认情况，浏览器一关，Cookie就会从浏览器内存中删除，对于<code>记住我</code>功能就无法实现</li>
+</ul>
+<p>所以我们现在就遇到一个难题是如何将Cookie持久化存储?<br>Cookie其实已经为我们提供好了对应的API来完成这件事，这个API就是setMaxAge,</p>
+<ul>
+<li>设置Cookie存活时间<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setMaxAge(<span class="keyword">int</span> seconds);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参数值为:</p>
+<ol>
+<li>正数：将Cookie写入浏览器所在电脑的硬盘，持久化存储。到时间自动删除</li>
+<li>负数：默认值，Cookie在当前浏览器内存中，当浏览器关闭，则Cookie被销毁</li>
+<li>零：删除对应Cookie</li>
+</ol>
+<p>接下来，我们就在AServlet中去设置Cookie的存活时间。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/aServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;zs&quot;</span>);</span><br><span class="line">        cookie.setMaxAge(<span class="number">7</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>); <span class="comment">//设置七天的</span></span><br><span class="line">        response.addCookie(cookie);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>修改完代码后，启动测试</p>
+<ul>
+<li>访问AServlet后，把浏览器关闭重启后访问BServlet，能在控制台打印出<code>username:zs</code>,说明Cookie没有随着浏览器关闭而被销毁</li>
+<li>通过浏览器查看Cookie的内容，到期时间成功续期7天<blockquote>
+<p>名称       username<br>内容       zs<br>域名       localhost<br>路径       /cookie_demo<br>为何发送   仅限同一网站的连接<br>脚本可访问 是<br>创建时间   2022年8月20日星期六 10:47:16<br>到期时间   2022年8月27日星期六 10:47:16</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Cookie存储中文"><a href="#Cookie存储中文" class="headerlink" title="Cookie存储中文"></a>Cookie存储中文</h3><p>Cookie是不能直接存储中文的，但是如果有这方面的需求，这个时候该如何解决呢?<br>我们可以使用<code>URL编码</code>，所以如果需要存储中文，就需要进行转码，具体的实现思路为:</p>
+<ol>
+<li>在AServlet中对中文进行URL编码，采用URLEncoder.encode()，将编码后的值存入Cookie中<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/aServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String value = <span class="string">&quot;张三&quot;</span>;</span><br><span class="line">        <span class="comment">//URL编码</span></span><br><span class="line">        value = URLEncoder.encode(value, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">        Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;username&quot;</span>, value);</span><br><span class="line">        cookie.setMaxAge(<span class="number">7</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>);</span><br><span class="line">        response.addCookie(cookie);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在BServlet中获取Cookie中的值,获取的值为URL编码后的值（<code>%E5%BC%A0%E4%B8%89</code>）</p>
+<blockquote>
+<p>名称       username<br>内容       %E5%BC%A0%E4%B8%89<br>域名       localhost<br>路径       /cookie_demo<br>为何发送   仅限同一网站的连接<br>脚本可访问 是<br>创建时间   2022年8月20日星期六 12:25:37<br>到期时间   2022年8月27日星期六 12:25:37</p>
+</blockquote>
+</li>
+<li><p>将获取的值在进行URL解码,采用URLDecoder.decode()，就可以获取到对应的中文值，控制台输出<code>username:张三</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/bServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">            String name = cookie.getName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;username&quot;</span>.equals(name)) &#123;</span><br><span class="line">                String value = cookie.getValue();</span><br><span class="line">                <span class="comment">//解码</span></span><br><span class="line">                value = URLDecoder.decode(value, <span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">                System.out.println(name + <span class="string">&quot;:&quot;</span> + value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h1><h2 id="Session的基本使用"><a href="#Session的基本使用" class="headerlink" title="Session的基本使用"></a>Session的基本使用</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>Session：服务端会话跟踪技术：将数据保存到服务端。</p>
+<ul>
+<li>Session是存储在服务端而Cookie是存储在客户端</li>
+<li>存储在客户端的数据容易被窃取和截获，存在很多不安全的因素</li>
+<li>存储在服务端的数据相比于客户端来说就更安全</li>
+</ul>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><ul>
+<li>在服务端的AServlet获取一个Session对象，把数据存入其中</li>
+<li>在服务端的BServlet获取到相同的Session对象，从中取出数据</li>
+<li>就可以实现一次会话中多次请求之间的数据共享了</li>
+<li>现在最大的问题是如何保证AServlet和BServlet使用的是同一个Session对象(后面的Session原理会说)</li>
+</ul>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>在JavaEE中提供了HttpSession接口，来实现一次会话的多次请求之间数据共享功能。</p>
+<p>具体的使用步骤为:</p>
+<ul>
+<li><p>获取Session对象,使用的是request对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Session对象提供的功能:</p>
+<ul>
+<li>存储数据到 session 域中<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object o)</span></span></span><br></pre></td></tr></table></figure></li>
+<li>根据 key，获取值<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure></li>
+<li>根据 key，删除该键值对<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeAttribute</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>介绍完Session相关的API后，接下来通过一个案例来完成对Session的使用</p>
+<p>需求：在一个Servlet中往Session中存入数据，在另一个Servlet中获取Session中存入的数据</p>
+<ol>
+<li>创建名为SessionDemo1的Servlet类:获取Session对象、存储数据<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/demo1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取Session对象</span></span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        <span class="comment">//存储数据</span></span><br><span class="line">        session.setAttribute(<span class="string">&quot;username&quot;</span>,<span class="string">&quot;ls&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>创建名为SessionDemo2的Servlet类:获取Session对象、获取数据<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/demo2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionDemo2</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取Session对象</span></span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        <span class="comment">//获取数据</span></span><br><span class="line">        Object username = session.getAttribute(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        <span class="comment">//看看能否输出到控制台</span></span><br><span class="line">        System.out.println(username);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>启动测试<br>先访问SessionDemo1，将数据存入Session，再访问SessionDemo2，从Session中获取数据，控制台成功输出<code>ls</code></li>
+</ol>
+<h3 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h3><p>至此Session的基本使用就已经完成了，重点要掌握的是:</p>
+<ul>
+<li>Session的获取<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br></pre></td></tr></table></figure></li>
+<li>Session常用方法的使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object o)</span></span></span><br><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<div class="note warning no-icon flat"><p>注意:Session中可以存储的是一个Object类型的数据，也就是说Session中可以存储任意数据类型。</p>
+</div>
+<p>介绍完Session的基本使用之后，那么Session的底层到底是如何实现一次会话两次请求之间的数据共享呢?</p>
+<h2 id="Session的原理分析"><a href="#Session的原理分析" class="headerlink" title="Session的原理分析"></a>Session的原理分析</h2><p>Session是基于Cookie实现的</p>
+<p>这句话其实不太能详细的说明Session的底层实现，接下来，我们一步步来分析下Session的具体实现原理:</p>
+<ul>
+<li>前提条件<ul>
+<li>Session要想实现一次会话多次请求之间的数据共享，就必须要保证多次请求获取Session的对象是同一个。</li>
+</ul>
+</li>
+<li><p>如何验证</p>
+<ul>
+<li>在上面案例中的两个ServletDemo中分别打印下Session对象，比较其地址值是否相同<div class="tabs" id=""><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#-1">ServletDemo1</button></li><li class="tab"><button type="button" data-href="#-2">ServletDemo2</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="-1"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/demo1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        System.out.println(session);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="-2"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/demo2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionDemo2</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        System.out.println(session);</span><br><span class="line">        Object username = session.getAttribute(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        System.out.println(username);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+</li>
+</ul>
+</li>
+<li><p>启动测试，分别访问<code>/demo1</code>和<code>/demo2</code>，输出如下</p>
+<blockquote>
+<p>org.apache.catalina.session.StandardSessionFacade@69186990<br>org.apache.catalina.session.StandardSessionFacade@69186990</p>
+</blockquote>
+</li>
+<li><p>通过打印可以得到如下结论:</p>
+<ul>
+<li>两个Servlet类中获取的Session对象是同一个</li>
+<li>把demo1和demo2请求刷新多次，控制台最终打印的结果都是同一个</li>
+</ul>
+</li>
+<li><p>那么问题又来了，如果新开一个浏览器，访问demo1或者demo2,打印在控制台的Session还是同一个对象么?</p>
+<ul>
+<li>测试的结果：打印的Session不一样。<blockquote>
+<p>org.apache.catalina.session.StandardSessionFacade@1c7eb9a<br>org.apache.catalina.session.StandardSessionFacade@1c7eb9a</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>所以Session实现的也是一次会话中的多次请求之间的数据共享。</p>
+<ul>
+<li>那么最主要的问题就来了，Session是如何保证在一次会话中获取的Session对象是同一个呢?</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>demo1在第一次获取session对象的时候，session对象会有一个唯一的标识，假如是<code>id:10</code></li>
+<li>demo1在session中存入其他数据并处理完成所有业务后，需要通过Tomcat服务器响应结果给浏览器</li>
+<li>Tomcat服务器发现业务处理中使用了session对象，就会把session的唯一标识<code>id:10</code>当做一个cookie，添加<code>Set-Cookie:JESSIONID=10</code>到响应头中，并响应给浏览器</li>
+<li>浏览器接收到响应结果后，会把响应头中的coookie数据存储到浏览器的内存中</li>
+<li>浏览器在同一会话中访问demo2的时候，会把cookie中的数据按照<code>cookie: JESSIONID=10</code>的格式添加到请求头中并发送给服务器Tomcat</li>
+<li>demo2获取到请求后，从请求头中就读取cookie中的JSESSIONID值为10，然后就会到服务器内存中寻找<code>id:10</code>的session对象，如果找到了，就直接返回该对象，如果没有则新创建一个session对象</li>
+<li>关闭打开浏览器后，因为浏览器的cookie已被销毁，所以就没有JESSIONID的数据，服务端获取到的session就是一个全新的session对象</li>
+</ol>
+<p>至此，<code>Session是基于Cookie来实现的</code>这就话，我们就解释完了</p>
+<h3 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h3><p>介绍完Session的原理，我们只需要记住</p>
+<ul>
+<li>Session是基于Cookie来实现的</li>
+</ul>
+<h2 id="Session的使用细节"><a href="#Session的使用细节" class="headerlink" title="Session的使用细节"></a>Session的使用细节</h2><h3 id="Session的钝化与活化"><a href="#Session的钝化与活化" class="headerlink" title="Session的钝化与活化"></a>Session的钝化与活化</h3><p>首先需要大家思考的问题是: </p>
+<ul>
+<li>服务器重启后，Session中的数据是否还在?</li>
+</ul>
+<p>要想回答这个问题，我们首先应该想到</p>
+<ol>
+<li>服务器端AServlet和BServlet共用的session对象应该是存储在服务器的内存中</li>
+<li>服务器重新启动后，内存中的数据应该是已经被释放，对象也应该都销毁了</li>
+</ol>
+<p>所以session数据应该也已经不存在了。但是如果session不存在会引发什么问题呢?<br>举个例子说明下，</p>
+<ol>
+<li>用户把需要购买的商品添加到购物车，因为要实现同一个会话多次请求数据共享，所以假设把数据存入Session对象中</li>
+<li>用户正要付钱的时候接到一个电话，付钱的动作就搁浅了</li>
+<li>正在用户打电话的时候，购物网站因为某些原因需要重启</li>
+<li>重启后session数据被销毁，购物车中的商品信息也就会随之而消失</li>
+<li>用户想再次发起支付，就会出为问题</li>
+</ol>
+<p>所以说对于session的数据，我们应该做到就算服务器重启了，也应该能把数据保存下来才对。</p>
+<p>那么Tomcat服务器在重启的时候，session数据到底会不会保存以及是如何保存的，我们可以通过实际案例来演示下:</p>
+<ol>
+<li>先启动Tomcat服务器</li>
+<li>访问<code>/demo1</code>将数据存入session中</li>
+<li><kbd>Ctrl</kbd>+<kbd>C</kbd>正确停止Tomcat服务器</li>
+<li>再次重新启动Tomcat服务器</li>
+<li>访问<code>/demo2</code> 查看是否能获取到session中的数据</li>
+</ol>
+<p>经过测试，会发现只要服务器是正常关闭和启动，session中的数据是可以被保存下来的。</p>
+<p>那么Tomcat服务器到底是如何做到的呢?</p>
+<p>具体的原因就是:Session的钝化和活化:</p>
+<ul>
+<li><p>钝化：在服务器正常关闭后，Tomcat会自动将Session数据写入硬盘的文件中</p>
+<ul>
+<li>钝化的数据路径为:<code>项目目录\target\tomcat\work\Tomcat\localhost\项目名称\SESSIONS.ser</code></li>
+</ul>
+</li>
+<li><p>活化：再次启动服务器后，从文件中加载数据到Session中</p>
+<ul>
+<li>数据加载到Session中后，路径中的<code>SESSIONS.ser</code>文件会被删除掉</li>
+</ul>
+</li>
+</ul>
+<p>对于上述的整个过程，都是Tomcat自己完成的，不需要我们参与，了解一下即可。</p>
+<h4 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h4><p>Session的钝化和活化介绍完后，需要我们注意的是:</p>
+<ul>
+<li>session数据存储在服务端，服务器重启后，session数据会被保存</li>
+<li>浏览器被关闭启动后，重新建立的连接就已经是一个全新的会话，获取的session数据也是一个新的对象</li>
+<li>session的数据要想共享，浏览器不能关闭，所以session数据不能长期保存数据</li>
+<li>cookie是存储在客户端，是可以长期保存</li>
+</ul>
+<h3 id="Session的销毁"><a href="#Session的销毁" class="headerlink" title="Session的销毁"></a>Session的销毁</h3><p>Session的销毁会有两种方式:</p>
+<ul>
+<li>默认情况下，无操作，30分钟自动销毁<ul>
+<li>对于这个失效时间，是可以通过配置进行修改的<ul>
+<li>在项目的web.xml中配置</li>
+<li>如果没有配置，默认是30分钟，默认值是在Tomcat的web.xml配置文件中写死的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>调用Session对象的invalidate()进行销毁<ul>
+<li>在SessionDemo2类中添加session销毁的方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/demo2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionDemo2</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        <span class="comment">//销毁</span></span><br><span class="line">        session.invalidate();</span><br><span class="line">        Object username = session.getAttribute(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        System.out.println(username);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>启动访问测试，先访问demo1将数据存入到session，再次访问demo2从session中获取数据，会得到如下错误信息<br><code>java.lang.IllegalStateException: getAttribute: Session already invalidated</code></li>
+<li>该销毁方法一般会在用户退出的时候，需要将session销毁掉。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Cookie和Session小结"><a href="#Cookie和Session小结" class="headerlink" title="Cookie和Session小结"></a>Cookie和Session小结</h3><p>Cookie 和 Session 都是来完成一次会话内多次请求间数据共享的。所需两个对象放在一块，就需要思考:</p>
+<p>Cookie和Session的区别是什么?</p>
+<ul>
+<li>区别:<ul>
+<li>存储位置：Cookie 是将数据存储在客户端，Session 将数据存储在服务端</li>
+<li>安全性：Cookie不安全，Session安全</li>
+<li>数据大小：Cookie最大3KB，Session无大小限制</li>
+<li>存储时间：Cookie可以通过setMaxAge()长期存储，Session默认30分钟</li>
+<li>服务器性能：Cookie不占服务器资源，Session占用服务器资源</li>
+</ul>
+</li>
+</ul>
+<p>Cookie和Session的应用场景分别是什么?</p>
+<ul>
+<li>应用场景:<ul>
+<li>购物车:使用Cookie来存储</li>
+<li>以登录用户的名称展示:使用Session来存储</li>
+<li>记住我功能:使用Cookie来存储</li>
+<li>验证码:使用session来存储</li>
+</ul>
+</li>
+</ul>
+<p>结论</p>
+<ul>
+<li>Cookie是用来保证用户在未登录情况下的身份识别</li>
+<li>Session是用来保存用户登录后的数据</li>
+</ul>
+<h1 id="用户登录注册案例"><a href="#用户登录注册案例" class="headerlink" title="用户登录注册案例"></a>用户登录注册案例</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>在上篇文章，我们已经完成了对品牌数据的增删改查操作，现在我们继续完善登录功能</p>
+<p>需求说明：</p>
+<ol>
+<li>完成用户登录功能，如果用户勾选”记住用户” ，则下次访问登录页面<code>自动填充</code>用户名密码</li>
+<li>完成注册功能，并实现<code>验证码</code>功能</li>
+</ol>
+<h2 id="用户登录功能"><a href="#用户登录功能" class="headerlink" title="用户登录功能"></a>用户登录功能</h2><ol>
+<li>需求:<ul>
+<li>用户登录成功后，跳转到列表页面，并在页面上展示当前登录的用户名称</li>
+<li>用户登录失败后，跳转回登录页面，并在页面上展示对应的错误信息</li>
+</ul>
+</li>
+<li>实现流程分析<ul>
+<li>前端通过表单发送请求和数据给Web层的LoginServlet</li>
+<li>在LoginServlet中接收请求和数据[用户名和密码]</li>
+<li>LoginServlet接收到请求和数据后，调用Service层完成根据用户名和密码查询用户对象</li>
+<li>在Service层需要编写UserService类，在类中实现login方法，方法中调用Dao层的UserMapper</li>
+<li>在UserMapper接口中，声明一个根据用户名和密码查询用户信息的方法</li>
+<li>Dao层把数据查询出来以后，将返回数据封装到User对象，将对象交给Service层</li>
+<li>Service层将数据返回给Web层</li>
+<li>Web层获取到User对象后，判断User对象，如果为Null,则将错误信息响应给登录页面，如果不为Null，则跳转到列表页面，并把当前登录用户的信息存入Session携带到列表页面。</li>
+</ul>
+</li>
+<li><p>具体实现</p>
+<ul>
+<li><p>在<code>db1</code>数据库下新建<code>tb_user</code>表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建用户表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_user(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">	username <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">unique</span>,</span><br><span class="line">	password <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 添加数据</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_user(username,password) <span class="keyword">values</span>(<span class="string">&#x27;zhangsan&#x27;</span>,<span class="string">&#x27;123&#x27;</span>),(<span class="string">&#x27;lisi&#x27;</span>,<span class="string">&#x27;234&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tb_user;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>com.blog.pojo</code>下新建User类<br>根据数据表中的数据类型创建即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.blog.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;User&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;id=&quot;</span> + id +</span><br><span class="line">                <span class="string">&quot;, username=&#x27;&quot;</span> + username + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, password=&#x27;&quot;</span> + password + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>com.blog.mapper</code>包下新建<code>UserMapper</code>接口<br>我们只需要登录，添加（注册）和查询（检测用户名是否已被占用）这三个功能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Select(&quot;select * from tb_user where username=#&#123;username&#125; and password=#&#123;password&#125;&quot;)</span></span><br><span class="line">    <span class="function">User <span class="title">login</span><span class="params">(<span class="meta">@Param(&quot;username&quot;)</span> String username, <span class="meta">@Param(&quot;password&quot;)</span> String password)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from tb_user where username=#&#123;username&#125;&quot;)</span></span><br><span class="line">    <span class="function">User <span class="title">selectByUsername</span><span class="params">(String username)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Insert(&quot;insert into tb_user values (null,#&#123;username&#125;,#&#123;password&#125;)&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(User user)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>resources/com/itheima/mapper</code>目录下新建<code>UserMapper.xml</code><br>由于我们使用注解开发，所以这里啥也不用写，当SQL语句很复杂的时候，我们才会采用此种方式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.blog.mapper.UserMapper&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>com.itheima.service</code>包下，创建UserService类<br>这里要实现登录的逻辑，上一篇文章也练习过很多遍了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">login</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">        UserMapper mapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">        User user = mapper.login(username, password);</span><br><span class="line">        sqlSession.close();</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个登录的页面<code>login.jsp</code><br>我这里就不搞那些花里胡哨的了，平平淡淡才是真，主要实现的是后端的逻辑，前端暂时无所谓了</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page isELIgnored=<span class="string">&quot;false&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;/brand_demo/loginServlet&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;h1&gt;登录系统&lt;/h1&gt;</span><br><span class="line">    用户名：&lt;input name=<span class="string">&quot;username&quot;</span> type=<span class="string">&quot;text&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    密码：&lt;input name=<span class="string">&quot;password&quot;</span> type=<span class="string">&quot;password&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    记住账号：&lt;input name=<span class="string">&quot;remember&quot;</span> type=<span class="string">&quot;checkbox&quot;</span> value=<span class="string">&quot;1&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input value=<span class="string">&quot;登录&quot;</span> type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">    &lt;!--这里提前写了一下注册的跳转链接，后面我们会把这个页面也写完--&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;/brand_demo/register.jsp&quot;</span>&gt;没有账号？&lt;/a&gt;  </span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建LoginServlet类</p>
+<ul>
+<li>实现登录功能，我们要先获取用户输入的用户名和密码</li>
+<li>然后调用service查询User</li>
+<li>判断User是否为null<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/loginServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> UserService userService = <span class="keyword">new</span> UserService();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取用户名和密码</span></span><br><span class="line">        String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        String password = request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        <span class="comment">//调用service查询User</span></span><br><span class="line">        User user = userService.login(username, password);</span><br><span class="line">        <span class="keyword">if</span> (user != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//登陆成功，跳转到查询所有BrandServlet</span></span><br><span class="line">            HttpSession session = request.getSession();</span><br><span class="line">            <span class="comment">//将user的信息存储到session域中，便于在brand.jsp页面添加提示信息</span></span><br><span class="line">            session.setAttribute(<span class="string">&quot;user&quot;</span>, user);</span><br><span class="line">            response.sendRedirect(<span class="string">&quot;/brand_demo/selectAllServlet&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//登陆失败，将错误信息存储到request域中</span></span><br><span class="line">            request.setAttribute(<span class="string">&quot;login_msg&quot;</span>, <span class="string">&quot;用户名或密码错误&quot;</span>);</span><br><span class="line">            <span class="comment">//并跳转到login.jsp</span></span><br><span class="line">            request.getRequestDispatcher(<span class="string">&quot;/login.jsp&quot;</span>).forward(request, response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>登陆成功，由于我们将user的信息存储到了session域中，我们就可以在<code>brand.jsp</code>页面上添加提示信息<code>&lt;h1&gt;$&#123;user.username&#125;,欢迎你&lt;/h1&gt;</code><br>当我们登陆成功后，会在页面的最上方用h1标题显示<code>username，欢迎你</code></p>
+</li>
+<li><p>登陆失败，由于我们将错误提示语句存储到了request域中，所以我们可以在login.jsp中用EL表达式接收一下错误信息，并展示到页面上</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/brand_demo/loginServlet&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>登录系统<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>$&#123;login_msg&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span>  <span class="comment">&lt;!--当登陆失败的时候，会在这里显示&quot;用户名或密码错误&quot;--&gt;</span></span><br><span class="line">    用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;cookie.username.value&#125;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;cookie.password.value&#125;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    记住账号：<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;remember&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">&quot;登录&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/brand_demo/register.jsp&quot;</span>&gt;</span>没有账号？<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动，访问测试，输入错误账号密码，会显示<code>用户名或密码错误</code>，输入正确的账号密码，会跳转到brand.jsp页面，展示所有商品信息，同时页面最上方有<code>username，欢迎你</code>字样</p>
+</li>
+<li><p>小结</p>
+<ul>
+<li>在LoginServlet中，将登录成功的用户数据存入session中，方法在列表页面中获取当前登录用户信息进行展示</li>
+<li>在LoginServlet中，将登录失败的错误信息存入到request中，如果存入到session中就会出现这次会话的所有请求都有登录失败的错误信息，这个是不需要的，所以不用存入到session中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="记住我-设置Cookie"><a href="#记住我-设置Cookie" class="headerlink" title="记住我-设置Cookie"></a>记住我-设置Cookie</h2><ol>
+<li><p>需求:<br>如果用户勾选”记住用户” ，则下次访问登陆页面自动填充用户名密码。这样可以提升用户的体验。<br>对应上面这个需求，最大的问题就是: 如何自动填充用户名和密码?</p>
+</li>
+<li><p>实现流程分析</p>
+<ul>
+<li>因为<code>记住我</code>功能要实现的效果是，就算用户把浏览器关闭过几天再来访问也能自动填充，所以需要将登陆信息存入一个可以长久保存，并且能够在浏览器关闭重新启动后依然有效的地方，就是我们前面讲的Cookie,所以:<ul>
+<li>将用户名和密码写入Cookie中，并且持久化存储Cookie,下次访问浏览器会自动携带Cookie</li>
+<li>在页面获取Cookie数据后，设置到用户名和密码框中</li>
+<li>何时写入Cookie?<ul>
+<li>用户必须登陆成功后才需要写</li>
+<li>用户必须在登录页面勾选了<code>记住我</code>的复选框</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>具体实现</p>
+</li>
+</ol>
+<ul>
+<li>在LoginServlet获取复选框的值并在登录成功后进行设置Cookie</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">    String password = request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">    <span class="comment">//这里要多获取一个复选框的值，在之前的jsp代码中，我将复选框的值设为了&quot;1&quot;</span></span><br><span class="line">    String remember = request.getParameter(<span class="string">&quot;remember&quot;</span>);</span><br><span class="line">    User user = userService.login(username, password);</span><br><span class="line">    <span class="keyword">if</span> (user != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">//当登录成功后，我们再来判断一下复选框选了没</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;1&quot;</span>.equals(remember)) &#123;</span><br><span class="line">            <span class="comment">//创建Cookie对象</span></span><br><span class="line">            Cookie c_username = <span class="keyword">new</span> Cookie(<span class="string">&quot;username&quot;</span>, username);</span><br><span class="line">            <span class="comment">//设置一下存活时间为7天，更长也行，随便你</span></span><br><span class="line">            c_username.setMaxAge(<span class="number">7</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>);</span><br><span class="line">            Cookie c_password = <span class="keyword">new</span> Cookie(<span class="string">&quot;password&quot;</span>, password);</span><br><span class="line">            c_password.setMaxAge(<span class="number">7</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>);</span><br><span class="line">            <span class="comment">//发送Cookie</span></span><br><span class="line">            response.addCookie(c_username);</span><br><span class="line">            response.addCookie(c_password);</span><br><span class="line">        &#125;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        session.setAttribute(<span class="string">&quot;user&quot;</span>, user);</span><br><span class="line">        response.sendRedirect(<span class="string">&quot;/brand_demo/selectAllServlet&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        request.setAttribute(<span class="string">&quot;login_msg&quot;</span>, <span class="string">&quot;用户名或密码错误&quot;</span>);</span><br><span class="line">        request.getRequestDispatcher(<span class="string">&quot;/login.jsp&quot;</span>).forward(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动访问测试，只有当前用户名和密码输入正确，并且勾选了Remeber的复选框，用F12打开开发者工具，监测网络，点击登录，在响应头中可以看得cookie的相关数据<blockquote>
+<p>Set-Cookie: username=zhangsan; Expires=Sat, 27-Aug-2022 14:35:56 GMT<br>Set-Cookie: password=123; Expires=Sat, 27-Aug-2022 14:35:56 GMT</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="记住我-获取Cookie"><a href="#记住我-获取Cookie" class="headerlink" title="记住我-获取Cookie"></a>记住我-获取Cookie</h2><ol>
+<li><p>需求<br>登录成功并勾选了Remeber后，后端返回给前端的Cookie数据就已经存储好了，接下来就需要在页面获取Cookie中的数据，并把数据设置到登录页面的用户名和密码框中。<br>如何在页面直接获取Cookie中的值呢?</p>
+</li>
+<li><p>实现流程分析<br>在页面可以使用EL表达式，<code>$&#123;cookie.key.value&#125;</code><br>key:指的是存储在cookie中的键名称，例如<code>$&#123;cookie.username.value&#125;</code></p>
+</li>
+<li><p>具体实现</p>
+<ul>
+<li>在login.jsp用户名的表单输入框使用value值给表单元素添加默认值，value可以使用<code>$&#123;cookie.username.value&#125;</code></li>
+<li>在login.jsp密码的表单输入框使用value值给表单元素添加默认值，value可以使用<code>$&#123;cookie.password.value&#125;</code><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">&quot;/brand_demo/loginServlet&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;h1&gt;登录系统&lt;/h1&gt;</span><br><span class="line">    &lt;div&gt;$&#123;login_msg&#125; $&#123;register_msg&#125;&lt;/div&gt;</span><br><span class="line">    用户名：&lt;input name=<span class="string">&quot;username&quot;</span> type=<span class="string">&quot;text&quot;</span> value=<span class="string">&quot;$&#123;cookie.username.value&#125;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    密码：&lt;input name=<span class="string">&quot;password&quot;</span> type=<span class="string">&quot;password&quot;</span> value=<span class="string">&quot;$&#123;cookie.password.value&#125;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    记住账号：&lt;input name=<span class="string">&quot;remember&quot;</span> type=<span class="string">&quot;checkbox&quot;</span> value=<span class="string">&quot;1&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input value=<span class="string">&quot;登录&quot;</span> type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;/brand_demo/register.jsp&quot;</span>&gt;没有账号？&lt;/a&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></li>
+<li>访问测试，重新访问登录页面，就可以看得用户和密码已经被填充。</li>
+</ul>
+</li>
+</ol>
+<h2 id="用户注册功能"><a href="#用户注册功能" class="headerlink" title="用户注册功能"></a>用户注册功能</h2><ol>
+<li><p>需求</p>
+<ul>
+<li>注册功能：保存用户信息到数据库</li>
+<li>验证码功能<ul>
+<li>展示验证码：展示验证码图片，并可以点击切换</li>
+<li>校验验证码：验证码填写不正确，则注册失败</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>实现流程分析</p>
+<ul>
+<li>前端通过表单发送请求和数据给Web层的RegisterServlet</li>
+<li>在RegisterServlet中接收请求和数据[用户名和密码]</li>
+<li>RegisterServlet接收到请求和数据后，调用Service层完成用户信息的保存</li>
+<li>在Service层需要编写UserService类，在类中实现register方法，需要判断用户是否已经存在，如果不存在，则完成用户数据的保存</li>
+<li>在UserMapper接口中，声明两个方法，一个是根据用户名查询用户信息方法，另一个是保存用户信息方法</li>
+<li>在UserService类中保存成功则返回true，失败则返回false,将数据返回给Web层</li>
+<li>Web层获取到结果后，如果返回的是true,则提示<code>注册成功</code>，并转发到登录页面，如果返回false则提示<code>用户名已存在</code>并转发到注册页面</li>
+</ul>
+</li>
+<li><p>具体实现</p>
+<ul>
+<li>在UserService中实现注册逻辑<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回值告诉我们是否注册成功了</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">register</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">    UserMapper mapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">    User u = mapper.selectByUsername(user.getUsername());</span><br><span class="line">    <span class="keyword">if</span> (u == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">//u为null，说明未找到username对应的用户，即用户名不重复，可以注册</span></span><br><span class="line">        mapper.add(user);</span><br><span class="line">        <span class="comment">//注册操作记得提交事务</span></span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">    sqlSession.close();</span><br><span class="line">    <span class="keyword">return</span> u == <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>编写一个注册的页面<code>register.jsp</code><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page isELIgnored=<span class="string">&quot;false&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;/brand_demo/registerServlet&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;h1&gt;欢迎注册&lt;/h1&gt;</span><br><span class="line">    &lt;!--已有账号的话就跳转至登录页面--&gt;</span><br><span class="line">    已有账号？&lt;a href=<span class="string">&quot;login.jsp&quot;</span>&gt;点击登录&lt;/a&gt;&lt;br&gt;</span><br><span class="line">    用户名：&lt;input name=<span class="string">&quot;username&quot;</span> type=<span class="string">&quot;text&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    密码：&lt;input name=<span class="string">&quot;password&quot;</span> type=<span class="string">&quot;password&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input value=<span class="string">&quot;注册&quot;</span> type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+<li>编写RegisterServlet<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/registerServlet&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegisterServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> UserService userService = <span class="keyword">new</span> UserService();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//获取客户输入的用户名和密码</span></span><br><span class="line">        String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        String password = request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        <span class="comment">//封装成一个User</span></span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.setUsername(username);</span><br><span class="line">        user.setPassword(password);</span><br><span class="line">        <span class="comment">//注册账号，用flag来接收是否注册成功</span></span><br><span class="line">        <span class="keyword">boolean</span> flag = userService.register(user);</span><br><span class="line">        <span class="keyword">if</span> (flag)&#123;</span><br><span class="line">            <span class="comment">//如果成功注册，将注册成功的提示存入request域中，随后跳转到登录页面</span></span><br><span class="line">            request.setAttribute(<span class="string">&quot;register_msg&quot;</span>,<span class="string">&quot;注册成功请登录&quot;</span>);</span><br><span class="line">            request.getRequestDispatcher(<span class="string">&quot;/login.jsp&quot;</span>).forward(request,response);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//如果注册失败，就是用户名重复了，将错误信息存入request域中，并返回注册页面</span></span><br><span class="line">            request.setAttribute(<span class="string">&quot;register_msg&quot;</span>,<span class="string">&quot;用户名已存在&quot;</span>);</span><br><span class="line">            request.getRequestDispatcher(<span class="string">&quot;/register.jsp&quot;</span>).forward(request,response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>注册成功，跳转至登录页面，我们需要将注册成功的提示显示在登录页面上，修改<code>login.jsp</code></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">&quot;/brand_demo/loginServlet&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;h1&gt;登录系统&lt;/h1&gt;</span><br><span class="line">    &lt;!--还是放在这里，一个登录的错误提示信息，一个注册成功的提示信息，谁有信息就显示谁--&gt;</span><br><span class="line">    &lt;div&gt;$&#123;login_msg&#125; $&#123;register_msg&#125;&lt;/div&gt; </span><br><span class="line">    用户名：&lt;input name=<span class="string">&quot;username&quot;</span> type=<span class="string">&quot;text&quot;</span> value=<span class="string">&quot;$&#123;cookie.username.value&#125;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    密码：&lt;input name=<span class="string">&quot;password&quot;</span> type=<span class="string">&quot;password&quot;</span> value=<span class="string">&quot;$&#123;cookie.password.value&#125;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    记住账号：&lt;input name=<span class="string">&quot;remember&quot;</span> type=<span class="string">&quot;checkbox&quot;</span> value=<span class="string">&quot;1&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input value=<span class="string">&quot;登录&quot;</span> type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;/brand_demo/register.jsp&quot;</span>&gt;没有账号？&lt;/a&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册失败，跳转至注册页面，同时将错误信息展示在注册页面上，修改<code>register.jsp</code></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">&quot;/brand_demo/registerServlet&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;h1&gt;欢迎注册&lt;/h1&gt;</span><br><span class="line">    已有账号？&lt;a href=<span class="string">&quot;login.jsp&quot;</span>&gt;点击登录&lt;/a&gt;&lt;br&gt;</span><br><span class="line">    用户名：&lt;input name=<span class="string">&quot;username&quot;</span> type=<span class="string">&quot;text&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;!--在这里显示一下注册失败的错误信息--&gt;</span><br><span class="line">    &lt;div&gt;$&#123;register_msg&#125;&lt;/div&gt;</span><br><span class="line">    密码：&lt;input name=<span class="string">&quot;password&quot;</span> type=<span class="string">&quot;password&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input value=<span class="string">&quot;注册&quot;</span> type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></li>
+<li>启动测试，如果是注册的用户信息已经存在，则会显示<code>用户名已存在</code>，如果注册成功，会跳转至登录页面，同时也会显示<code>注册成功请登录</code>提示语句</li>
+</ul>
+</li>
+</ol>
+<h2 id="验证码-展示"><a href="#验证码-展示" class="headerlink" title="验证码-展示"></a>验证码-展示</h2><h2 id="验证码-校验"><a href="#验证码-校验" class="headerlink" title="验证码-校验"></a>验证码-校验</h2><div class="tabs" id=""><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#-1">1</button></li><li class="tab"><button type="button" data-href="#-2">2</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="-1"><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="-2"><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Kyle Violet</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://cyborg2077.github.io/2022/08/20/JavaWeb07/">https://cyborg2077.github.io/2022/08/20/JavaWeb07/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://cyborg2077.github.io" target="_blank">Kyle's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaWeb/">JavaWeb</a><a class="post-meta__tags" href="/tags/Cookie/">Cookie</a><a class="post-meta__tags" href="/tags/Session/">Session</a></div><div class="post_share"><div class="social-share" data-image="https://img2.baidu.com/it/u=1767752488,2158562887&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=932&amp;h=500" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/18/JavaWeb06/"><img class="next-cover" src="https://img0.baidu.com/it/u=518815500,4294667560&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JavaWeb---JSP</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="cols"><div class="col"><div class="container"><div class="front avatarPanel"><div class="inner"><div class="player-title">Attributes</div><div class="player-avatar"><img src="https://s2.loli.net/2022/04/18/fj4XvrdM5o62hbA.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div></div></div><div class="back attributesPanel"><div class="inner"><div class="player-lv">LV.7</div><div class="player-name">Kyle Violet</div><div class="attributes-value"><div class="attributes-value-item"><a href="/archives/"><div class="attributes">文章</div><div class="value-bar"><div class="value-bar-fill" style="width:68.00%"><div class="value-bar-fill-in" style="background: rgba(89, 230, 54,0.6)"></div></div></div><span>68/100</span></a></div><div class="attributes-value-item"><a href="/tags/"><div class="attributes">标签</div><div class="value-bar"><div class="value-bar-fill" style="width:59.00%"><div class="value-bar-fill-in" style="background: rgba(224, 20, 20, 0.6)"></div></div></div><span>59/100</span></a></div><div class="attributes-value-item"><a href="/categories/"><div class="attributes">分类</div><div class="value-bar"><div class="value-bar-fill" style="width:5.00%"><div class="value-bar-fill-in" style="background: rgba(30, 97, 226, 0.6)"></div></div></div><span>5/100</span></a></div></div></div></div></div></div><div class="col"><div class="container"><div class="front descriptionPanel"><div class="inner"><div class="player_description">The furthest distance in the world <br>ls not between life and death <br>But when l stand in front of you <br> Yet you don't know that l love you</div><div class="play-bottom"></div></div></div><div class="back buttonPanel"><div class="inner"><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Cyborg2077"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Cyborg2077" target="_blank" title="Github"><i class="iconfont icon-github"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1586385296&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://music.163.com/#/user/home?id=608935942" target="_blank" title="网抑云"><i class="iconfont icon-wangyiyunyinleclick"></i></a><a class="social-icon" href="https://space.bilibili.com/160218990" target="_blank" title="Bilibili"><i class="iconfont icon-bilibili"></i></a></div><div class="play-bottom"></div></div></div></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E8%B7%9F%E8%B8%AA%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">会话跟踪技术概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.2.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cookie"><span class="toc-number">2.</span> <span class="toc-text">Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">Cookie的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.1.2.</span> <span class="toc-text">Cookie的工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-1"><span class="toc-number">2.1.3.</span> <span class="toc-text">Cookie的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-1"><span class="toc-number">2.1.4.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie%E7%9A%84%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text">Cookie的原理分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie%E7%9A%84%E4%BD%BF%E7%94%A8%E7%BB%86%E8%8A%82"><span class="toc-number">2.3.</span> <span class="toc-text">Cookie的使用细节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie%E7%9A%84%E5%AD%98%E6%B4%BB%E6%97%B6%E9%97%B4"><span class="toc-number">2.3.1.</span> <span class="toc-text">Cookie的存活时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie%E5%AD%98%E5%82%A8%E4%B8%AD%E6%96%87"><span class="toc-number">2.3.2.</span> <span class="toc-text">Cookie存储中文</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Session"><span class="toc-number">3.</span> <span class="toc-text">Session</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Session%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text">Session的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">3.1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">3.1.2.</span> <span class="toc-text">工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.1.3.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-2"><span class="toc-number">3.1.4.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session%E7%9A%84%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">Session的原理分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-3"><span class="toc-number">3.2.1.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session%E7%9A%84%E4%BD%BF%E7%94%A8%E7%BB%86%E8%8A%82"><span class="toc-number">3.3.</span> <span class="toc-text">Session的使用细节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Session%E7%9A%84%E9%92%9D%E5%8C%96%E4%B8%8E%E6%B4%BB%E5%8C%96"><span class="toc-number">3.3.1.</span> <span class="toc-text">Session的钝化与活化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-4"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Session%E7%9A%84%E9%94%80%E6%AF%81"><span class="toc-number">3.3.2.</span> <span class="toc-text">Session的销毁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie%E5%92%8CSession%E5%B0%8F%E7%BB%93"><span class="toc-number">3.3.3.</span> <span class="toc-text">Cookie和Session小结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A1%88%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text">用户登录注册案例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-number">4.1.</span> <span class="toc-text">需求分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="toc-number">4.2.</span> <span class="toc-text">用户登录功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B0%E4%BD%8F%E6%88%91-%E8%AE%BE%E7%BD%AECookie"><span class="toc-number">4.3.</span> <span class="toc-text">记住我-设置Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B0%E4%BD%8F%E6%88%91-%E8%8E%B7%E5%8F%96Cookie"><span class="toc-number">4.4.</span> <span class="toc-text">记住我-获取Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E5%8A%9F%E8%83%BD"><span class="toc-number">4.5.</span> <span class="toc-text">用户注册功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81-%E5%B1%95%E7%A4%BA"><span class="toc-number">4.6.</span> <span class="toc-text">验证码-展示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81-%E6%A0%A1%E9%AA%8C"><span class="toc-number">4.7.</span> <span class="toc-text">验证码-校验</span></a></li></ol></li></ol></div></div><div class="card-widget card-recommend-post"><div class="item-headline"><i class="fas fa-dharmachakra"></i><span>相关推荐</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/13/JavaWeb02/" title="JavaWeb---HTML&CSS"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F7195c774995376cbaf3c2868706521746c0e9142.png&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645330580&t=7ef089d6818c156c451e5072f53f3597" alt="JavaWeb---HTML&CSS"></a><div class="content"><a class="title" href="/2022/08/13/JavaWeb02/" title="JavaWeb---HTML&CSS">JavaWeb---HTML&CSS</a><time datetime="2022-08-13" title="发表于 2022-08-13">2022-08-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/14/JavaWeb03/" title="JavaWeb---JavaScript"><img src="https://img1.baidu.com/it/u=2579164449,2431217981&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="JavaWeb---JavaScript"></a><div class="content"><a class="title" href="/2022/08/14/JavaWeb03/" title="JavaWeb---JavaScript">JavaWeb---JavaScript</a><time datetime="2022-08-16" title="发表于 2022-08-16">2022-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/16/JavaWeb04/" title="JavaWeb---HTTP&Tomcat&Servlet"><img src="https://img0.baidu.com/it/u=3721396657,2943407387&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=453" alt="JavaWeb---HTTP&Tomcat&Servlet"></a><div class="content"><a class="title" href="/2022/08/16/JavaWeb04/" title="JavaWeb---HTTP&Tomcat&Servlet">JavaWeb---HTTP&Tomcat&Servlet</a><time datetime="2022-08-17" title="发表于 2022-08-17">2022-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/11/JavaWeb01/" title="JavaWeb---Maven&MyBatis"><img src="https://img0.baidu.com/it/u=1415156609,1199509453&fm=253&fmt=auto&app=120&f=JPEG?w=949&h=500" alt="JavaWeb---Maven&MyBatis"></a><div class="content"><a class="title" href="/2022/08/11/JavaWeb01/" title="JavaWeb---Maven&MyBatis">JavaWeb---Maven&MyBatis</a><time datetime="2022-08-18" title="发表于 2022-08-18">2022-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/18/JavaWeb06/" title="JavaWeb---JSP"><img src="https://img0.baidu.com/it/u=518815500,4294667560&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800" alt="JavaWeb---JSP"></a><div class="content"><a class="title" href="/2022/08/18/JavaWeb06/" title="JavaWeb---JSP">JavaWeb---JSP</a><time datetime="2022-08-19" title="发表于 2022-08-19">2022-08-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/17/JavaWeb05/" title="JavaWeb---Request&Response"><img src="https://img0.baidu.com/it/u=4155835667,974645702&fm=253&fmt=auto&app=138&f=PNG?w=889&h=500" alt="JavaWeb---Request&Response"></a><div class="content"><a class="title" href="/2022/08/17/JavaWeb05/" title="JavaWeb---Request&Response">JavaWeb---Request&Response</a><time datetime="2022-08-20" title="发表于 2022-08-20">2022-08-20</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(135deg,#ace0f9,#a1c4fd)"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Kyle Violet</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">The worst way to miss someone is to be sitting right beside her <br> knowing you can't have her.</div></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><!--button#darkmode(type="button" title=_p('rightside.night_mode_title'))i.fas.fa-adjust--><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.vemoji)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      document.getElementById('twikoo-count').innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo@1.5.11/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-lwy15gwgl-cyborg2077.vercel.app/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo@1.5.11/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="7134539309" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script async src="/js/diytitle.js"></script><script src="/js/weather.js"></script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script src="/js/sun_moon.js" async></script><script src="/js/chocolate.js" async></script><script id="canvas_nest" defer="defer" color="255,192,203" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,自由,平等,公正,法制,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show","#web_bg",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-RQZSMGWCQS', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?Cyborg2077";
+            var git_color =['#e4dfd7', '#f9f4dc', '#f7e8aa', '#f7e8aa', '#f8df72', '#fcd217', '#fcc515', '#f28e16', '#fb8b05', '#d85916', '#f43e06'];
+            var git_user ="Cyborg2077";
+            var parent_div_git = document.getElementsByClassName('recent-posts')[0];
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementsByClassName('recent-posts')[0]){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><script data-pjax>
+  function card_artitalk_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-shuo"><div class="card-content" style="height:auto;min-height:280px;"><div class="item-headline"><i class="fas fa-comments"></i><span><a href="/artitalk/" title="artitalk page link">碎碎念</a></span><a id="cardVisual" style="cursor:pointer;float:right" onclick="cardVisual()">编辑</a></div><div id="artitalk_main" style="width:100%;height:100%;padding:1px"></div></div></div>';
+    console.log('已挂载card_artitalk');
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html);
+    (()=>{
+      const init = () => {
+        new Artitalk(Object.assign({
+          appId: 'W8Vs5lhPyoXONr88rXUqnTTb-MdYXbMMI',
+          appKey: 'CVYbhIp5zeHNMxFpH5ySmrgU',
+        }, {"serverURL":"https://W8Vs5lhP.api.lncldglobal.com","lang":"zh","pageSize":1,"color1":"#49b1f5","color2":"#00c4b6","atEmoji":{"Mafumafu1":"https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN@master/Mafumafu/199749454.png","Mafumafu2":"https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN@master/Mafumafu/199749455.png"}} ))
+      }
+      if (typeof Artitalk === 'function') {
+        init()
+      } else {
+        getScript('https://npm.elemecdn.com/artitalk').then(init)
+      }
+    })()
+    }
+  var elist = '/artitalk/,/posts/'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    card_artitalk_injector_config();
+  }
+  else if (epage === cpage){
+    card_artitalk_injector_config();
+  }
+  </script><script async src="https://npm.elemecdn.com/hexo-butterfly-artitalk-pro/lib/card_visual.js"></script><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(http://p0.itc.cn/images03/20200525/332e1ea10c634cbfaf0dfc5b69d00a3c.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/力扣/&quot;);" href="javascript:void(0);">力扣</a><span class="categoryBar-list-count">10</span><span class="categoryBar-list-descr">刷题指南</span></li><li class="categoryBar-list-item" style="background:url(http://p8.itc.cn/images03/20200525/377f4f7044fe49b0bb932f43ef4f4891.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/刷题日志/&quot;);" href="javascript:void(0);">刷题日志</a><span class="categoryBar-list-count">14</span><span class="categoryBar-list-descr">Leetcode刷题日志，目标成为千题大佬</span></li><li class="categoryBar-list-item" style="background:url(http://p8.itc.cn/images03/20200525/0ed549edde2c4d5eaecc2824e753ca74.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/学习笔记/&quot;);" href="javascript:void(0);">学习笔记</a><span class="categoryBar-list-count">34</span><span class="categoryBar-list-descr">写给自己看的一些笔记</span></li><li class="categoryBar-list-item" style="background:url(http://p6.itc.cn/images03/20200525/8dedcdf6ace44a50a1deb6a9743821fe.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/蓝桥杯/&quot;);" href="javascript:void(0);">蓝桥杯</a><span class="categoryBar-list-count">8</span><span class="categoryBar-list-descr">厕所战神杯 狗都不报</span></li><li class="categoryBar-list-item" style="background:url(http://p9.itc.cn/images03/20200525/07539bdba160465d80d23b3f16db8620.jpeg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/杂谈/&quot;);" href="javascript:void(0);">杂谈</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">随便唠唠</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://cdn.jsdelivr.net/npm/hexo-butterfly-clock/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img2.baidu.com/it/u=4052816064,1042373333&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2021-12-25</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt="">Java---多线程</a><div class="blog-slider__text">Java学习笔记---多线程</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2021/12/25/JavaThread/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img2.baidu.com/it/u=852907915,3528076091&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2021-11-17</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt="">十大排序算法</a><div class="blog-slider__text">Java学习笔记---排序算法</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2021/11/17/SortMenu/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fbf0e4aa0bee8b05d446914c97ae4a611b64f6837.png&amp;refer=http%3A%2F%2Fi0.hdslb.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1645340425&amp;t=0731cf208414cf55a532ab7a232cc4ff" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-06</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt="">Java---网络编程(基础)</a><div class="blog-slider__text">Java学习笔记---网络编程(基础)</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/07/06/JavaWebBasic/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img2.baidu.com/it/u=945409242,1491286515&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-08</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt="">Java---反射机制</a><div class="blog-slider__text">Java学习笔记---反射机制</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/07/08/JavaReflection/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=1415156609,1199509453&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=949&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt="">Java---集合</a><div class="blog-slider__text">Java学习笔记---集合</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/21/JavaCollections/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=1144121390,2782791282&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-26</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt="">Java---IO流</a><div class="blog-slider__text">Java学习笔记---IO流</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/26/JavaIO/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-dbe4189cad999946abdcd174fba140ea_r.jpg&amp;refer=http%3A%2F%2Fpic3.zhimg.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1651217592&amp;t=44946406f8e7b9ed15f483e0495b33c9" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt="">Java---泛型</a><div class="blog-slider__text">Java学习笔记---泛型</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/24/JavaGenerics/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://img0.baidu.com/it/u=1415156609,1199509453&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=949&amp;h=500" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-17</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt="">Java---枚举类和注解</a><div class="blog-slider__text">Java学习笔记---枚举类和注解</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/17/JavaEnumAndAnnotation/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.zhimg.com%2Fv2-7f659641f358fab5aa28640c3f62978a_r.jpg&amp;refer=http%3A%2F%2Fpic3.zhimg.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1645330580&amp;t=3c5f025bbdcc09fad7cfd3e8aae5ccc9" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-04-15</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt="">Java---常用类</a><div class="blog-slider__text">Java学习笔记---常用类</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/04/15/JavaCommonClasses/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:90px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v4.1.0"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false});</script></body></html>
