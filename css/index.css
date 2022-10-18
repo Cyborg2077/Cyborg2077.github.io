@@ -1538,14 +1538,14 @@ blockquote > :last-child {
   margin-bottom: 0 !important;
 }
 :root {
-  --hl-color: #a6accd;
-  --hl-bg: #292d3e;
-  --hltools-bg: #252938;
-  --hltools-color: #a6accd;
-  --hlnumber-bg: #292d3e;
-  --hlnumber-color: rgba(166,172,205,0.5);
-  --hlscrollbar-bg: #393f57;
-  --hlexpand-bg: linear-gradient(180deg, rgba(41,45,62,0.6), rgba(41,45,62,0.9));
+  --hl-color: #eff;
+  --hl-bg: #212121;
+  --hltools-bg: #1c1c1c;
+  --hltools-color: rgba(238,255,255,0.8);
+  --hlnumber-bg: #212121;
+  --hlnumber-color: rgba(238,255,255,0.5);
+  --hlscrollbar-bg: #353535;
+  --hlexpand-bg: linear-gradient(180deg, rgba(33,33,33,0.6), rgba(33,33,33,0.9));
 }
 figure.highlight table {
   scrollbar-color: var(--hlscrollbar-bg) transparent;
@@ -1563,7 +1563,7 @@ figure.highlight pre .meta {
   color: #c792ea;
 }
 figure.highlight pre .comment {
-  color: #676e95;
+  color: #969896;
 }
 figure.highlight pre .variable,
 figure.highlight pre .attribute,
@@ -1626,7 +1626,7 @@ figure.highlight pre .javascript .function {
   color: #c792ea;
 }
 #article-container figure.highlight .line.marked {
-  background-color: rgba(113,124,180,0.314);
+  background-color: rgba(97,97,97,0.314);
 }
 #article-container figure.highlight table {
   display: block;
@@ -1797,6 +1797,48 @@ figure.highlight pre .javascript .function {
 }
 #article-container .gist table td {
   border: none;
+}
+#article-container figure.highlight {
+  margin: 0 0 24px;
+  border-radius: 7px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
+  -webkit-transform: translateZ(0);
+}
+#article-container figure.highlight .highlight-tools:after {
+  position: absolute;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fc625d;
+  -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  content: ' ';
+}
+#article-container figure.highlight .highlight-tools .expand {
+  right: 0;
+}
+#article-container figure.highlight .highlight-tools .expand.closed {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-transform: rotate(90deg) !important;
+  -moz-transform: rotate(90deg) !important;
+  -o-transform: rotate(90deg) !important;
+  -ms-transform: rotate(90deg) !important;
+  transform: rotate(90deg) !important;
+}
+#article-container figure.highlight .highlight-tools .expand ~ .copy-notice {
+  right: 3.45em;
+}
+#article-container figure.highlight .highlight-tools .expand ~ .copy-button {
+  right: 2.1em;
+}
+#article-container figure.highlight .highlight-tools .code-lang {
+  left: 75px;
 }
 @-moz-keyframes code-expand-key {
   0% {
