@@ -75,7 +75,7 @@
   .tip-button::after {
     bottom: -1rem;
     color: white;
-    content: 'ヾ(≧O≦)〃~'; /*点击后显示的内容*/
+    content: 'ヾ(≧O≦)〃好耶~'; /*点击后显示的内容*/
     height: 110%;
     left: 0;
     opacity: 0;
