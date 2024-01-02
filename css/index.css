@@ -6834,6 +6834,9 @@ blockquote.pullquote.right {
   background-color: #5cb85c;
 }
 :root {
+  --msgbox-border-color: #888;
+  --msgbox-border-background: #fff;
+  --msgbox-chat-background: rgba(255,255,255,0.7);
   --msgbox-name-color: #888;
   --guest-font-color: #000;
   --guest-background-color: #cbcbcb;
@@ -6841,6 +6844,9 @@ blockquote.pullquote.right {
   --admin-background-color: #12b7f5;
 }
 [data-theme="dark"] {
+  --msgbox-border-color: #fff;
+  --msgbox-border-background: #000;
+  --msgbox-chat-background: rgba(22,22,22,0.5);
   --msgbox-name-color: #888;
   --guest-font-color: #e3e8e9;
   --guest-background-color: #303646;
@@ -6860,6 +6866,9 @@ blockquote.pullquote.right {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
   -webkit-box-lines: single;
   -moz-box-lines: single;
   -o-box-lines: single;
@@ -6869,7 +6878,96 @@ blockquote.pullquote.right {
   width: 100%;
   height: auto;
 }
-.msgbox .msg-main {
+.msgbox .mag-box-title {
+  color: var(--msgbox-border-color);
+  width: 100%;
+  height: 50px;
+  background: var(--msgbox-border-background);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.msgbox .mag-box-input-main {
+  width: 100%;
+  height: 50px;
+  color: var(--msgbox-border-color);
+  background: var(--msgbox-border-background);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.msgbox .mag-box-input-main input.mag-box-input {
+  border-radius: 15px;
+  height: 30px;
+  width: calc(100% - 90px);
+  padding: 0px 20px;
+}
+.msgbox .mag-box-input-main input.mag-box-input:focus-visible {
+  outline: none;
+}
+.msgbox .mag-box-input-main i.fa-solid {
+  width: 30px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.msgbox .msgbox-chat-content {
+  padding: 20px 20px;
+  -webkit-box-shadow: 0px 0px 0.5px var(--msgbox-border-color) inset;
+  box-shadow: 0px 0px 0.5px var(--msgbox-border-color) inset;
+  max-height: 50vh;
+  overflow-y: scroll;
+  background: var(--msgbox-chat-background);
+}
+.msgbox .msgbox-chat-content::-webkit-scrollbar {
+  width: 0;
+}
+.msgbox .msgbox-chat-content .msg-main {
   width: 100%;
   height: auto;
   display: -webkit-box;
@@ -6892,20 +6990,20 @@ blockquote.pullquote.right {
   flex-wrap: nowrap;
   margin: 0 0 25px 0;
 }
-.msgbox .msg-main .msg-avatar-box {
+.msgbox .msgbox-chat-content .msg-main .msg-avatar-box {
   width: 30px;
   min-width: 30px;
 }
-.msgbox .msg-main .msg-avatar-box img.msg-avatar {
+.msgbox .msgbox-chat-content .msg-main .msg-avatar-box img.msg-avatar {
   border-radius: 50%;
   width: 30px;
   height: 30px;
   position: relative;
 }
-.msgbox .msg-main .msg-avatar-box .img-alt {
+.msgbox .msgbox-chat-content .msg-main .msg-avatar-box .img-alt {
   display: none;
 }
-.msgbox .msg-main .msg-content {
+.msgbox .msgbox-chat-content .msg-main .msg-content {
   width: 90%;
   display: -webkit-box;
   display: -moz-box;
@@ -6926,30 +7024,30 @@ blockquote.pullquote.right {
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
-.msgbox .msg-main .msg-content .msg-name {
+.msgbox .msgbox-chat-content .msg-main .msg-content .msg-name {
   font-size: 12px;
   color: var(--msgbox-name-color);
   line-height: 1em;
   height: 1.5em;
 }
-.msgbox .msg-main .msg-content .msg-content-text {
+.msgbox .msgbox-chat-content .msg-main .msg-content .msg-content-text {
   border-radius: 8px;
   width: auto;
   max-width: calc(100% - 30px);
   padding: 5px 5px 0px 20px;
   clip-path: polygon(0 15px, 10px 16px, 10px 5px, 15px 0, 100% 0, 100% 100%, 15px 100%, 10px calc(100% - 5px), 10px 25px);
 }
-.msgbox .msg-main .msg-content .msg-content-text>p {
+.msgbox .msgbox-chat-content .msg-main .msg-content .msg-content-text>p {
   margin: 0 0 0 !important;
 }
-.msgbox .msg-main .msg-content .msg-content-text>p img {
+.msgbox .msgbox-chat-content .msg-main .msg-content .msg-content-text>p img {
   border-radius: 6px;
 }
-.msgbox .msg-main.msgguest .msg-avatar-box img.msg-avatar {
+.msgbox .msgbox-chat-content .msg-main.msgguest .msg-avatar-box img.msg-avatar {
   top: 0;
   right: 0;
 }
-.msgbox .msg-main.msgguest .msg-content {
+.msgbox .msgbox-chat-content .msg-main.msgguest .msg-content {
   -webkit-box-align: start;
   -moz-box-align: start;
   -o-box-align: start;
@@ -6957,14 +7055,14 @@ blockquote.pullquote.right {
   -webkit-align-items: flex-start;
   align-items: flex-start;
 }
-.msgbox .msg-main.msgguest .msg-content .msg-name {
+.msgbox .msgbox-chat-content .msg-main.msgguest .msg-content .msg-name {
   margin-left: 15px;
 }
-.msgbox .msg-main.msgguest .msg-content .msg-content-text {
+.msgbox .msgbox-chat-content .msg-main.msgguest .msg-content .msg-content-text {
   background: var(--guest-background-color);
   color: var(--guest-font-color);
 }
-.msgbox .msg-main.msgadmin {
+.msgbox .msgbox-chat-content .msg-main.msgadmin {
   -webkit-box-direction: reverse;
   -moz-box-direction: reverse;
   -o-box-direction: reverse;
@@ -6975,11 +7073,11 @@ blockquote.pullquote.right {
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
-.msgbox .msg-main.msgadmin .msg-avatar-box img.msg-avatar {
+.msgbox .msgbox-chat-content .msg-main.msgadmin .msg-avatar-box img.msg-avatar {
   top: 0;
   left: 0;
 }
-.msgbox .msg-main.msgadmin .msg-content {
+.msgbox .msgbox-chat-content .msg-main.msgadmin .msg-content {
   -webkit-box-align: end;
   -moz-box-align: end;
   -o-box-align: end;
@@ -6987,10 +7085,10 @@ blockquote.pullquote.right {
   -webkit-align-items: flex-end;
   align-items: flex-end;
 }
-.msgbox .msg-main.msgadmin .msg-content .msg-name {
+.msgbox .msgbox-chat-content .msg-main.msgadmin .msg-content .msg-name {
   margin-right: 15px;
 }
-.msgbox .msg-main.msgadmin .msg-content .msg-content-text {
+.msgbox .msgbox-chat-content .msg-main.msgadmin .msg-content .msg-content-text {
   background: var(--admin-background-color);
   color: var(--admin-font-color);
   padding: 5px 20px 0px 5px;
@@ -6998,7 +7096,7 @@ blockquote.pullquote.right {
   max-width: calc(100% - 30px);
 }
 @media screen and (max-width: 496px) {
-  .msgbox .msg-main.msgadmin {
+  .msgbox .msgbox-chat-content .msg-main.msgadmin {
     -webkit-box-orient: horizontal;
     -moz-box-orient: horizontal;
     -o-box-orient: horizontal;
@@ -7006,11 +7104,11 @@ blockquote.pullquote.right {
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  .msgbox .msg-main.msgadmin .msg-avatar-box img.msg-avatar {
+  .msgbox .msgbox-chat-content .msg-main.msgadmin .msg-avatar-box img.msg-avatar {
     top: 0;
     right: 0;
   }
-  .msgbox .msg-main.msgadmin .msg-content {
+  .msgbox .msgbox-chat-content .msg-main.msgadmin .msg-content {
     -webkit-box-align: start;
     -moz-box-align: start;
     -o-box-align: start;
@@ -7018,10 +7116,10 @@ blockquote.pullquote.right {
     -webkit-align-items: flex-start;
     align-items: flex-start;
   }
-  .msgbox .msg-main.msgadmin .msg-content .msg-name {
+  .msgbox .msgbox-chat-content .msg-main.msgadmin .msg-content .msg-name {
     margin-left: 15px;
   }
-  .msgbox .msg-main.msgadmin .msg-content .msg-content-text {
+  .msgbox .msgbox-chat-content .msg-main.msgadmin .msg-content .msg-content-text {
     padding: 5px 5px 0px 20px;
     clip-path: polygon(0 15px, 10px 16px, 10px 5px, 15px 0, 100% 0, 100% 100%, 15px 100%, 10px calc(100% - 5px), 10px 25px);
     max-width: calc(100% - 30px);
