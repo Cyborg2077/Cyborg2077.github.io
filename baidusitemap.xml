@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://cyborg2077.github.io/2024/02/07/NavicatSyncPit/</loc>
+    <lastmod>2024-02-24</lastmod>
+  </url>
+  <url>
+    <loc>https://cyborg2077.github.io/2024/01/26/LangChainPrimer/</loc>
+    <lastmod>2024-02-24</lastmod>
+  </url>
+  <url>
     <loc>https://cyborg2077.github.io/2023/11/25/ServerSendEvents/</loc>
-    <lastmod>2024-02-16</lastmod>
+    <lastmod>2024-02-24</lastmod>
   </url>
   <url>
     <loc>https://cyborg2077.github.io/2023/12/31/SelectForUpdate/</loc>
