@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://cyborg2077.github.io/2024/02/25/LRUCacheExpire/</loc>
+    <lastmod>2024-02-25</lastmod>
+  </url>
+  <url>
     <loc>https://cyborg2077.github.io/2024/02/07/NavicatSyncPit/</loc>
     <lastmod>2024-02-24</lastmod>
   </url>
